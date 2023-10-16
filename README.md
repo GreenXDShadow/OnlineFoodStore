@@ -14,24 +14,24 @@ git clone https://github.com/YOUR_USERNAME/OnlineFoodStore.git
 ```
 Replace `YOUR_USERNAME` with your GitHub username.
 
-### 2. **Set the Upstream**:
+### 2. **Set up the remote repository**:
 Navigate to the cloned directory:
 
 ```bash
 cd OnlineFoodStore
 ```
 
-Then, set up the original repository as the `upstream`:
+Then, set up the original repository as the `origin`:
 
 ```bash
-git remote add upstream https://github.com/GreenXDShadow/OnlineFoodStore.git
+git remote add origin https://github.com/GreenXDShadow/OnlineFoodStore.git
 ```
 
 ### 3. **Pull the Latest Changes**:
 Before making any changes, ensure you have the latest version from the original repository:
 
 ```bash
-git pull upstream staging
+git pull origin main
 ```
 
 ### 4. **Create a New Branch**:
@@ -53,23 +53,23 @@ git add .
 git commit -m "Brief description of your changes"
 ```
 
-### 7. **Push to Your Fork**:
-Push your changes to your fork:
+### 7. **Push to Github**:
+Push your changes to Github:
 
 ```bash
-git push origin feature/NAME_OF_YOUR_FEATURE
+git push -u origin feature/NAME_OF_YOUR_FEATURE
 ```
 
 ### 8. **Create a Pull Request (PR)**:
-Finally, create a pull request to the `staging` branch of the original `OnlineFoodStore` repository:
+Finally, create a pull request to the `main` branch of the original `OnlineFoodStore` repository:
 
-- Go to your forked repository on GitHub.
+- Go to the repository on GitHub.
 - Click on the **New pull request** button.
-- Ensure the base repository is `GreenXDShadow/OnlineFoodStore` and the base branch is `staging`.
-- For the head repository, choose your fork and the branch you just pushed.
+- Ensure the base repository is `GreenXDShadow/OnlineFoodStore` and the base branch is `main`.
+- For the head repository, choose the branch you just pushed.
 - Click **Create pull request**.
 - Fill in a title and description for your PR, then submit.
 
 ---
 
-Once you've submitted your PR, your changes will be reviewed. If everything looks good, they will merge your changes into the `staging` branch. Nick will then take care of pushing the changes to the `main` branch.
+Once you've submitted your PR, your changes will be reviewed. If everything looks good, they will merge your changes into the `main` branch.
