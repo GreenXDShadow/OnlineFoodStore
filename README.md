@@ -4,13 +4,13 @@ CMPE-131 Group Project
 ## User Guide: Contributing to the OnlineFoodStore Repository
 
 ### Prerequisites:
-1. Ensure you have `git` installed on your machine. If not, [download and install it](https://git-scm.com/downloads).
+Ensure you have `git` installed on your machine. If not, [download and install it](https://git-scm.com/downloads).
 
-### 2. **Clone the Repository**:
+### 1. **Clone the Repository**:
 Now, clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/OnlineFoodStore.git
+git clone https://github.com/GreenXDShadow/OnlineFoodStore.git
 ```
 Replace `YOUR_USERNAME` with your GitHub username.
 
