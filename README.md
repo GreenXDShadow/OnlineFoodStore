@@ -12,7 +12,6 @@ Now, clone the repository to your local machine:
 ```bash
 git clone https://github.com/GreenXDShadow/OnlineFoodStore.git
 ```
-Replace `YOUR_USERNAME` with your GitHub username.
 
 ### 2. **Set up the remote repository**:
 Navigate to the cloned directory:
