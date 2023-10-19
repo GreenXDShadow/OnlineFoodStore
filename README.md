@@ -5,12 +5,18 @@ CMPE-131 Group Project
 
 ### Prerequisites:
 Ensure you have `git` installed on your machine. If not, [download and install it](https://git-scm.com/downloads).
+Ensure you have 'Github Desktop' Installed. (https://desktop.github.com/)
 
 ### 1. **Clone the Repository**:
 Now, clone the repository to your local machine:
 
 ```bash
 git clone https://github.com/GreenXDShadow/OnlineFoodStore.git
+```
+if this does not work use
+
+```bash
+git clone git@github.com:GreenXDShadow/OnlineFoodStore.git
 ```
 
 ### 2. **Set up the remote repository**:
