@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Slabo27';
+    src: url('font/slabo.ttf') format('truetype');
+    /* Add more src declarations for different font formats if available */
+}
 html {
   height: 100%;
   width: 100%;
@@ -10,14 +15,30 @@ body{
   background-size: 100% 120%;
   background-position: center center;
   background-repeat: no-repeat;
-  
+  overflow-x: hidden;  /* Prevents horizontal scrolling */
+  width: 100%;         
+  max-width: 100%; 
+  font-family: 'Slabo27', sans-serif;
 }
+
+.category-button {
+  text-decoration: none; /* Remove the underline */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin:1% 5%
+}
+
+/* a{
+  text-decoration: none;
+  margin: 1% 5% 1% 3%;
+} */
+
 
 .topnav {
   overflow: auto;
   background-color: #B8A0FF;
   /*rounded top of border*/
-  border-radius: 10px 10px 0px 0px;
   display: flex;
   align-items: center;
 }
@@ -96,6 +117,7 @@ h2{
 h3 {
   color: #6e2b73;
   margin: 10px 0 0;
+  text-align: center;
 }
 
 .icon{
@@ -104,16 +126,71 @@ h3 {
   align-items: center;
    background-color: #edd4f7;
    width: 110px;
-   height: 140px;
+   height: 170px;
    padding-top: 1%;
    border-radius: 15px;
    padding:10px;
    padding-bottom: 0px;
    margin: 1% 5%;
 }
-.icon img {
-  width: 80px; /* Adjust the width of the icon as needed */
-  height: 80px; /* Adjust the height of the icon as needed */
+.icon-category{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+   background-color: #edd4f7;
+   width: 110px;
+   height: 150px;
+   padding-top: 10px;
+   border-radius: 15px;
+   padding-right:10px;
+   padding-left:10px;
+   padding-bottom: 0px;
+  margin: 1% 5%;
+}
+.icon:hover{
+  background-color: #e0b3e6;
+}
+.icon-category:hover{
+  background-color: #e0b3e6;
+}
+.icon-img {
+  width: 85px; /* Adjust the width of the icon as needed */
+  height: 85px; /* Adjust the height of the icon as needed */
+}
+
+.item-buttons{
+  background-color: transparent;
+  margin-top:10px;
+  border: none;
+  display: flex; /* Make the button a flex container */
+  align-items: center; /* Center items vertically */
+}
+
+.confirm{
+  align-items: center; /* Center items vertically */
+  background-color: transparent;
+  margin-top:0px;
+  border: none;
+  display: flex; /* Make the button a flex container */
+}
+
+.add-to{
+  display:flex;
+  align-items: center; /* Center items vertically */
+}
+
+.to-cart-plus{
+  width:15px;
+  height: 15px;
+  margin-left: 20px;
+  align-items: center;
+}
+
+.to-cart-minus{
+  width:15px;
+  height: 15px;
+  margin-right: 20px;
+  align-items: center;
 }
 
 .row{
@@ -159,6 +236,17 @@ flex-direction: row;
   min-width: 100%;
 }
 
+.account{
+  background-color: transparent;
+  border: none;
+}
+
+#oneline{
+  display: flex;
+  text-align: center;
+  align-items: center; /* Vertical align the elements to the center */
+}
+
 /* Added CSS for the fade-out effect */
 .carousel-container::before, .carousel-container::after {
 content: "";
@@ -193,6 +281,7 @@ position: relative;
 .user-icon-btn{
   background-color: transparent;
   border: none;
+  margin-top: 10 px;
 }
 
 .user-icon-btn:hover {
@@ -201,11 +290,21 @@ position: relative;
   background: radial-gradient(circle at center, #f9edff 0%, transparent 70%);
 
 }
+/* cart button */
+.cart-icon-btn{
+  background-color: transparent;
+  border: none;
+  margin-top: 10 px;
+}
 
+.cart-icon-btn:hover {
+  border-radius: 50%;
+  background-color: #ccc; 
+  background: radial-gradient(circle at center, #f9edff 0%, transparent 70%);
+
+}
 
 .dropdown-content {
-  /* margin-top:5%; */
-  /* display: none; */
   position: absolute;
   right: 0;
   top: 0;
@@ -213,20 +312,25 @@ position: relative;
   width: 400px;
   height: 100vh;
   border-radius: 15px 0px 0px 15px;
-  /* max-height: 1000px; */
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1001; /* Set a higher z-index value to prioritize over overlay*/
   filter: none;
 
   /* Added for the slide effect */
   transform: translateX(100%); /* Initially push it off the right side of the screen */
-  transition: transform 0.3s ease-out; /* This will smooth the transition */
+  transition: transform 0.5s ease-out; /* This will smooth the transition */
+}
+
+.quantity{
+  padding-top:3px;
 }
 
 .dropdown-content.hidden {
   transform: translateX(100%); /* This pushes it off the right side of the screen */
 }
-
+.arrow-level{
+  padding-bottom: 10px;
+}
 .overlay {
   position: fixed;
   backdrop-filter: blur(10px); 
@@ -239,7 +343,21 @@ position: relative;
   display: none; /* Initially hidden */
 
   opacity: 0; /* Start as transparent */
-  transition: opacity 0.3s ease-out; /* Smooth transition for fade effect */
+  transition: opacity 0.5s ease-out; /* Smooth transition for fade effect */
+}
+.form-popup {
+  display: none;
+  top: 300px;
+  padding: 15px;
+  border: 3px solid #f1f1f1;
+  z-index: 9;
+}
+.form-container {
+  display: block;
+  text-align: center;
+  align-items: center;
+  width: 100px;
+  padding: 10px;
 }
 
 /* @media screen and (max-width: 500px) {
