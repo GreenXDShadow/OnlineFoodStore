@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+  <!-- icon library and stylesheet reference -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <!--MODIFIED to use url_for-->
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css"/>
+<!--LINE BELOW HAS BEEN MODIFIED: updated to use Flasks url_for function to generate URLs for these files    -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+  <div class="overlay"></div>
+  <div class ="topnav">
+    <a href="#"><i class="fa fa-fw fa-home"></i> Home</a>
+    <form>
+      <input class="searchbar" type = "search" placeholder="search for products <3">
+    </form> 
+    <div class = "imageRight">
+          <button class="user-icon-btn" onclick="toggleDropdown()">
+            <img src="{{ url_for('static', filename='Icons/user.png') }}" alt="user" class="user-icon" width="27px" height="27px"></div></button>
+            <div class="dropdown-content hidden" id="myDropdown">
+            <button class="user-icon-btn" onclick="toggleDropdown()"><i class="fa fa-times fa-xs fa-fw "style="font-size: 2em;"></i></button>
+            <p>LOGIN & REGISTRATION</p>
+          </div>
+      <img src="{{ url_for('static', filename='Icons/cart.png') }}" alt="cart" class="nav-icon" width="22px" height="25px">
+    </div>
+  </div>
+    <div class="bottomnav">
+      <ul>
+        <li><a href="#">Select Category</a></li>
+        <li><a href="#">New Products</a></li>
+        <li><a href="#">Featured Products</a></li>
+        <li><a href="#">Contact Us</a></li>
+      </ul>
+    </div>
+  <h4>Shop by:</h4>
+  <h2>Categories</h2>
+  <div class="row">
+        <div class="carousel carousel-1">
+            <button class="carousel-btn prev-btn"><i class="fa fa-chevron-left"></i></button>
+
+            <div class="carousel-container">
+                <div class="carousel-inner">
+
+                    <div class="row">
+                        <div class="icon">
+                            <img src="{{ url_for('static', filename='Icons/fruit icon.png') }}" alt="fruit" width="80px" height="80px">
+                            <h3>Fruit</h3>
+                        </div>
+                        <div class="icon">
+                            <img src="{{ url_for('static', filename='Icons/vegetable.png') }}" alt="veggies" width="80px" height="80px">
+                            <h3>Vegetables</h3>
+                        </div>
+                        <div class="icon">
+                            <img src="{{ url_for('static', filename='Icons/dairy-products.png') }}" alt="dairy" width="80px" height="80px">
+                            <h3>Dairy and Eggs</h3>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="icon">
+                            <img src="{{ url_for('static', filename='Icons/meat.png') }}" alt="meat" width="80px" height="80px">
+                            <h3>Meat and Seafood</h3>
+                        </div>
+                        <div class="icon">
+                            <img src="{{ url_for('static', filename='Icons/frozen-food.png') }}" alt="frozen food" width="80px" height="80px">
+                            <h3>Frozen Food</h3>
+                        </div>
+                        <div class="icon">
+                            <img src="{{ url_for('static', filename='Icons/beverages.png') }}" alt="beverages" width="80px" height="80px">
+                            <h3>Beverages</h3>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <button class="carousel-btn next-btn"><i class="fa fa-chevron-right"></i></button>
+        </div>
+    </div>
+  <!-- second carousel  -->
+  <h4>For You:</h4>
+  <h2>Top Featured Products</h2>
+  <div class="row">
+      <div class="carousel carousel-2">
+          <button class="carousel-btn prev-btn"><i class="fa fa-chevron-left"></i></button>
+
+          <div class="carousel-container">
+              <div class="carousel-inner">
+
+                  <div class="row">
+                      <div class="icon">
+                          <img src="{{ url_for('static', filename='Icons/cauliflower.png') }}" alt="cauliflower" width="80px" height="80px">
+                          <h3>Cauliflower</h3>
+                      </div>
+                      <div class="icon">
+                          <img src="{{ url_for('static', filename='Icons/strawberry.png') }}" alt="strawberry" width="80px" height="80px">
+                          <h3>Strawberry</h3>
+                      </div>
+                      <div class="icon">
+                          <img src="{{ url_for('static', filename='Icons/carrots.png') }}" alt="carrots" width="80px" height="80px">
+                          <h3>Carrots</h3>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="icon">
+                          <img src="{{ url_for('static', filename='Icons/banana.png') }}" alt="banana" width="80px" height="80px">
+                          <h3>Banana</h3>
+                      </div>
+                      <div class="icon">
+                          <img src="{{ url_for('static', filename='Icons/tomato.png') }}" alt="tomato" width="80px" height="80px">
+                          <h3>Tomato</h3>
+                      </div>
+                      <div class="icon">
+                          <img src="{{ url_for('static', filename='Icons/green-onion.png') }}" alt="green onions" width="80px" height="80px">
+                          <h3>Green Onion</h3>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <button class="carousel-btn next-btn"><i class="fa fa-chevron-right"></i></button>
+      </div>
+  </div>
+</div>
+<!--MODIFIED TO USE url_for-->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
