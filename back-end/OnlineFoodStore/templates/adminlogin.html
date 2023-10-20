@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beverages</title>
+    <!-- icon library and stylesheet reference -->
+    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+  </head>
+
+<body>
+  <div class="overlay"></div>
+  <div class="topnav">
+    <a href="{{ url_for('index') }}"><i class="fa fa-fw fa-home"></i> Home</a>
+    <form>
+      <input class="searchbar" type="search" placeholder="search for products <3">
+    </form>
+    <div class="imageRight">
+      <button class="user-icon-btn" onclick="toggleDropdown()">
+        <img src="Icons/user.png" alt="user" class="user-icon" width="27px" height="27px">
+    </div></button>
+    <div class="dropdown-content hidden" id="myDropdown">
+      <button class="user-icon-btn" onclick="toggleDropdown()"><i class="fa fa-times fa-xs fa-fw imageRight"
+          style="font-size: 2em;"></i></button>
+      <h2>ACCOUNT</h2>
+      <div id="oneline">
+        <h4>Register</h4>
+        <button id="loginButton" class="user-icon-btn" onclick=registrationPopUp()>
+          <img class="arrow-level" src="Icons/down.png" alt="downarrow" width="20px" height="20px">
+        </button>
+      </div>
+      <div class="form-popup" id="register">
+        <form action="example.com/path" class="form-container" id="popUpForm">
+          <h2>Registration</h2>
+          <input type="text" id="userName" placeholder="Username">
+          <input type="password" id="passWord" placeholder="Password">
+          <br>
+          <input type="password" id="passWord" placeholder="Confirm Password">
+          <br>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div id="oneline">
+        <h4>Log In</h4>
+        <button id="loginButton" class="user-icon-btn" onclick=loginPopUp()>
+          <img class="arrow-level" src="Icons/down.png" alt="downarrow" width="20px" height="20px">
+        </button>
+      </div>
+      <div class="form-popup" id="login">
+        <form action="example.com/path" class="form-container" id="popUpForm">
+          <h2>Login</h2>
+          <input type="text" id="userName" placeholder="Username">
+          <input type="password" id="passWord" placeholder="Password">
+          <br>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+    </div>
+    <img src="Icons/cart.png" alt="cart" class="nav-icon" width="22px" height="25px">
+  </div>
+  </div>
+  <div class="bottomnav">
+    <ul>
+      <li><a href="#">Select Category</a></li>
+      <li><a href="#">New Products</a></li>
+      <li><a href="#">Featured Products</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </div>
+  <div class="adminpage" id="adminlogin">
+    <form action="example.com/path" class="adminform" id="popUpForm">
+      <h1>Admin Login</h1>
+      <input class="adminlogin"type="text" id="adminuserName" placeholder="Username">
+      <input class="adminlogin"type="password" id="adminpassWord" placeholder="Password">
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+</body>
+</html>
