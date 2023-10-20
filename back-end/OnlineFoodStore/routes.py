@@ -34,3 +34,7 @@ def beverages():
 @app.route('/adminlogin')
 def adminlogin():
     return render_template('adminlogin.html')
+
+@app.route('/cart')
+def cart():
+    return render_template(('cart.html'))
