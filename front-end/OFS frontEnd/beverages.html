@@ -20,7 +20,7 @@
     </form>
     <div class="imageRight">
       <button class="user-icon-btn" onclick="toggleDropdown()">
-        <img src="Icons/user.png" alt="user" class="user-icon" width="27px" height="27px">
+        <img src="{{ url_for('static', filename='Icons/user.png') }}" alt="user" class="user-icon" width="27px" height="27px">
     </div></button>
     <div class="dropdown-content hidden" id="myDropdown">
       <button class="user-icon-btn" onclick="toggleDropdown()"><i class="fa fa-times fa-xs fa-fw imageRight"
@@ -59,7 +59,7 @@
         </form>
       </div>
     </div>
-    <img src="Icons/cart.png" alt="cart" class="nav-icon" width="22px" height="25px">
+    <img src="{{ url_for('static', filename='Icons/cart.png') }}" alt="cart" class="nav-icon" width="22px" height="25px">
   </div>
   </div>
   <div class="bottomnav">
@@ -72,7 +72,7 @@
   </div>
   <div class="row">
     <div class="icon">
-      <img src="Icons/apple.png" alt="apple" width="80px" height="80px">
+      <img src="{{ url_for('static', filename='Icons/apple.png') }}" alt="apple" width="80px" height="80px">
       <h3>Apple</h3>
       <div class="add-to">
         <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
@@ -84,11 +84,11 @@
         </button>
       </div>
       <button class="confirm" onclick="resetQuantity(this)">
-        <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+        <img src="{{ url_for('static', filename='Icons/check.png') }}" alt="check Icon" style="width: 16px; height: 16px;">
       </button>
     </div>
     <div class="icon">
-      <img src="Icons/apricot.png" alt="apricot" width="80px" height="80px">
+      <img src="{{ url_for('static', filename='Icons/apricot.png') }}" alt="apricot" width="80px" height="80px">
       <h3>Apricot</h3>
       <div class="add-to">
         <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
@@ -100,11 +100,11 @@
         </button>
       </div>
       <button class="confirm" onclick="resetQuantity(this)">
-        <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+        <img src="{{ url_for('static', filename='Icons/check.png') }}" alt="check Icon" style="width: 16px; height: 16px;">
       </button>
     </div>
     <div class="icon">
-      <img src="Icons/avocado.png" alt="avocado" width="80px" height="80px">
+      <img src="{{ url_for('static', filename='Icons/avocado.png') }}" alt="avocado" width="80px" height="80px">
       <h3>Avocado</h3>
       <div class="add-to">
         <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
@@ -116,11 +116,11 @@
         </button>
       </div>
       <button class="confirm" onclick="resetQuantity(this)">
-        <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+        <img src="{{ url_for('static', filename='Icons/check.png') }}" alt="check Icon" style="width: 16px; height: 16px;">
       </button>
     </div>
     <div class="icon">
-      <img src="Icons/banana.png" alt="banana" width="80px" height="80px">
+      <img src="{{ url_for('static', filename='Icons/banana.png') }}" alt="banana" width="80px" height="80px">
       <h3>Banana</h3>
       <div class="add-to">
         <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
@@ -132,14 +132,14 @@
         </button>
       </div>
       <button class="confirm" onclick="resetQuantity(this)">
-        <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+        <img src="{{ url_for('static', filename='Icons/check.png') }}" alt="check Icon" style="width: 16px; height: 16px;">
       </button>
     </div>
 
   </div>
   <div class="row">
     <div class="icon">
-      <img src="Icons/apple.png" alt="apple" width="80px" height="80px">
+      <img src="{{ url_for('static', filename='Icons/apple.png') }}" alt="apple" width="80px" height="80px">
       <h3>Apple</h3>
       <div class="add-to">
         <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
@@ -151,11 +151,11 @@
         </button>
       </div>
       <button class="confirm" onclick="resetQuantity(this)">
-        <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+        <img src="{{ url_for('static', filename='Icons/check.png') }}" alt="check Icon" style="width: 16px; height: 16px;">
       </button>
     </div>
     <div class="icon">
-      <img src="Icons/apricot.png" alt="apricot" width="80px" height="80px">
+      <img src="{{ url_for('static', filename='Icons/apricot.png') }}" alt="apricot" width="80px" height="80px">
       <h3>Apricot</h3>
       <div class="add-to">
         <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
@@ -167,11 +167,11 @@
         </button>
       </div>
       <button class="confirm" onclick="resetQuantity(this)">
-        <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+        <img src="{{ url_for('static', filename='Icons/check.png') }}" alt="check Icon" style="width: 16px; height: 16px;">
       </button>
     </div>
     <div class="icon">
-      <img src="Icons/avocado.png" alt="avocado" width="80px" height="80px">
+      <img src="{{ url_for('static', filename='Icons/avocado.png') }}" alt="avocado" width="80px" height="80px">
       <h3>Avocado</h3>
       <div class="add-to">
         <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
@@ -183,11 +183,11 @@
         </button>
       </div>
       <button class="confirm" onclick="resetQuantity(this)">
-        <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+        <img src="{{ url_for('static', filename='Icons/check.png') }}" alt="check Icon" style="width: 16px; height: 16px;">
       </button>
     </div>
     <div class="icon">
-      <img src="Icons/banana.png" alt="banana" width="80px" height="80px">
+      <img src="{{ url_for('static', filename='Icons/banana.png') }}" alt="banana" width="80px" height="80px">
       <h3>Banana</h3>
       <div class="add-to">
         <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
@@ -199,7 +199,7 @@
         </button>
       </div>
       <button class="confirm" onclick="resetQuantity(this)">
-        <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+        <img src="{{ url_for('static', filename='Icons/check.png') }}" alt="check Icon" style="width: 16px; height: 16px;">
       </button>
     </div>
 
