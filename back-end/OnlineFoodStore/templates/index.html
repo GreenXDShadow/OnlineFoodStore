@@ -56,7 +56,7 @@
               </div>
             <a href="{{ url_for('adminlogin') }}"><h4>Admin Login</h4></a>
           </div>
-    <button class="cart-icon-btn" onclick= "window.location.href = 'cart.html';">
+    <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
     <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px" height="27px"></div></button>
     </div>
   </div>
