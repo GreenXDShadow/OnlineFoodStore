@@ -29,15 +29,17 @@
               </button>
             </div>
               <div class="form-popup" id="register">
-                <form action="example.com/path" class="form-container" id="popUpForm">
-                  <h2>Registration</h2>
-                  <input type="text" id="userName" placeholder="Username">
-                  <input type="password" id="passWord" placeholder="Password">
-                  <br>
-                  <input type="password" id="passWord" placeholder="Confirm Password">
-                  <br>
-                  <button type="submit">Submit</button>
-                </form>
+                  <form action="/api/addUser" method="post" class="form-container" id="popUpForm">
+                      <h2>Registration</h2>
+                      <input type="text" id="userName" name="name" placeholder="Username">
+                      <input type="password" id="passWord" name="password" placeholder="Password">
+                      <br>
+                      <input type="password" id="confirmPassWord" name="confirm_password" placeholder="Confirm Password">
+                      <br>
+                      <input type="email" id="email" name="email" placeholder="Email Address">
+                      <br>
+                      <button type="submit">Submit</button>
+                  </form>
               </div>
             <div id="oneline">
               <h4>Log In</h4>
