@@ -52,6 +52,8 @@ class Manager(User):
         return f"<Manager(id={self.id}, name={self.name}, email={self.email})>"
 
 class Cart(db.Model):
+    __tablename__ = "cart"
+
     id = db.Column(db.Integer, primary_key=True)
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)

@@ -77,6 +77,7 @@ def print_tables():
 
 if __name__ == '__main__':
     with app.app_context():
-        clear_tables()
-        populate_data()
+        db.create_all()
+        # clear_tables()
+        # populate_data()
         print_tables()
