@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homepage</title>
   <!-- icon library and stylesheet reference -->
-  <link href="{{ url_for('static', filename='style.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 </head>
@@ -13,13 +13,14 @@
 <body>
   <div class="overlay"></div>
   <div class="topnav">
-    <a href="index.html"><i class="fa fa-fw fa-home"></i> Home</a>
+    <a href="{{ url_for('index') }}"><i class="fa fa-fw fa-home"></i> Home</a>
     <form>
       <input class="searchbar" type="search" placeholder="search for products <3">
     </form>
     <div class="imageRight">
       <button class="user-icon-btn" onclick="toggleDropdown()">
-        <img src="Icons/user.png" alt="user" class="user-icon" width="27px" height="27px">
+        <img src="{{ url_for('static', filename='Icons/user.png')}}" alt="user" class="user-icon" width="27px"
+          height="27px">
     </div></button>
     <div class="dropdown-content hidden" id="myDropdown">
       <button class="user-icon-btn" onclick="toggleDropdown()"><i class="fa fa-times fa-xs fa-fw imageRight"
@@ -28,7 +29,8 @@
       <div id="oneline">
         <h4>Register</h4>
         <button id="loginButton" class="user-icon-btn" onclick=registrationPopUp()>
-          <img class="arrow-level" src="Icons/down.png" alt="downarrow" width="20px" height="20px">
+          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+            height="20px">
         </button>
       </div>
       <div class="form-popup" id="register">
@@ -45,7 +47,8 @@
       <div id="oneline">
         <h4>Log In</h4>
         <button id="loginButton" class="user-icon-btn" onclick=loginPopUp()>
-          <img class="arrow-level" src="Icons/down.png" alt="downarrow" width="20px" height="20px">
+          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+            height="20px">
         </button>
       </div>
       <div class="form-popup" id="login">
@@ -59,9 +62,13 @@
       </div>
     </div>
     <button class="cart-icon-btn" onclick="toggleDropdown()">
-      <img src="Icons/cart.png" alt="user" class="user-icon" width="27px" height="27px">
+      <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
+        height="27px">
   </div></button>
   </div>
+
+
+
   </div>
   <div class="bottomnav">
     <ul>
@@ -71,4 +78,4 @@
       <li><a href="#">Contact Us</a></li>
     </ul>
   </div>
-  <h3 class = "cart">Cart</h3>
+  <h3 class="cart">Cart</h3>

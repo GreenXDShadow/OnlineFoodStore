@@ -20,7 +20,8 @@
     </form>
     <div class="imageRight">
       <button class="user-icon-btn" onclick="toggleDropdown()">
-        <img src="{{ url_for('static', filename='Icons/user.png')}}" alt="user" class="user-icon" width="27px" height="27px">
+        <img src="{{ url_for('static', filename='Icons/user.png')}}" alt="user" class="user-icon" width="27px"
+          height="27px">
     </div></button>
     <div class="dropdown-content hidden" id="myDropdown">
       <button class="user-icon-btn" onclick="toggleDropdown()"><i class="fa fa-times fa-xs fa-fw imageRight"
@@ -29,7 +30,8 @@
       <div id="oneline">
         <h4>Register</h4>
         <button id="loginButton" class="user-icon-btn" onclick=registrationPopUp()>
-          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px" height="20px">
+          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+            height="20px">
         </button>
       </div>
       <div class="form-popup" id="register">
@@ -46,7 +48,8 @@
       <div id="oneline">
         <h4>Log In</h4>
         <button id="loginButton" class="user-icon-btn" onclick=loginPopUp()>
-          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px" height="20px">
+          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+            height="20px">
         </button>
       </div>
       <div class="form-popup" id="login">
@@ -58,10 +61,14 @@
           <button type="submit">Submit</button>
         </form>
       </div>
-      <a href="adminlogin.html"><h4>Admin Login</h4></a>
+      <a href="adminlogin.html">
+        <h4>Admin Login</h4>
+      </a>
     </div>
-    <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="cart" class="nav-icon" width="22px" height="25px">
-  </div>
+    <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
+      <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
+        height="27px">
+  </div></button> </div>
   </div>
   <div class="bottomnav">
     <ul>
@@ -72,139 +79,163 @@
     </ul>
   </div>
   <h1 style="margin-left:18%;">Fruits:</h2>
-  <div class="row">
-    <div class="icon">
-      <img src="{{ url_for('static', filename='Icons/apple.png')}}" alt="apple" width="80px" height="80px">
-      <h3>Apple</h3>
-      <div class="add-to">
-        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
-          <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}" alt="Cart Icon">
-        </button>
-        <span class="quantity">1</span>
-        <button class="item-buttons" onclick="changeQuantity(this,'increment')">
-          <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}" alt="Cart Icon">
-        </button>
-      </div>
-      <button class="confirm" onclick="resetQuantity(this)">
-        <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
-      </button>
-    </div>
-    <div class="icon">
-      <img src="{{ url_for('static', filename='Icons/apricot.png')}}" alt="apricot" width="80px" height="80px">
-      <h3>Apricot</h3>
-      <div class="add-to">
-        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
-          <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}" alt="Cart Icon">
-        </button>
-        <span class="quantity">1</span>
-        <button class="item-buttons" onclick="changeQuantity(this,'increment')">
-          <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}" alt="Cart Icon">
+    <div class="row">
+      <div class="icon">
+        <img src="{{ url_for('static', filename='Icons/apple.png')}}" alt="apple" width="80px" height="80px">
+        <h3>Apple</h3>
+        <div class="add-to">
+          <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+            <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}"
+              alt="Cart Icon">
+          </button>
+          <span class="quantity">1</span>
+          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+            <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}"
+              alt="Cart Icon">
+          </button>
+        </div>
+        <button class="confirm" onclick="resetQuantity(this)">
+          <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon"
+            style="width: 16px; height: 16px;">
         </button>
       </div>
-      <button class="confirm" onclick="resetQuantity(this)">
-        <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
-      </button>
-    </div>
-    <div class="icon">
-      <img src="{{ url_for('static', filename='Icons/grape.png')}}" alt="grape" width="80px" height="80px">
-      <h3>Grape</h3>
-      <div class="add-to">
-        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
-          <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}" alt="Cart Icon">
-        </button>
-        <span class="quantity">1</span>
-        <button class="item-buttons" onclick="changeQuantity(this,'increment')">
-          <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}" alt="Cart Icon">
-        </button>
-      </div>
-      <button class="confirm" onclick="resetQuantity(this)">
-        <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
-      </button>
-    </div>
-    <div class="icon">
-      <img src="{{ url_for('static', filename='Icons/banana.png')}}" alt="banana" width="80px" height="80px">
-      <h3>Banana</h3>
-      <div class="add-to">
-        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
-          <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}" alt="Cart Icon">
-        </button>
-        <span class="quantity">1</span>
-        <button class="item-buttons" onclick="changeQuantity(this,'increment')">
-          <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}" alt="Cart Icon">
+      <div class="icon">
+        <img src="{{ url_for('static', filename='Icons/apricot.png')}}" alt="apricot" width="80px" height="80px">
+        <h3>Apricot</h3>
+        <div class="add-to">
+          <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+            <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}"
+              alt="Cart Icon">
+          </button>
+          <span class="quantity">1</span>
+          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+            <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}"
+              alt="Cart Icon">
+          </button>
+        </div>
+        <button class="confirm" onclick="resetQuantity(this)">
+          <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon"
+            style="width: 16px; height: 16px;">
         </button>
       </div>
-      <button class="confirm" onclick="resetQuantity(this)">
-        <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
-      </button>
-    </div>
-  </div>
-  <div class="row">
-    <div class="icon">
-      <img src="{{ url_for('static', filename='Icons/blueberry.png')}}" alt="blueberry" width="80px" height="80px">
-      <h3>Blueberries</h3>
-      <div class="add-to">
-        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
-          <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}" alt="Cart Icon">
-        </button>
-        <span class="quantity">1</span>
-        <button class="item-buttons" onclick="changeQuantity(this,'increment')">
-          <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}" alt="Cart Icon">
-        </button>
-      </div>
-      <button class="confirm" onclick="resetQuantity(this)">
-        <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
-      </button>
-    </div>
-    <div class="icon">
-      <img src="{{ url_for('static', filename='Icons/blackberry.png')}}" alt="blackberry" width="80px" height="80px">
-      <h3>Blackberry</h3>
-      <div class="add-to">
-        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
-          <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}" alt="Cart Icon">
-        </button>
-        <span class="quantity">1</span>
-        <button class="item-buttons" onclick="changeQuantity(this,'increment')">
-          <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}" alt="Cart Icon">
+      <div class="icon">
+        <img src="{{ url_for('static', filename='Icons/grape.png')}}" alt="grape" width="80px" height="80px">
+        <h3>Grape</h3>
+        <div class="add-to">
+          <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+            <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}"
+              alt="Cart Icon">
+          </button>
+          <span class="quantity">1</span>
+          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+            <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}"
+              alt="Cart Icon">
+          </button>
+        </div>
+        <button class="confirm" onclick="resetQuantity(this)">
+          <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon"
+            style="width: 16px; height: 16px;">
         </button>
       </div>
-      <button class="confirm" onclick="resetQuantity(this)">
-        <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
-      </button>
-    </div>
-    <div class="icon">
-      <img src="{{ url_for('static', filename='Icons/breadfruit.png')}}" alt="breadfruit" width="80px" height="80px">
-      <h3>Breadfruit</h3>
-      <div class="add-to">
-        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
-          <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}" alt="Cart Icon">
-        </button>
-        <span class="quantity">1</span>
-        <button class="item-buttons" onclick="changeQuantity(this,'increment')">
-          <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}" alt="Cart Icon">
+      <div class="icon">
+        <img src="{{ url_for('static', filename='Icons/banana.png')}}" alt="banana" width="80px" height="80px">
+        <h3>Banana</h3>
+        <div class="add-to">
+          <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+            <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}"
+              alt="Cart Icon">
+          </button>
+          <span class="quantity">1</span>
+          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+            <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}"
+              alt="Cart Icon">
+          </button>
+        </div>
+        <button class="confirm" onclick="resetQuantity(this)">
+          <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon"
+            style="width: 16px; height: 16px;">
         </button>
       </div>
-      <button class="confirm" onclick="resetQuantity(this)">
-        <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
-      </button>
     </div>
-    <div class="icon">
+    <div class="row">
+      <div class="icon">
+        <img src="{{ url_for('static', filename='Icons/blueberry.png')}}" alt="blueberry" width="80px" height="80px">
+        <h3>Blueberries</h3>
+        <div class="add-to">
+          <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+            <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}"
+              alt="Cart Icon">
+          </button>
+          <span class="quantity">1</span>
+          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+            <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}"
+              alt="Cart Icon">
+          </button>
+        </div>
+        <button class="confirm" onclick="resetQuantity(this)">
+          <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon"
+            style="width: 16px; height: 16px;">
+        </button>
+      </div>
+      <div class="icon">
+        <img src="{{ url_for('static', filename='Icons/blackberry.png')}}" alt="blackberry" width="80px" height="80px">
+        <h3>Blackberry</h3>
+        <div class="add-to">
+          <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+            <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}"
+              alt="Cart Icon">
+          </button>
+          <span class="quantity">1</span>
+          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+            <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}"
+              alt="Cart Icon">
+          </button>
+        </div>
+        <button class="confirm" onclick="resetQuantity(this)">
+          <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon"
+            style="width: 16px; height: 16px;">
+        </button>
+      </div>
+      <div class="icon">
+        <img src="{{ url_for('static', filename='Icons/breadfruit.png')}}" alt="breadfruit" width="80px" height="80px">
+        <h3>Breadfruit</h3>
+        <div class="add-to">
+          <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+            <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}"
+              alt="Cart Icon">
+          </button>
+          <span class="quantity">1</span>
+          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+            <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}"
+              alt="Cart Icon">
+          </button>
+        </div>
+        <button class="confirm" onclick="resetQuantity(this)">
+          <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon"
+            style="width: 16px; height: 16px;">
+        </button>
+      </div>
+      <div class="icon">
         <img src="{{ url_for('static', filename='Icons/cherry.png')}}" alt="cherry" width="80px" height="80px">
         <h3>Cherry</h3>
         <div class="add-to">
           <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
-            <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}" alt="Cart Icon">
+            <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}"
+              alt="Cart Icon">
           </button>
           <span class="quantity">1</span>
           <button class="item-buttons" onclick="changeQuantity(this,'increment')">
-            <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}" alt="Cart Icon">
+            <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}"
+              alt="Cart Icon">
           </button>
         </div>
         <button class="confirm" onclick="resetQuantity(this)">
-          <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
+          <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon"
+            style="width: 16px; height: 16px;">
         </button>
       </div>
     </div>
-  <!-- <div class="row">
+    <!-- <div class="row">
     <div class="icon">
       <img src="Icons/cherry.png" alt="cherry" width="80px" height="80px">
       <h3>Cherry</h3>
@@ -272,7 +303,7 @@
   </div> -->
 
 
-  <!-- <div class="icon">
+    <!-- <div class="icon">
     <img src="Icons/strawberry.png" alt="strawberry" width="80px" height="80px">
     <h3>Strawberry</h3>
     <div class="add-to">
@@ -289,7 +320,7 @@
     </button>
   </div> -->
 
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 
