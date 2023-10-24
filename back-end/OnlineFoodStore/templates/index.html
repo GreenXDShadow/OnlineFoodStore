@@ -1,134 +1,151 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Homepage</title>
   <!-- icon library and stylesheet reference -->
-  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css"/>
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 </head>
+
 <body>
   <div class="overlay"></div>
-  <div class ="topnav">
+  <div class="topnav">
     <a href="{{ url_for('index') }}"><i class="fa fa-fw fa-home"></i> Home</a>
     <form>
-      <input class="searchbar" type = "search" placeholder="search for products <3">
+      <input class="searchbar" type="search" placeholder="search for products <3">
     </form>
-    <div class = "imageRight">
-          <button class="user-icon-btn" onclick="toggleDropdown()">
-            <img src="{{ url_for('static', filename='Icons/user.png')}}" alt="user" class="user-icon" width="27px" height="27px"></div></button>
-          <div class="dropdown-content hidden" id="myDropdown">
-            <button class="user-icon-btn" onclick="toggleDropdown()"><i class="fa fa-times fa-xs fa-fw imageRight"style="font-size: 2em;"></i></button>
-            <h2>ACCOUNT</h2>
-            <div id="oneline">
-              <h4>Register</h4>
-              <button id="loginButton" class="user-icon-btn" onclick= registrationPopUp()>
-                <img class = "arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px" height="20px">
-              </button>
-            </div>
-              <div class="form-popup" id="register">
-                  <form action="/api/addUser" method="post" class="form-container" id="popUpForm">
-                      <h2>Registration</h2>
-                      <input type="text" id="userName" name="name" placeholder="Username">
-                      <input type="password" id="passWord" name="password" placeholder="Password">
-                      <br>
-                      <input type="password" id="confirmPassWord" name="confirm_password" placeholder="Confirm Password">
-                      <br>
-                      <input type="email" id="email" name="email" placeholder="Email Address">
-                      <br>
-                      <button type="submit">Submit</button>
-                  </form>
-              </div>
-            <div id="oneline">
-              <h4>Log In</h4>
-              <button id="loginButton" class="user-icon-btn" onclick= loginPopUp()>
-                <img class = "arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px" height="20px">
-              </button>
-            </div>
-              <div class="form-popup" id="login">
-                <form action="example.com/path" class="form-container" id="popUpForm">
-                  <h2>Login</h2>
-                  <input type="text" id="userName" placeholder="Username">
-                  <input type="password" id="passWord" placeholder="Password">
-                  <br>
-                  <button type="submit">Submit</button>
-                </form>
-              </div>
-            <a href="{{ url_for('adminlogin') }}"><h4>Admin Login</h4></a>
-          </div>
+    <div class="imageRight">
+      <button class="user-icon-btn" onclick="toggleDropdown()">
+        <img src="{{ url_for('static', filename='Icons/user.png')}}" alt="user" class="user-icon" width="27px"
+          height="27px">
+    </div></button>
+    <div class="dropdown-content hidden" id="myDropdown">
+      <button class="user-icon-btn" onclick="toggleDropdown()"><i class="fa fa-times fa-xs fa-fw imageRight"
+          style="font-size: 2em;"></i></button>
+      <h2>ACCOUNT</h2>
+      <div id="oneline">
+        <h4>Register</h4>
+        <button id="loginButton" class="user-icon-btn" onclick=registrationPopUp()>
+          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+            height="20px">
+        </button>
+      </div>
+      <div class="form-popup" id="register">
+        <form action="/api/addUser" method="post" class="form-container" id="popUpForm">
+          <h2>Registration</h2>
+          <input type="text" id="userName" name="name" placeholder="Username">
+          <input type="password" id="passWord" name="password" placeholder="Password">
+          <br>
+          <input type="password" id="confirmPassWord" name="confirm_password" placeholder="Confirm Password">
+          <br>
+          <input type="email" id="email" name="email" placeholder="Email Address">
+          <br>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <div id="oneline">
+        <h4>Log In</h4>
+        <button id="loginButton" class="user-icon-btn" onclick=loginPopUp()>
+          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+            height="20px">
+        </button>
+      </div>
+      <div class="form-popup" id="login">
+        <form action="example.com/path" class="form-container" id="popUpForm">
+          <h2>Login</h2>
+          <input type="text" id="userName" placeholder="Username">
+          <input type="password" id="passWord" placeholder="Password">
+          <br>
+          <button type="submit">Submit</button>
+        </form>
+      </div>
+      <a href="{{ url_for('adminlogin') }}">
+        <h4>Admin Login</h4>
+      </a>
+    </div>
     <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
-    <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px" height="27px"></div></button>
-    </div>
+      <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
+        height="27px">
+  </div></button>
   </div>
-    <div class="bottomnav">
-      <ul>
-        <li><a href="#">Select Category</a></li>
-        <li><a href="#">New Products</a></li>
-        <li><a href="#">Featured Products</a></li>
-        <li><a href="#">Contact Us</a></li>
-      </ul>
-    </div>
+  </div>
+  <div class="bottomnav">
+    <ul>
+      <li><a href="#">Select Category</a></li>
+      <li><a href="#">New Products</a></li>
+      <li><a href="#">Featured Products</a></li>
+      <li><a href="#">Contact Us</a></li>
+    </ul>
+  </div>
   <div class="bannerposition">
-  <img class="banner" src="{{ url_for('static', filename='Images/banner.png')}}">
+    <img class="banner" src="{{ url_for('static', filename='Images/banner.png')}}">
   </div>
   <h4 style="margin-bottom:0;">Shop by:</h4>
   <h2>Categories</h2>
   <div class="row">
-        <div class="carousel carousel-1">
-            <button class="carousel-btn prev-btn"><i class="fa fa-chevron-left"></i></button>
+    <div class="carousel carousel-1">
+      <button class="carousel-btn prev-btn"><i class="fa fa-chevron-left"></i></button>
 
-            <div class="carousel-container">
-                <div class="carousel-inner">
-                    <div class="row">
-                      <a href="{{ url_for('fruit') }}" class="category-button">
-                        <div class="icon-category">
-                            <img src="{{ url_for('static', filename='Icons/fruit icon.png')}}" alt="fruit" width="80px" height="80px">
-                            <h3>Fruit</h3>
-                        </div>
-                      </a>
-                      <a href="{{ url_for('vegetable') }}" class="category-button">
-                        <div class="icon-category">
-                            <img src="{{ url_for('static', filename='Icons/vegetable.png')}}" alt="veggies" width="80px" height="80px">
-                            <h3>Vegetables</h3>
-                        </div>
-                      </a>
-                      <a href="{{ url_for('dairy') }}" class="category-button">
-                        <div class="icon-category" style:"padding: 5">
-                            <img src="{{ url_for('static', filename='Icons/dairy-products.png')}}" alt="dairy" width="80px" height="80px">
-                            <h3>Dairy and Eggs</h3>
-                        </div>
-                      </a>
-                    </div>
+      <div class="carousel-container">
+        <div class="carousel-inner">
+          <div class="row">
+            <a href="{{ url_for('fruit') }}" class="category-button">
+              <div class="icon-category">
+                <img src="{{ url_for('static', filename='Icons/fruit icon.png')}}" alt="fruit" width="80px"
+                  height="80px">
+                <h3>Fruit</h3>
+              </div>
+            </a>
+            <a href="{{ url_for('vegetable') }}" class="category-button">
+              <div class="icon-category">
+                <img src="{{ url_for('static', filename='Icons/vegetable.png')}}" alt="veggies" width="80px"
+                  height="80px">
+                <h3>Vegetables</h3>
+              </div>
+            </a>
+            <a href="{{ url_for('dairy') }}" class="category-button">
+              <div class="icon-category" style:"padding: 5">
+                <img src="{{ url_for('static', filename='Icons/dairy-products.png')}}" alt="dairy" width="80px"
+                  height="80px">
+                <h3>Dairy and Eggs</h3>
+              </div>
+            </a>
+          </div>
 
-                    <div class="row">
-                      <a href="{{ url_for('meat') }}" class="category-button">
-                        <div class="icon-category">
-                            <img src="{{ url_for('static', filename='Icons/meat.png')}}" alt="meat" width="80px" height="80px">
-                            <h3>Meat and Seafood</h3><link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css"/>
-                        </div>
-                      </a>
-                      <a href="{{ url_for('frozen') }}" class="category-button">
-                        <div class="icon-category">
-                            <img src="{{ url_for('static', filename='Icons/frozen-food.png')}}" alt="frozen food" width="80px" height="80px">
-                            <h3>Frozen Food</h3>
-                        </div>
-                      </a>
-                      <a href="{{ url_for('beverages') }}" class="category-button">
-                        <div class="icon-category">
-                            <img src="{{ url_for('static', filename='Icons/beverages.png')}}" alt="beverages" width="80px" height="80px">
-                            <h3>Beverages</h3>
-                        </div>
-                      </a>
-                    </div>
+          <div class="row">
+            <a href="{{ url_for('meat') }}" class="category-button">
+              <div class="icon-category">
+                <img src="{{ url_for('static', filename='Icons/meat.png')}}" alt="meat" width="80px" height="80px">
+                <h3>Meat and Seafood</h3>
+                <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
+              </div>
+            </a>
+            <a href="{{ url_for('frozen') }}" class="category-button">
+              <div class="icon-category">
+                <img src="{{ url_for('static', filename='Icons/frozen-food.png')}}" alt="frozen food" width="80px"
+                  height="80px">
+                <h3>Frozen Food</h3>
+              </div>
+            </a>
+            <a href="{{ url_for('beverages') }}" class="category-button">
+              <div class="icon-category">
+                <img src="{{ url_for('static', filename='Icons/beverages.png')}}" alt="beverages" width="80px"
+                  height="80px">
+                <h3>Beverages</h3>
+              </div>
+            </a>
+          </div>
 
-                </div>
-            </div>
-
-            <button class="carousel-btn next-btn"><i class="fa fa-chevron-right"></i></button>
         </div>
+      </div>
+
+      <button class="carousel-btn next-btn"><i class="fa fa-chevron-right"></i></button>
     </div>
+  </div>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
   <!-- replit watermark. erase later -->

@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html>
 
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Beverages</title>
-    <!-- icon library and stylesheet reference -->
-    <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
-  </head>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homepage</title>
+  <!-- icon library and stylesheet reference -->
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+</head>
 
 <body>
   <div class="overlay"></div>
@@ -20,7 +20,8 @@
     </form>
     <div class="imageRight">
       <button class="user-icon-btn" onclick="toggleDropdown()">
-        <img src="Icons/user.png" alt="user" class="user-icon" width="27px" height="27px">
+        <img src="{{ url_for('static', filename='Icons/user.png')}}" alt="user" class="user-icon" width="27px"
+          height="27px">
     </div></button>
     <div class="dropdown-content hidden" id="myDropdown">
       <button class="user-icon-btn" onclick="toggleDropdown()"><i class="fa fa-times fa-xs fa-fw imageRight"
@@ -29,7 +30,8 @@
       <div id="oneline">
         <h4>Register</h4>
         <button id="loginButton" class="user-icon-btn" onclick=registrationPopUp()>
-          <img class="arrow-level" src="Icons/down.png" alt="downarrow" width="20px" height="20px">
+          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+            height="20px">
         </button>
       </div>
       <div class="form-popup" id="register">
@@ -58,8 +60,14 @@
           <button type="submit">Submit</button>
         </form>
       </div>
+      <a href="{{ url_for('adminlogin') }}">
+        <h4>Admin Login</h4>
+      </a>
     </div>
-    <img src="Icons/cart.png" alt="cart" class="nav-icon" width="22px" height="25px">
+    <button class="cart-icon-btn" onclick="window.location.href = '{ url_for('cart') }';">
+      <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
+        height="27px">
+  </div></button>
   </div>
   </div>
   <div class="bottomnav">
@@ -67,17 +75,197 @@
       <li><a href="#">Select Category</a></li>
       <li><a href="#">New Products</a></li>
       <li><a href="#">Featured Products</a></li>
-      <li><a href="#">Contact Us</a></li>
+      <li><a href="{{ url_for('adminlogin') }}">Contact Us</a></li>
     </ul>
   </div>
-  <div class="adminpage" id="adminlogin">
-    <form action="example.com/path" class="adminform" id="popUpForm">
-      <h1>Admin Login</h1>
-      <input class="adminlogin"type="text" id="adminuserName" placeholder="Username">
-      <input class="adminlogin"type="password" id="adminpassWord" placeholder="Password">
-      <br>
-      <button type="submit">Submit</button>
-    </form>
+  <div class="bannerposition">
+    <img class="banner" src="{{ url_for('static', filename='images/banner.png')}}">
   </div>
+  <h4 style="margin-bottom:0;">Shop by:</h4>
+  <h2>Categories</h2>
+  <div class="row">
+    <div class="carousel carousel-1">
+      <button class="carousel-btn prev-btn"><i class="fa fa-chevron-left"></i></button>
+
+      <div class="carousel-container">
+        <div class="carousel-inner">
+          <div class="row">
+            <a href="{{ url_for('fruit') }}" class="category-button">
+              <div class="icon-category">
+                <img src="{{ url_for('static', filename='Icons/fruit icon.png')}}" alt="fruit" width="80px"
+                  height="80px">
+                <h3>Fruit</h3>
+              </div>
+            </a>
+            <a href="{{ url_for('vegetable') }}" class="category-button">
+              <div class="icon-category">
+                <img src="{{ url_for('static', filename='Icons/vegetable.png')}}" alt="veggies" width="80px"
+                  height="80px">
+                <h3>Vegetables</h3>
+              </div>
+            </a>
+            <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
+              <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
+                height="27px">
+          </div></button>" class="category-button">
+          <div class="icon-category" style:"padding: 5">
+            <img src="{{ url_for('static', filename='Icons/dairy-products.png')}}" alt="dairy" width="80px"
+              height="80px">
+            <h3>Dairy and Eggs</h3>
+          </div>
+          </a>
+        </div>
+
+        <div class="row">
+          <a href="{{ url_for('meat') }}" class="category-button">
+            <div class="icon-category">
+              <img src="{{ url_for('static', filename='Icons/meat.png')}}" alt="meat" width="80px" height="80px">
+              <h3>Meat and Seafood</h3>
+            </div>
+          </a>
+          <a href="{{ url_for('frozen') }}" class="category-button">
+            <div class="icon-category">
+              <img src="{{ url_for('static', filename='Icons/frozen-food.png')}}" alt="frozen food" width="80px"
+                height="80px">
+              <h3>Frozen Food</h3>
+            </div>
+          </a>
+          <a href="{{ url_for('beverages') }}" class="category-button">
+            <div class="icon-category">
+              <img src="{{ url_for('static', filename='Icons/beverages.png')}}" alt="beverages" width="80px"
+                height="80px">
+              <h3>Beverages</h3>
+            </div>
+          </a>
+        </div>
+
+      </div>
+    </div>
+
+    <button class="carousel-btn next-btn"><i class="fa fa-chevron-right"></i></button>
+  </div>
+  </div>
+  <!-- second carousel  -->
+  <!-- <h4>For You:</h4>
+  <h2>Top Featured Products</h2>
+  <div class="row">
+      <div class="carousel carousel-2">
+          <button class="carousel-btn prev-btn"><i class="fa fa-chevron-left"></i></button>
+
+          <div class="carousel-container">
+              <div class="carousel-inner">
+
+                  <div class="row">
+                      <div class="icon">
+                          <img src="Icons/cauliflower.png" alt="cauliflower" width="80px" height="80px">
+                          <h3>Cauliflower</h3>
+                        <div class="add-to">
+                        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+                            <img class="to-cart-minus arrow-level" src="Icons/minus.png" alt="Cart Icon">
+                        </button>
+                          <span class="quantity">1</span>
+                          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+                              <img class="to-cart-plus arrow-level" src="Icons/plus.png" alt="Cart Icon">
+                          </button>
+                        </div>
+                        <button class="confirm" onclick="resetQuantity(this)">
+                            <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+                        </button>
+                      </div>
+                      <div class="icon">
+                          <img src="Icons/strawberry.png" alt="strawberry" width="80px" height="80px">
+                          <h3>Strawberry</h3>
+                        <div class="add-to">
+                        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+                            <img class="to-cart-minus arrow-level" src="Icons/minus.png" alt="Cart Icon">
+                        </button>
+                          <span class="quantity">1</span>
+                          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+                              <img class="to-cart-plus arrow-level" src="Icons/plus.png" alt="Cart Icon">
+                          </button>
+                        </div>
+                        <button class="confirm" onclick="resetQuantity(this)">
+                            <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+                        </button>
+                      </div>
+                      <div class="icon">
+                          <img src="Icons/carrots.png" alt="carrots" width="80px" height="80px">
+                          <h3>Carrots</h3>
+                        <div class="add-to">
+                        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+                            <img class="to-cart-minus arrow-level" src="Icons/minus.png" alt="Cart Icon">
+                        </button>
+                          <span class="quantity">1</span>
+                          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+                              <img class="to-cart-plus arrow-level" src="Icons/plus.png" alt="Cart Icon">
+                          </button>
+                        </div>
+                        <button class="confirm" onclick="resetQuantity(this)">
+                            <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+                        </button>
+                      </div>
+                  </div>
+
+                  <div class="row">
+                      <div class="icon">
+                          <img src="Icons/banana.png" alt="banana" width="80px" height="80px">
+                          <h3>Banana</h3>
+                        <div class="add-to">
+                        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+                            <img class="to-cart-minus arrow-level" src="Icons/minus.png" alt="Cart Icon">
+                        </button>
+                          <span class="quantity">1</span>
+                          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+                              <img class="to-cart-plus arrow-level" src="Icons/plus.png" alt="Cart Icon">
+                          </button>
+                        </div>
+                        <button class="confirm" onclick="resetQuantity(this)">
+                            <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+                        </button>
+                      </div>
+                      <div class="icon">
+                          <img src="Icons/tomato.png" alt="tomato" width="80px" height="80px">
+                          <h3>Tomato</h3>
+                        <div class="add-to">
+                        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+                            <img class="to-cart-minus arrow-level" src="Icons/minus.png" alt="Cart Icon">
+                        </button>
+                          <span class="quantity">1</span>
+                          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+                              <img class="to-cart-plus arrow-level" src="Icons/plus.png" alt="Cart Icon">
+                          </button>
+                        </div>
+                        <button class="confirm" onclick="resetQuantity(this)">
+                            <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+                        </button>
+                      </div>
+                      <div class="icon">
+                          <img src="Icons/green-onion.png" alt="green onions" width="80px" height="80px">
+                          <h3>Green Onion</h3>
+                        <div class="add-to">
+                        <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
+                            <img class="to-cart-minus arrow-level" src="Icons/minus.png" alt="Cart Icon">
+                        </button>
+                          <span class="quantity">1</span>
+                          <button class="item-buttons" onclick="changeQuantity(this,'increment')">
+                              <img class="to-cart-plus arrow-level" src="Icons/plus.png" alt="Cart Icon">
+                          </button>
+                        </div>
+                        <button class="confirm" onclick="resetQuantity(this)">
+                            <img src="Icons/check.png" alt="check Icon" style="width: 16px; height: 16px;">
+                        </button>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <button class="carousel-btn next-btn"><i class="fa fa-chevron-right"></i></button>
+      </div>
+  </div>
+</div> -->
+  <script src="script.js"></script>
+
+  <!-- replit watermark. erase later -->
+  <script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right">        </script>
 </body>
+
 </html>
