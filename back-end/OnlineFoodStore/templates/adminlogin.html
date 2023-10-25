@@ -7,6 +7,7 @@
   <title>AdminLogin</title>
   <!-- icon library and stylesheet reference -->
   <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ url_for('static', filename='css/adminloginstyle.css') }}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 </head>
@@ -37,14 +38,24 @@
       <div class="form-popup" id="register">
         <form action="/api/addUser" method="post" class="form-container" id="popUpForm">
           <h2>Registration</h2>
+          <div class="input-container">
+          <i class="fa fa-fw fa-user"></i>
           <input type="text" id="userName" name="name" placeholder="Username">
+          </div>
+          <div class="input-container">
+          <i class="fa fa-fw fa-lock"></i>
           <input type="password" id="passWord" name="password" placeholder="Password">
-          <br>
+          </div>
+          <div class="input-container">
+          <i class="fa fa-fw fa-lock"></i>
           <input type="password" id="confirmPassWord" name="confirm_password" placeholder="Confirm Password">
-          <br>
+          </div>
+          <div class="input-container">
+          <i class="fa fa-fw fa-envelope"></i>
           <input type="email" id="email" name="email" placeholder="Email Address">
+          </div>
           <br>
-          <button type="submit">Submit</button>
+          <input type="submit" value="Submit">
         </form>
       </div>
       <div id="oneline">
@@ -56,11 +67,17 @@
       </div>
       <div class="form-popup" id="login">
         <form action="example.com/path" class="form-container" id="popUpForm">
-          <h2>Login</h2>
+          <h2>Log In</h2>
+          <div class="input-container">
+          <i class="fa fa-fw fa-user"></i>
           <input type="text" id="userName" placeholder="Username">
+        </div>
+        <div class="input-container">
+          <i class="fa fa-fw fa-lock"></i>
           <input type="password" id="passWord" placeholder="Password">
+          </div>
           <br>
-          <button type="submit">Submit</button>
+            <input type="submit" value="Submit">
         </form>
       </div>
       <a href="{{ url_for('adminlogin') }}">
@@ -81,15 +98,74 @@
       <li><a href="#">Contact Us</a></li>
     </ul>
   </div>
-  <div class="adminpage" id="adminlogin">
-    <form action="example.com/path" class="adminform" id="popUpForm">
-      <h1>Admin Login</h1>
-      <input class="adminlogin"type="text" id="adminuserName" placeholder="Username">
-      <input class="adminlogin"type="password" id="adminpassWord" placeholder="Password">
-      <br>
-      <button type="submit">Submit</button>
-    </form>
+  <div class="adminbody">
+  <div class="container">
+    <input type="checkbox" id="flip">
+    <div class="cover">
+      <div class="front">
+        <img src="{{ url_for('static', filename='Images/loginimage.png')}}" alt="">
+        <div class="text">
+          <span class="text-1">the place you can get <br> all you need</span>
+          <span class="text-2">Let's start managing<3</span>
+        </div>
+      </div>
+      <div class="back">
+        <img src="{{ url_for('static', filename='Images/loginimage.png')}}" alt="">
+        <div class="text">
+         <span class="text-3">the place you can get <br> all you need</span>
+          <span class="text-4">Let's start managing<3</span>
+        </div>
+      </div>
+    </div>
+    <div class="forms">
+        <div class="form-content">
+          <div class="login-form">
+            <div class="title">Admin Login</div>
+          <form action="#">
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fa fa-fw fa-envelope"></i>
+                <input type="text" placeholder="Enter your email" required>
+              </div>
+              <div class="input-box">
+                <i class="fa fa-fw fa-lock"></i>
+                <input type="password" placeholder="Enter your password" required>
+              </div>
+              <div class="text"><a href="#" style="color: #C1A7EF;">Forgot password?</a></div>
+              <div class="button input-box">
+                <input type="submit" value="Submit">
+              </div>
+              <div class="text sign-up-text">Don't have an account? <label for="flip">Signup now</label></div>
+            </div>
+        </form>
+      </div>
+        <div class="signup-form">
+          <div class="title">Admin Signup</div>
+        <form action="#">
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fa fa-fw fa-user"></i>
+                <input type="text" placeholder="Enter your name" required>
+              </div>
+              <div class="input-box">
+                <i class="fa fa-fw fa-envelope"></i>
+                <input type="text" placeholder="Enter your email" required>
+              </div>
+              <div class="input-box">
+                <i class="fa fa-fw fa-lock"></i>
+                <input type="password" placeholder="Enter your password" required>
+              </div>
+              <div class="button input-box">
+                <input type="submit" value="Submit">
+              </div>
+              <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
+            </div>
+      </form>
+    </div>
+    </div>
+    </div>
   </div>
+</div>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>

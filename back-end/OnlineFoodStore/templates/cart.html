@@ -34,14 +34,26 @@
         </button>
       </div>
       <div class="form-popup" id="register">
-        <form action="example.com/path" class="form-container" id="popUpForm">
+        <form action="/api/addUser" method="post" class="form-container" id="popUpForm">
           <h2>Registration</h2>
-          <input type="text" id="userName" placeholder="Username">
-          <input type="password" id="passWord" placeholder="Password">
+          <div class="input-container">
+          <i class="fa fa-fw fa-user"></i>
+          <input type="text" id="userName" name="name" placeholder="Username">
+          </div>
+          <div class="input-container">
+          <i class="fa fa-fw fa-lock"></i>
+          <input type="password" id="passWord" name="password" placeholder="Password">
+          </div>
+          <div class="input-container">
+          <i class="fa fa-fw fa-lock"></i>
+          <input type="password" id="confirmPassWord" name="confirm_password" placeholder="Confirm Password">
+          </div>
+          <div class="input-container">
+          <i class="fa fa-fw fa-envelope"></i>
+          <input type="email" id="email" name="email" placeholder="Email Address">
+          </div>
           <br>
-          <input type="password" id="passWord" placeholder="Confirm Password">
-          <br>
-          <button type="submit">Submit</button>
+          <input type="submit" value="Submit">
         </form>
       </div>
       <div id="oneline">
@@ -53,22 +65,28 @@
       </div>
       <div class="form-popup" id="login">
         <form action="example.com/path" class="form-container" id="popUpForm">
-          <h2>Login</h2>
+          <h2>Log In</h2>
+          <div class="input-container">
+          <i class="fa fa-fw fa-user"></i>
           <input type="text" id="userName" placeholder="Username">
+        </div>
+        <div class="input-container">
+          <i class="fa fa-fw fa-lock"></i>
           <input type="password" id="passWord" placeholder="Password">
+          </div>
           <br>
-          <button type="submit">Submit</button>
+            <input type="submit" value="Submit">
         </form>
       </div>
+      <a href="{{ url_for('adminlogin') }}">
+        <h4>Admin Login</h4>
+      </a>
     </div>
-    <button class="cart-icon-btn" onclick="toggleDropdown()">
+    <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
       <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
         height="27px">
   </div></button>
   </div>
-
-
-
   </div>
   <div class="bottomnav">
     <ul>

@@ -98,5 +98,13 @@ function resetQuantity(checkButton) {
     quantityElement.innerText = '1';
 }
 
+document.getElementById('flip').addEventListener('change', function() {
+  var backImage = document.querySelector('.back img');
+  if (this.checked) {
+    backImage.src = "{{ url_for('static', filename='Images/otherimage.png')}}";
+  } else {
+    backImage.src = "{{ url_for('static', filename='Images/loginimage.png')}}";
+  }
+});
 
 
