@@ -402,6 +402,48 @@ position: relative;
   justify-content: center;
 }
 
+.input-container {
+  width: 100px;
+  position: relative;
+  color:  #dcc2e8;
+  font-size: 15px;
+}
+
+.input-container i {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px;
+  color: #dcc2e8;
+}
+
+.input-container input {
+  width: 100%;
+  padding: 10px 60px; /* Adjust padding as needed */
+  font-size: 15px;
+}
+
+.input-container label {
+  position: absolute;
+  top: 10px;
+  left: 10px; /* Adjust left value as needed */
+  pointer-events: none;
+  font-size: 16px;
+  color: #dcc2e8;
+  transition: 0.2s;
+}
+
+.input-container input:focus + label,
+.input-container input:not(:placeholder-shown) + label {
+  top: -10px;
+  font-size: 15px;
+  color: #dcc2e8;
+}
+
+.input-container input::placeholder {
+  padding: 10px 0px; /* Adjust padding as needed */
+}
 /* @media screen and (max-width: 500px) {
   .topnav a, .bottomnav a{
     float: none;
