@@ -1,11 +1,14 @@
 import os
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, flash, redirect, render_template, request, url_for, jsonify
+
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
+# Update this key (placeholder for now)
+app.secret_key = 'your_secret_key_here'
 
 app.config['SQLALCHEMY_DATABASE_URI'] = \
     'sqlite:///' + os.path.join(basedir, 'database.db')
@@ -29,13 +32,14 @@ class ApiCalls:
         confirm_password = request.form.get('confirm_password')
 
         if password != confirm_password:
-            return jsonify({"message": "Passwords do not match"}), 400
+            flash("Passwords do not match", "error")
+        else:
+            new_user = Customer(name=name, password=password, email=email)
+            db.session.add(new_user)
+            db.session.commit()
+            flash("User added successfully", "success")
 
-        new_user = Customer(name=name, password=password, email=email)
-        db.session.add(new_user)
-        db.session.commit()
-
-        return jsonify({"message": "User added successfully", "user_id": new_user.id}), 201
+        return render_template('index.html')
 
 
 # These app routes are 'URL' requests. A function will be run whenever the web page reaches any of these URLs.
