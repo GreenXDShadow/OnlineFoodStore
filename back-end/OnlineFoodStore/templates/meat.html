@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage</title>
+  <title>Meat</title>
   <!-- icon library and stylesheet reference -->
   <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -102,7 +102,7 @@
     </div>
     <div class="row">
       <div class="icon">
-        <img src="{{ url_for('static', filename='Icons/roasted.png')}}" alt="Ham" width="80px" height="80px">
+        <img src="{{ url_for('static', filename='Icons/ham.png')}}" alt="ham" width="80px" height="80px">
         <h3>Ham</h3>
         <div class="add-to">
           <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
@@ -121,8 +121,8 @@
         </button>
       </div>
       <div class="icon">
-        <img src="{{ url_for('static', filename='Icons/roast-chicken.png')}}" alt="Turkey" width="80px" height="80px">
-        <h3>Whole Turkey</h3>
+        <img src="{{ url_for('static', filename='Icons/lambshank.png')}}" alt="lamb shank" width="80px" height="80px">
+        <h3>Lamb Shank</h3>
         <div class="add-to">
           <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
             <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}"
@@ -159,7 +159,7 @@
         </button>
       </div>
       <div class="icon">
-        <img src="{{ url_for('static', filename='Icons/minced-meat.png')}}" alt="ground_beef" width="80px"
+        <img src="{{ url_for('static', filename='Icons/groundbeef.png')}}" alt="ground beef" width="80px"
           height="80px">
         <h3>Ground Beef</h3>
         <div class="add-to">
@@ -220,7 +220,7 @@
         </button>
       </div>
       <div class="icon">
-        <img src="{{ url_for('static', filename='Icons/chop.png')}}" alt="pork_chop" width="80px" height="80px">
+        <img src="{{ url_for('static', filename='Icons/chop.png')}}" alt="pork chop" width="80px" height="80px">
         <h3>Pork Chop</h3>
         <div class="add-to">
           <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
