@@ -1,5 +1,5 @@
 import os
-from flask import Flask, flash, redirect, render_template, request, url_for, jsonify
+from flask import Flask, jsonify, flash, redirect, render_template, request, url_for, jsonify
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
@@ -22,7 +22,6 @@ from User import User, Customer, Manager, Cart
 
 
 class ApiCalls:
-
     @staticmethod
     @app.route('/api/addUser', methods=['POST'])
     def addUser():
@@ -32,14 +31,12 @@ class ApiCalls:
         confirm_password = request.form.get('confirm_password')
 
         if password != confirm_password:
-            flash("Passwords do not match", "error")
-        else:
-            new_user = Customer(name=name, password=password, email=email)
-            db.session.add(new_user)
-            db.session.commit()
-            flash("User added successfully", "success")
+            return jsonify({"status": "error", "message": "Passwords do not match"})
 
-        return render_template('index.html')
+        new_user = Customer(name=name, password=password, email=email)
+        db.session.add(new_user)
+        db.session.commit()
+        return jsonify({"status": "success", "message": "User added successfully"})
 
 
 # These app routes are 'URL' requests. A function will be run whenever the web page reaches any of these URLs.

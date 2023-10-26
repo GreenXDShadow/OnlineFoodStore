@@ -166,13 +166,42 @@
               </div>
             </a>
           </div>
-
         </div>
       </div>
 
       <button class="carousel-btn next-btn"><i class="fa fa-chevron-right"></i></button>
     </div>
   </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <script>
+    $(document).ready(function() {
+        $("#popUpForm").submit(function(e) {
+            e.preventDefault();
+
+            $.ajax({
+                url: $(this).attr('action'), // takes the action attribute of the form
+                type: 'POST',
+                data: $(this).serialize(), // serialize form data
+                success: function(response) {
+                    var messageDiv = $("#flash-messages");
+                    messageDiv.empty(); // clear previous messages
+
+                    if(response.status === "success") {
+                        messageDiv.append('<li class="success">' + response.message + '</li>');
+                    } else {
+                        messageDiv.append('<li class="error">' + response.message + '</li>');
+                    }
+                },
+                error: function(error) {
+                    console.error("Error:", error);
+                }
+            });
+        });
+    });
+  </script>
+
+
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
   <!-- replit watermark. erase later -->
