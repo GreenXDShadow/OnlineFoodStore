@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Meat</title>
+  <title>Meats</title>
   <!-- icon library and stylesheet reference -->
   <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -144,7 +144,7 @@
         <h3>Sausage</h3>
         <div class="add-to">
           <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
-            <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}.png"
+            <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}"
               alt="Cart Icon">
           </button>
           <span class="quantity">1</span>
@@ -239,7 +239,7 @@
         </button>
       </div>
       <div class="icon">
-        <img src="{{ url_for('static', filename='Icons/bacon.png')}}.png" alt="bacon" width="80px" height="80px">
+        <img src="{{ url_for('static', filename='Icons/bacon.png')}}" alt="bacon" width="80px" height="80px">
         <h3>Bacon</h3>
         <div class="add-to">
           <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
