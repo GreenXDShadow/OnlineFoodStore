@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage</title>
+  <title>Contact</title>
   <!-- icon library and stylesheet reference -->
   <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="{{ url_for('static', filename='css/contactstyle.css') }}" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 </head>
 
@@ -108,80 +108,28 @@
       <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
     </ul>
   </div>
-  <div class="bannerposition">
-    <img class="banner" src="{{ url_for('static', filename='Images/banner.png')}}">
-  </div>
-  <h4 style="margin-bottom:0;">Shop by:</h4>
-  <h2>Categories</h2>
-  <div class="row">
-    <div class="carousel carousel-1">
-      <button class="carousel-btn prev-btn"><i class="fa fa-chevron-left"></i></button>
-
-      <div class="carousel-container">
-        <div class="carousel-inner">
-          <div class="row">
-            <a href="{{ url_for('fruit') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/fruits.png')}}" alt="fruits" width="80px"
-                  height="80px">
-                <h3>Fruit</h3>
-              </div>
-            </a>
-            <a href="{{ url_for('vegetable') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/vegetables.png')}}" alt="vegetables" width="80px"
-                  height="80px">
-                <h3>Vegetables</h3>
-              </div>
-            </a>
-            <a href="{{ url_for('dairy') }}" class="category-button">
-              <div class="icon-category" style:"padding: 5">
-                <img src="{{ url_for('static', filename='Icons/dairyproducts.png')}}" alt="dairy" width="80px"
-                  height="80px">
-                <h3>Dairy and Eggs</h3>
-              </div>
-            </a>
-          </div>
-
-          <div class="row">
-            <a href="{{ url_for('meat') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/meat.png')}}" alt="meat" width="80px" height="80px">
-                <h3>Meat and Seafood</h3>
-                <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
-              </div>
-            </a>
-            <a href="{{ url_for('frozen') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/frozenfood.png')}}" alt="frozen food" width="80px"
-                  height="80px">
-                <h3>Frozen Food</h3>
-              </div>
-            </a>
-            <a href="{{ url_for('beverages') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/beverages.png')}}" alt="beverages" width="80px"
-                  height="80px">
-                <h3>Beverages</h3>
-              </div>
-            </a>
-          </div>
-        </div>
+<div class="container">
+    <div style="text-align:center">
+      <h2>Contact Us</h2>
+      <p>Shop for some fresh produce, or leave us a message: </br> Email Us: Team2OFS@gmail.com </p>
+    </div>
+    <div class="row">
+      <div class="column">
+        <img class="banner" src="{{ url_for('static', filename='Images/banner.png')}}" style= "width:100%"";">
       </div>
-
-      <button class="carousel-btn next-btn"><i class="fa fa-chevron-right"></i></button>
+      <div class="column">
+        <form action="#">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="firstname" placeholder="Your name..">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+          <label for="subject">Subject</label>
+          <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-  <script src="{{ url_for('static', filename='js/ajaxScript.js') }}"></script>
-
-
-
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
-  <!-- replit watermark. erase later -->
-  <script src="https://replit.com/public/js/replit-badge-v2.js" theme="dark" position="bottom-right">        </script>
 </body>
-
 </html>
