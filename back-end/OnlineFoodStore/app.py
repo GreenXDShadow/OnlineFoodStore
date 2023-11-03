@@ -20,6 +20,7 @@ db = SQLAlchemy(app)
 from Product import Product, BoxedProduct, FreshProduct
 from User import User, Customer, Manager, Cart
 
+from sqlalchemy.exc import IntegrityError
 
 class ApiCalls:
     @staticmethod
@@ -30,13 +31,26 @@ class ApiCalls:
         email = request.form.get('email')
         confirm_password = request.form.get('confirm_password')
 
+        # Check if any field is empty
+        if not all([name, password, email, confirm_password]):
+            return jsonify({"status": "error", "message": "All fields must be filled out"})
+
+        # Check password confirmation
         if password != confirm_password:
             return jsonify({"status": "error", "message": "Passwords do not match"})
 
-        new_user = Customer(name=name, password=password, email=email)
-        db.session.add(new_user)
-        db.session.commit()
-        return jsonify({"status": "success", "message": "User added successfully"})
+        # Attempt to add user to database
+        try:
+            new_user = Customer(name=name, password=password, email=email)
+            db.session.add(new_user)
+            db.session.commit()
+            return jsonify({"status": "success", "message": "User added successfully"})
+        except IntegrityError:  # This is for the unique constraint error
+            return jsonify({"status": "error", "message": "Email already exists"})
+        except Exception as e:
+            # Handle other database exceptions here
+            return jsonify({"status": "error", "message": "An error occurred while registering. Please try again."})
+
 
 
 # These app routes are 'URL' requests. A function will be run whenever the web page reaches any of these URLs.
