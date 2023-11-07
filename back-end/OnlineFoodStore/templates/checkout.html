@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout</title>
+  <!-- icon library and stylesheet reference -->
+  <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div style="text-align: center">
+        <h1>Checkout</h1>
+    </div>
+  <div class="container">
+    <h3>Delivery Information</h3>
+    <form action="#">
+        <label for="fname">First Name</label>
+        <input type="text" id="fname" name="firstname" placeholder="First Name">
+        <label for="lname">Last Name</label>
+        <input type="text" id="lname" name="lastname" placeholder="Last Name">
+        <label for="address">Address</label>
+        <input type="text" id="address" name="address" placeholder="Address">
+        <label for="city">City</label>
+        <input type="text" id="city" name="city" placeholder="City">
+        <label for="state">State</label>
+        <input type="text" id="city" name="city" placeholder="City">
+        <input type="submit" value="Confirm">
+      </form>
+  </div>
+
+  <div class="container">
+    <h3>Payment Information</h3>
+    <form action="#">
+        <label for="cardnum">Card Number</label>
+        <input type="number" id="cardpin" name="cardnumber" maxlength="19" placeholder="0000000000000000">
+        <label for="cardpin">CVV/CVC Code</label>
+        <input type="number" id="cardpin" name="cardpin" maxlength="4" placeholder="000">
+        <label for="expirymonth">Expiration Month</label>
+        <input type="number" id="expirymonth" name="expirymonth" maxlength=2" placeholder="01">
+        <label for="expiryyear">Expiration Month</label>
+        <input type="number" id="expiryyear" name="expiryyear" maxlength=2" placeholder="01">
+        <input type="submit" value="Submit">
+      </form>
+  </div>
+
+  <div class="bottomnav">
+    <ul>
+      <li><a href="#">Select Category</a></li>
+      <li><a href="#">New Products</a></li>
+      <li><a href="#">Featured Products</a></li>
+      <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+    </ul>
+  </div>
+  <div class="adminbody">
+  <div class="container">
+    
+    </div>
+    </div>
+    </div>
+  </div>
+</div>
+  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
