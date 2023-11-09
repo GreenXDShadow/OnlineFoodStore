@@ -444,6 +444,58 @@ position: relative;
 .input-container input::placeholder {
   padding: 10px 0px; /* Adjust padding as needed */
 }
+
+.input-form {
+  padding: 10px;
+  background-color: #dcc2e8;
+  border-style: groove;
+}
+
+.subheading {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.form-sameline {
+  padding-left: 70px;
+}
+
+label {
+  display: inline-block;
+  flex-direction: row;
+  justify-content: flex-end;
+  text-align: right;
+  width: 300px;
+  line-height: 30px;
+  margin-bottom: 15px;
+}
+
+input {
+  height: 30px;
+  flex: 0 0 150px;
+  margin-left: 15px;
+}
+
+.form-btn {
+  display: inline-block;
+  text-align: center;
+  display: block;
+  margin: 0 auto;
+  font-size: 20px;
+  cursor: pointer;
+  border-style: groove;
+}
+
+.form-btn:hover {
+  background-color: #C1A7EF;
+}
+
+.hidden {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
 /* @media screen and (max-width: 500px) {
   .topnav a, .bottomnav a{
     float: none;
