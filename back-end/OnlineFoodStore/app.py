@@ -94,6 +94,10 @@ def beverages():
 def adminlogin():
     return render_template('adminlogin.html')
 
+@app.route('/userlogin')
+def userlogin():
+    return render_template('userlogin.html')
+
 @app.route('/contact')
 def contact():
     return render_template('contact.html')

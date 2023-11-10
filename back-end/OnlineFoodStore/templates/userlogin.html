@@ -81,8 +81,12 @@
         </form>
       </div>
       <a href="{{ url_for('adminlogin') }}">
+        <h4>Admin Login</h4>
+      </a>
+      <a href="{{ url_for('userlogin') }}">
         <h4>User Login</h4>
       </a>
+
     </div>
     <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
       <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
@@ -120,7 +124,7 @@
     <div class="forms">
         <div class="form-content">
           <div class="login-form">
-            <div class="title">Admin Login</div>
+            <div class="title">User Login</div>
           <form action="#">
             <div class="input-boxes">
               <div class="input-box">
@@ -140,7 +144,7 @@
         </form>
       </div>
         <div class="signup-form">
-          <div class="title">Admin Signup</div>
+          <div class="title">User Signup</div>
         <form action="#">
             <div class="input-boxes">
               <div class="input-box">

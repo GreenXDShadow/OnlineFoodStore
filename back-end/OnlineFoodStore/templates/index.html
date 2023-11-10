@@ -93,6 +93,9 @@
       <a href="{{ url_for('adminlogin') }}">
         <h4>Admin Login</h4>
       </a>
+      <a href="{{ url_for('userlogin') }}">
+        <h4>User Login</h4>
+      </a>
     </div>
     <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
       <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
@@ -106,7 +109,6 @@
       <li><a href="#">New Products</a></li>
       <li><a href="#">Featured Products</a></li>
       <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
-      <li><a href="{{ url_for('checkout') }}">Checkout</a></li>
     </ul>
   </div>
   <div class="bannerposition">
