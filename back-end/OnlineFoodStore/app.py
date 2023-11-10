@@ -103,6 +103,9 @@ def cart():
     # if user is logged in we will display the items in their current cart here with a total
     return render_template('cart.html')
 
+@app.route('/checkout')
+def checkout():
+    return render_template('checkout.html')
 
 if __name__ == "__main__":
     app.run(debug=True)
