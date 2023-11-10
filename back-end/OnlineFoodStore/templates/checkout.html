@@ -12,57 +12,167 @@
 </head>
 
 <body>
+  <div class="overlay"></div>
+  <div class="topnav">
+    <a href="{{ url_for('index') }}"><i class="fa fa-fw fa-home"></i> Home</a>
+    <form>
+      <input class="searchbar" type="search" placeholder="search for products <3">
+    </form>
+    <div class="imageRight">
+      <button class="user-icon-btn" onclick="toggleDropdown()">
+        <img src="{{ url_for('static', filename='Icons/user.png')}}" alt="user" class="user-icon" width="27px"
+          height="27px">
+    </div></button>
+    <div class="dropdown-content hidden" id="myDropdown">
+      <button class="user-icon-btn" onclick="toggleDropdown()"><i class="fa fa-times fa-xs fa-fw imageRight"
+          style="font-size: 2em;"></i></button>
+      <h2>ACCOUNT</h2>
+      <div id="oneline">
+        <h4>Register</h4>
+        <button id="loginButton" class="user-icon-btn" onclick=registrationPopUp()>
+          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+            height="20px">
+        </button>
+      </div>
+      <div class="form-popup" id="register">
+        <div id="flash-messages">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flash-messages">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        </div>
+        <form action="/api/addUser" method="post" class="form-container" id="popUpForm">
+          <h2>Registration</h2>
+          <div class="input-container">
+          <i class="fa fa-fw fa-user"></i>
+          <input type="text" id="userName" name="name" placeholder="Username">
+          </div>
+          <div class="input-container">
+          <i class="fa fa-fw fa-lock"></i>
+          <input type="password" id="passWord" name="password" placeholder="Password">
+          </div>
+          <div class="input-container">
+          <i class="fa fa-fw fa-lock"></i>
+          <input type="password" id="confirmPassWord" name="confirm_password" placeholder="Confirm Password">
+          </div>
+          <div class="input-container">
+          <i class="fa fa-fw fa-envelope"></i>
+          <input type="email" id="email" name="email" placeholder="Email Address">
+          </div>
+          <br>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+      <div id="oneline">
+        <h4>Log In</h4>
+        <button id="loginButton" class="user-icon-btn" onclick=loginPopUp()>
+          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+            height="20px">
+        </button>
+      </div>
+      <div class="form-popup" id="login">
+        <form action="example.com/path" class="form-container" id="popUpForm">
+          <h2>Log In</h2>
+          <div class="input-container">
+          <i class="fa fa-fw fa-user"></i>
+          <input type="text" id="userName" placeholder="Username">
+        </div>
+        <div class="input-container">
+          <i class="fa fa-fw fa-lock"></i>
+          <input type="password" id="passWord" placeholder="Password">
+          </div>
+          <br>
+            <input type="submit" value="Submit">
+        </form>
+      </div>
+      <a href="{{ url_for('adminlogin') }}">
+        <h4>Admin Login</h4>
+      </a>
+    </div>
+    <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
+      <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
+        height="27px">
+  </div></button>
+  </div>
+  </div>
     <div style="text-align: center">
         <h1>Checkout</h1>
     </div>
-  <div class="container">
-    <h3>Delivery Information</h3>
+  <div class="input-form">
+    <h2>Delivery Information</h2>
     <form action="#">
-        <label for="fname">First Name</label>
+        <label for="fname">First Name
         <input type="text" id="fname" name="firstname" placeholder="First Name">
-        <label for="lname">Last Name</label>
+        </label>
+        <label for="lname">Last Name
         <input type="text" id="lname" name="lastname" placeholder="Last Name">
-        <label for="address">Address</label>
+      </label>
+        <br>
+        <br>
+        <label for="address">Address
         <input type="text" id="address" name="address" placeholder="Address">
-        <label for="city">City</label>
+      </label>
+        <br>
+        <br>
+        <label for="city">City
         <input type="text" id="city" name="city" placeholder="City">
-        <label for="state">State</label>
-        <input type="text" id="city" name="city" placeholder="City">
-        <input type="submit" value="Confirm">
+      </label>
+        <label for="state">State
+        <input type="text" id="state" name="state" placeholder="CA">
+      </label>
+        <label for="zipcode">ZIP code
+        <input class="hidden" type="number" id="zipcode" name="zipcode" maxlength="5" placeholder="00000">
+      </label>
+        <br>
+        <input class="form-btn" type="submit" value="Confirm">
       </form>
   </div>
 
-  <div class="container">
-    <h3>Payment Information</h3>
+  <br>
+  <br>
+
+  <div class="input-form">
+    <h2>Payment Information</h2>
     <form action="#">
-        <label for="cardnum">Card Number</label>
-        <input type="number" id="cardpin" name="cardnumber" maxlength="19" placeholder="0000000000000000">
-        <label for="cardpin">CVV/CVC Code</label>
-        <input type="number" id="cardpin" name="cardpin" maxlength="4" placeholder="000">
-        <label for="expirymonth">Expiration Month</label>
-        <input type="number" id="expirymonth" name="expirymonth" maxlength=2" placeholder="01">
-        <label for="expiryyear">Expiration Month</label>
-        <input type="number" id="expiryyear" name="expiryyear" maxlength=2" placeholder="01">
-        <input type="submit" value="Submit">
+        <label for="cardnum">Card Number
+        <input class="hidden" type="number" id="cardpin" name="cardnumber" maxlength="19" placeholder="0000000000000000">
+      </label>
+        <label for="cardpin">CVV/CVC Code
+        <input class="hidden" type="number" id="cardpin" name="cardpin" maxlength="4" placeholder="000">
+      </label>
+      <br>
+        <label for="expirymonth">Expiration Month
+        <input class="hidden" type="number" id="expirymonth" name="expirymonth" maxlength=2" placeholder="01">
+      </label>
+        <label for="expiryyear">Expiration Year
+        <input class="hidden" type="number" id="expiryyear" name="expiryyear" maxlength=2" placeholder="01">
+      </label>
+        <br>
+        <input class="form-btn" type="submit" value="Confirm">
       </form>
   </div>
 
-  <div class="bottomnav">
-    <ul>
-      <li><a href="#">Select Category</a></li>
-      <li><a href="#">New Products</a></li>
-      <li><a href="#">Featured Products</a></li>
-      <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
-    </ul>
+  <br>
+  <br>
+
+  <div class="input-form">
+    <h3>Order Summary</h3>
+    <table>
+
+    </table>
+    <p>Delivery Fee: </p>
+    <p>Payment due: </p>
+    <form action="#">
+      <br>
+      <input class="form-btn" type="submit" value="Submit Order">
+    </form>
   </div>
-  <div class="adminbody">
-  <div class="container">
-    
-    </div>
-    </div>
-    </div>
-  </div>
-</div>
+
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
