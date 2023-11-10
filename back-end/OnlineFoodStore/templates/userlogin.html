@@ -4,9 +4,10 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Homepage</title>
+  <title>UserLogin</title>
   <!-- icon library and stylesheet reference -->
   <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
+  <link href="{{ url_for('static', filename='css/adminloginstyle.css') }}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 </head>
@@ -35,17 +36,6 @@
         </button>
       </div>
       <div class="form-popup" id="register">
-        <div id="flash-messages">
-        {% with messages = get_flashed_messages(with_categories=true) %}
-            {% if messages %}
-                <ul class="flash-messages">
-                    {% for category, message in messages %}
-                        <li class="{{ category }}">{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-        {% endwith %}
-        </div>
         <form action="/api/addUser" method="post" class="form-container" id="popUpForm">
           <h2>Registration</h2>
           <div class="input-container">
@@ -91,7 +81,7 @@
         </form>
       </div>
       <a href="{{ url_for('adminlogin') }}">
-        <h4>Admin Login</h4>
+        <h4>User Login</h4>
       </a>
     </div>
     <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
@@ -105,82 +95,77 @@
       <li><a href="#">Select Category</a></li>
       <li><a href="#">New Products</a></li>
       <li><a href="#">Featured Products</a></li>
-      <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
-      <li><a href="{{ url_for('checkout') }}">Checkout</a></li>
+      <li><a href="#">Contact Us</a></li>
     </ul>
   </div>
-  <div class="bannerposition">
-    <img class="banner" src="{{ url_for('static', filename='Images/banner.png')}}">
-  </div>
-  <h4 style="margin-bottom:0;">Shop by:</h4>
-  <h2>Categories</h2>
-  <div class="row">
-    <div class="carousel carousel-1">
-      <button class="carousel-btn prev-btn"><i class="fa fa-chevron-left"></i></button>
-
-      <div class="carousel-container">
-        <div class="carousel-inner">
-          <div class="row">
-            <a href="{{ url_for('fruit') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/fruits.png')}}" alt="fruits" width="80px"
-                  height="80px">
-                <h3>Fruit</h3>
-              </div>
-            </a>
-            <a href="{{ url_for('vegetable') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/vegetables.png')}}" alt="vegetables" width="80px"
-                  height="80px">
-                <h3>Vegetables</h3>
-              </div>
-            </a>
-            <a href="{{ url_for('dairy') }}" class="category-button">
-              <div class="icon-category" style:"padding: 5">
-                <img src="{{ url_for('static', filename='Icons/dairyproducts.png')}}" alt="dairy" width="80px"
-                  height="80px">
-                <h3>Dairy and Eggs</h3>
-              </div>
-            </a>
-          </div>
-
-          <div class="row">
-            <a href="{{ url_for('meat') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/meat.png')}}" alt="meat" width="80px" height="80px">
-                <h3>Meats</h3>
-                <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
-              </div>
-            </a>
-            <a href="{{ url_for('frozen') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/frozenfood.png')}}" alt="frozen food" width="80px"
-                  height="80px">
-                <h3>Frozen Food</h3>
-              </div>
-            </a>
-            <a href="{{ url_for('beverages') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/beverages.png')}}" alt="beverages" width="80px"
-                  height="80px">
-                <h3>Beverages</h3>
-              </div>
-            </a>
-          </div>
+  <div class="adminbody">
+  <div class="container">
+    <input type="checkbox" id="flip">
+    <div class="cover">
+      <div class="front">
+        <img src="{{ url_for('static', filename='Images/loginimage.png')}}" alt="">
+        <div class="text">
+          <span class="text-1">the place you can get <br> all you need</span>
+          <span class="text-2">Let's start managing<3</span>
         </div>
       </div>
-
-      <button class="carousel-btn next-btn"><i class="fa fa-chevron-right"></i></button>
+      <div class="back">
+        <img src="{{ url_for('static', filename='Images/loginimage.png')}}" alt="">
+        <div class="text">
+         <span class="text-3">the place you can get <br> all you need</span>
+          <span class="text-4">Let's start managing<3</span>
+        </div>
+      </div>
+    </div>
+    <div class="forms">
+        <div class="form-content">
+          <div class="login-form">
+            <div class="title">Admin Login</div>
+          <form action="#">
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fa fa-fw fa-envelope"></i>
+                <input type="text" placeholder="Enter your email" required>
+              </div>
+              <div class="input-box">
+                <i class="fa fa-fw fa-lock"></i>
+                <input type="password" placeholder="Enter your password" required>
+              </div>
+              <div class="text"><a href="#" style="color: #C1A7EF;">Forgot password?</a></div>
+              <div class="button input-box">
+                <input type="submit" value="Submit">
+              </div>
+              <div class="text sign-up-text">Don't have an account? <label for="flip">Signup now</label></div>
+            </div>
+        </form>
+      </div>
+        <div class="signup-form">
+          <div class="title">Admin Signup</div>
+        <form action="#">
+            <div class="input-boxes">
+              <div class="input-box">
+                <i class="fa fa-fw fa-user"></i>
+                <input type="text" placeholder="Enter your name" required>
+              </div>
+              <div class="input-box">
+                <i class="fa fa-fw fa-envelope"></i>
+                <input type="text" placeholder="Enter your email" required>
+              </div>
+              <div class="input-box">
+                <i class="fa fa-fw fa-lock"></i>
+                <input type="password" placeholder="Enter your password" required>
+              </div>
+              <div class="button input-box">
+                <input type="submit" value="Submit">
+              </div>
+              <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
+            </div>
+      </form>
+    </div>
+    </div>
     </div>
   </div>
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <script src="{{ url_for('static', filename='js/ajaxScript.js') }}"></script>
-
-
-
+</div>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
 </body>
-
 </html>
