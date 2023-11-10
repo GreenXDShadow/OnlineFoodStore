@@ -7,9 +7,9 @@
   <!-- icon library and stylesheet reference -->
   <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="{{ url_for('static', filename='css/cart.css') }}" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 </head>
-
 <body>
   <div class="overlay"></div>
   <div class="topnav">
@@ -97,3 +97,28 @@
     </ul>
   </div>
   <h3 class="cart">Cart</h3>
+  <div class = "cartRow" >
+    <div class = "cartBox">
+      <h3>Items</h3>
+      <div class = "cartinnerBox">
+       <div class = "itemTitle">Apple</div>
+      </div>
+    </div>
+    <div class = "checkoutBox">
+      <div class = "checkoutBox-items">
+        <div class = "checkoutBox-headers">Subtotal</div>
+        <div class = "checkoutinnerBox">
+          Total: XXXXXXXXX
+          <br>
+          Tax: XXXXXXXXX
+        </div>
+        <div class = "checkoutBox-headers">Shipping</div>
+        <div class = "checkoutinnerBox">
+          Shipping Cost: FREE
+        </div>
+        <input class = "checkoutButton" type="submit" value="Checkout">
+
+      </div>
+    </div>
+  </div>
+</body>
