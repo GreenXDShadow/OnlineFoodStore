@@ -111,5 +111,9 @@ def cart():
 def checkout():
     return render_template('checkout.html')
 
+@app.route('/featured')
+def featured():
+    return render_template('featured.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
