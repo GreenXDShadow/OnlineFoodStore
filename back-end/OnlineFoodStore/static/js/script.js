@@ -107,4 +107,20 @@ document.getElementById('flip').addEventListener('change', function() {
   }
 });
 
+function categorySelect() {
+  document.getElementById("categorys").classList.toggle("categories-appear");
+}
+
+window.onclick = function(event) {
+  if (!event.target.matches('.categorydrop')) {
+    var dropdowns = document.getElementsByClassName("drop-categories");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var open = dropdowns[i];
+      if (open.classList.contains('categories-appear')) {
+        open.classList.remove('categories-appear');
+      }
+    }
+  }
+}
 

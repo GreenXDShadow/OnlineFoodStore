@@ -115,5 +115,9 @@ def checkout():
 def featured():
     return render_template('featured.html')
 
+@app.route('/categories')
+def categories():
+    return render_template('categories.html')
+
 if __name__ == "__main__":
     app.run(debug=True)
