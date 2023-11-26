@@ -103,75 +103,133 @@
     <div style="text-align: center">
         <h1>Checkout</h1>
     </div>
-  <div class="input-form">
-    <h2>Delivery Information</h2>
-    <form action="#">
-        <label for="fname">First Name
-        <input type="text" id="fname" name="firstname" placeholder="First Name">
-        </label>
-        <label for="lname">Last Name
-        <input type="text" id="lname" name="lastname" placeholder="Last Name">
-      </label>
-        <br>
-        <br>
-        <label for="address">Address
-        <input type="text" id="address" name="address" placeholder="Address">
-      </label>
-        <br>
-        <br>
-        <label for="city">City
-        <input type="text" id="city" name="city" placeholder="City">
-      </label>
-        <label for="state">State
-        <input type="text" id="state" name="state" placeholder="CA">
-      </label>
-        <label for="zipcode">ZIP code
-        <input class="hidden" type="number" id="zipcode" name="zipcode" maxlength="5" placeholder="00000">
-      </label>
-        <br>
-        <input class="form-btn" type="submit" value="Confirm">
-      </form>
-  </div>
 
-  <br>
-  <br>
+    <div class="row" >
+      <div class="box">
+        <h2>Delivery Information</h2>
+        <div class="input-form">
+          <form action="#">
+              <label for="fname">First Name
+              <input type="text" id="fname" name="firstname" placeholder="First Name">
+              </label>
+              <label for="lname">Last Name
+              <input type="text" id="lname" name="lastname" placeholder="Last Name">
+            </label>
+              <br>
+              <br>
+              <label for="address1">Address 1
+              <input type="text" id="address1" name="address1" placeholder="Address 1">
+              </label>
+              <label for="address2">Address 2
+              <input type="text" id="address2" name="address2" placeholder="Address 2">
+            </label>
+              <br>
+              <br>
+              <label for="city">City
+              <input type="text" id="city" name="city" placeholder="City">
+            </label>
+              <label for="state">State
+              <input type="text" id="state" name="state" placeholder="CA">
+            </label>
+              <label for="zipcode">ZIP code
+              <input type="text" id="zipcode" name="zipcode" maxlength="5" placeholder="00000">
+            </label>
+            </form>
+        </div>
+        <h2>Payment Information</h2>
+        <div class="input-form">
+          <form action="#">
+              <label for="cardnum">Card Number
+              <input type="text" id="cardnum" name="cardnumber" maxlength="19" placeholder="0000000000000000">
+            </label>
+              <label for="cardpin">CVV/CVC Code
+              <input type="text" id="cardpin" name="cardpin" maxlength="4" placeholder="000">
+            </label>
+            <br>
+              <label for="expirymonth">Expiration Month
+              <input type="text" id="expirymonth" name="expirymonth" pattern="[0-1]{1}[1-9]{1}" placeholder="01">
+            </label>
+              <label for="expiryyear">Expiration Year
+              <input type="text" id="expiryyear" name="expiryyear" pattern="[00-99]{2}" placeholder="01">
+            </label>
+            </form>
+        </div>
+      </div>
+      <div class="box">
+        <h3>Order Summary</h3>
+          <div class="inside">
+          <table class="orders">
+            <colgroup>
+              <col style="width: 15%"/>
+              <col style="width: 5%"/>
+              <col style="width: 10%"/>
+            </colgroup>
+            <tr>
+              <th>Product Name</th>
+              <th>Quantity</th>
+              <th>Total Price</th>
+            </tr>
+            <tr>
+              <td>Cherry</td>
+              <td>7</td>
+              <td>$8.04</td>
+            </tr>
+            <tr>
+              <td>Cherry</td>
+              <td>7</td>
+              <td>$8.04</td>
+            </tr>
+            <tr>
+              <td>Cherry</td>
+              <td>7</td>
+              <td>$8.04</td>
+            </tr>
+            <tr>
+              <td>Cherry</td>
+              <td>7</td>
+              <td>$8.04</td>
+            </tr>
+            <tr>
+              <td>Cherry</td>
+              <td>7</td>
+              <td>$8.04</td>
+            </tr>
+            <tr>
+              <td>Cherry</td>
+              <td>7</td>
+              <td>$8.04</td>
+            </tr>
+            <tr>
+              <td>Cherry</td>
+              <td>7</td>
+              <td>$8.04</td>
+            </tr>
+            <tr>
+              <td>Cherry</td>
+              <td>7</td>
+              <td>$8.04</td>
+            </tr>
+            <tr>
+              <td>Cherry</td>
+              <td>7</td>
+              <td>$8.04</td>
+            </tr>
+          </table>
+          <p>Delivery Fee:</p>
+          <p>Tax:</p>
+          <p><b>Payment due:</b></p>
+          <br>
+          <form action="#">
+            <input class="form-btn" type="submit" value="Submit Order">
+          </form>
+          </div>
+      </div>
+    </div>
 
-  <div class="input-form">
-    <h2>Payment Information</h2>
-    <form action="#">
-        <label for="cardnum">Card Number
-        <input class="hidden" type="number" id="cardpin" name="cardnumber" maxlength="19" placeholder="0000000000000000">
-      </label>
-        <label for="cardpin">CVV/CVC Code
-        <input class="hidden" type="number" id="cardpin" name="cardpin" maxlength="4" placeholder="000">
-      </label>
-      <br>
-        <label for="expirymonth">Expiration Month
-        <input class="hidden" type="number" id="expirymonth" name="expirymonth" maxlength=2" placeholder="01">
-      </label>
-        <label for="expiryyear">Expiration Year
-        <input class="hidden" type="number" id="expiryyear" name="expiryyear" maxlength=2" placeholder="01">
-      </label>
-        <br>
-        <input class="form-btn" type="submit" value="Confirm">
-      </form>
-  </div>
+  
 
-  <br>
-  <br>
-
-  <div class="input-form">
-    <h3>Order Summary</h3>
-    <table>
-
-    </table>
-    <p>Delivery Fee: </p>
-    <p>Payment due: </p>
-    <form action="#">
-      <br>
-      <input class="form-btn" type="submit" value="Submit Order">
-    </form>
-  </div>
+  
+</div>
 
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
