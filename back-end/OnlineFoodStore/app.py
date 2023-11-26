@@ -74,27 +74,6 @@ class ApiCalls:
             session.pop('username', None)
             session.pop('cart', None)
         return render_template('index.html', session=session)
-    @staticmethod
-    @app.route('api/add_to_cart/<item_id>')
-    def add_to_cart(item_id):
-        # Fetch item details from your database based on item_id
-        item = db.session.query(Product).filter(Product.id == item_id).first()
-
-        # Initialize cart if it doesn't exist in the session
-        if 'cart' not in session:
-            session['cart'] = {}
-
-        # Add/update item in the cart
-        if item:
-            if item_id in session['cart']:
-                session['cart'][item_id]['quantity'] += 1
-            else:
-                session['cart'][item_id] = {
-                    'name': item.name,
-                    'price': item.price,
-                    'quantity': 1
-                }
-
 # These app routes are 'URL' requests. A function will be run whenever the web page reaches any of these URLs.
 @app.route('/')
 def index():
