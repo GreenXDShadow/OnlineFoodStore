@@ -25,67 +25,65 @@ def populate_data():
     db.session.add(customer1)
     db.session.add(manager1)
 
-
-    # Default dairy products
+    # Default dairy products with prices added
     dairy_products = [
-        Product(name="Milk", weight=1.0, type="packaged", category="dairy", imagePath="Icons/milk.png", quantity=1, amount=None),
-        Product(name="that Cheese", weight=0.5, type="packaged", category="dairy", imagePath="Icons/cheese.png",quantity=1, amount=None),
-        Product(name="Eggsssss", weight=0.6, type="packaged", category="dairy", imagePath="Icons/eggs.png", quantity=1,amount=None),
-        Product(name="Almond Milk", weight=1.0, type="packaged", category="dairy", imagePath="Icons/almondmilk.png",quantity=1, amount=None),
-        Product(name="Yogurt", weight=0.4, type="packaged", category="dairy", imagePath="Icons/yogurt.png", quantity=1,amount=None),
-        Product(name="Butter", weight=0.25, type="packaged", category="dairy", imagePath="Icons/butter.png", quantity=1,amount=None),
-        Product(name="Whipped Cream", weight=0.2, type="packaged", category="dairy", imagePath="Icons/whippedcream.png",quantity=1, amount=None),
-        Product(name="Soy Milk", weight=1.0, type="packaged", category="dairy", imagePath="Icons/soymilk.png",quantity=1, amount=None)
+        Product(name="Milk", weight=1.0, type="packaged", category="dairy", price=2.99, imagePath="Icons/milk.png", quantity=1, amount=None),
+        Product(name="that Cheese", weight=0.5, type="packaged", category="dairy", price=4.50, imagePath="Icons/cheese.png", quantity=1, amount=None),
+        Product(name="Eggsssss", weight=0.6, type="packaged", category="dairy", price=3.20, imagePath="Icons/eggs.png", quantity=1, amount=None),
+        Product(name="Almond Milk", weight=1.0, type="packaged", category="dairy", price=3.99, imagePath="Icons/almondmilk.png", quantity=1, amount=None),
+        Product(name="Yogurt", weight=0.4, type="packaged", category="dairy", price=1.50, imagePath="Icons/yogurt.png", quantity=1, amount=None),
+        Product(name="Butter", weight=0.25, type="packaged", category="dairy", price=2.25, imagePath="Icons/butter.png", quantity=1, amount=None),
+        Product(name="Whipped Cream", weight=0.2, type="packaged", category="dairy", price=2.00,imagePath="Icons/whippedcream.png", quantity=1, amount=None),
+        Product(name="Soy Milk", weight=1.0, type="packaged", category="dairy", price=3.99,imagePath="Icons/soymilk.png", quantity=1, amount=None)
     ]
 
-    # Frozen food products
     frozen_food_products = [
-        Product(name="Pizza", weight=0.8, type="packaged", category="frozen", imagePath="Icons/pizza.png", quantity=1, amount=None),
-        Product(name="Berries", weight=0.5, type="packaged", category="frozen", imagePath="Icons/berries.png", quantity=1, amount=None),
-        Product(name="Peas", weight=0.6, type="packaged", category="frozen", imagePath="Icons/peas.png", quantity=1, amount=None),
-        Product(name="Fish Sticks", weight=0.7, type="packaged", category="frozen", imagePath="Icons/fishsticks.png", quantity=1, amount=None),
-        Product(name="Spinach", weight=0.4, type="packaged", category="frozen", imagePath="Icons/spinach.png", quantity=1, amount=None),
-        Product(name="Mushrooms", weight=0.3, type="packaged", category="frozen", imagePath="Icons/mushrooms.png", quantity=1, amount=None),
-        Product(name="Chicken Nuggets", weight=0.6, type="packaged", category="frozen", imagePath="Icons/nuggets.png", quantity=1, amount=None),
-        Product(name="Shrimp", weight=0.5, type="packaged", category="frozen", imagePath="Icons/shrimp.png", quantity=1, amount=None)
+        Product(name="Pizza", weight=0.8, type="packaged", category="frozen", price=6.99, imagePath="Icons/pizza.png", quantity=1, amount=None),
+        Product(name="Berries", weight=0.5, type="packaged", category="frozen", price=4.50, imagePath="Icons/berries.png", quantity=1, amount=None),
+        Product(name="Peas", weight=0.6, type="packaged", category="frozen", price=2.99, imagePath="Icons/peas.png", quantity=1, amount=None),
+        Product(name="Fish Sticks", weight=0.7, type="packaged", category="frozen", price=5.50, imagePath="Icons/fishsticks.png", quantity=1, amount=None),
+        Product(name="Spinach", weight=0.4, type="packaged", category="frozen", price=3.25, imagePath="Icons/spinach.png", quantity=1, amount=None),
+        Product(name="Mushrooms", weight=0.3, type="packaged", category="frozen", price=3.75, imagePath="Icons/mushrooms.png", quantity=1, amount=None),
+        Product(name="Chicken Nuggets", weight=0.6, type="packaged", category="frozen", price=4.99, imagePath="Icons/nuggets.png", quantity=1, amount=None),
+        Product(name="Shrimp", weight=0.5, type="packaged", category="frozen", price=7.99, imagePath="Icons/shrimp.png", quantity=1, amount=None)
     ]
 
     # Beverage products
     beverage_products = [
-        Product(name="Orange Juice", weight=1.0, type="liquid", category="beverages", imagePath="Icons/orangejuice.png", quantity=1, amount=None),
-        Product(name="Water", weight=1.0, type="liquid", category="beverages", imagePath="Icons/water.png", quantity=1, amount=None),
-        Product(name="Grape Juice", weight=1.0, type="liquid", category="beverages", imagePath="Icons/grapejuice.png", quantity=1, amount=None),
-        Product(name="Apple Cider", weight=1.0, type="liquid", category="beverages", imagePath="Icons/applecider.png", quantity=1, amount=None),
-        Product(name="Berry Smoothie", weight=0.5, type="liquid", category="beverages", imagePath="Icons/berrysmoothie.png", quantity=1, amount=None),
-        Product(name="Lemonade", weight=1.0, type="liquid", category="beverages", imagePath="Icons/lemonade.png", quantity=1, amount=None),
-        Product(name="Green Tea", weight=0.5, type="liquid", category="beverages", imagePath="Icons/greentea.png", quantity=1, amount=None),
-        Product(name="Watermelon Juice", weight=1.0, type="liquid", category="beverages", imagePath="Icons/watermelonjuice.png", quantity=1, amount=None)
+        Product(name="Orange Juice", weight=1.0, type="liquid", category="beverages", price=3.99, imagePath="Icons/orangejuice.png", quantity=1, amount=None),
+        Product(name="Water", weight=1.0, type="liquid", category="beverages", price=1.00, imagePath="Icons/water.png", quantity=1, amount=None),
+        Product(name="Grape Juice", weight=1.0, type="liquid", category="beverages", price=4.20, imagePath="Icons/grapejuice.png", quantity=1, amount=None),
+        Product(name="Apple Cider", weight=1.0, type="liquid", category="beverages", price=5.00, imagePath="Icons/applecider.png", quantity=1, amount=None),
+        Product(name="Berry Smoothie", weight=0.5, type="liquid", category="beverages", price=3.50, imagePath="Icons/berrysmoothie.png", quantity=1, amount=None),
+        Product(name="Lemonade", weight=1.0, type="liquid", category="beverages", price=2.75, imagePath="Icons/lemonade.png", quantity=1, amount=None),
+        Product(name="Green Tea", weight=0.5, type="liquid", category="beverages", price=2.50, imagePath="Icons/greentea.png", quantity=1, amount=None),
+        Product(name="Watermelon Juice", weight=1.0, type="liquid", category="beverages", price=4.00, imagePath="Icons/watermelonjuice.png", quantity=1, amount=None)
     ]
 
     # Fruit products
     # TODO: Change the quantity to amount since loose items can be bought by weight
     fruit_products = [
-        Product(name="Apple", weight=0.2, type="fresh", category="fruit", imagePath="Icons/apple.png", quantity=1, amount=None),
-        Product(name="Apricot", weight=0.1, type="fresh", category="fruit", imagePath="Icons/apricot.png", quantity=1, amount=None),
-        Product(name="Grape", weight=0.5, type="fresh", category="fruit", imagePath="Icons/grape.png", quantity=1, amount=None),
-        Product(name="Banana", weight=0.2, type="fresh", category="fruit", imagePath="Icons/banana.png", quantity=1, amount=None),
-        Product(name="Blueberry", weight=0.2, type="fresh", category="fruit", imagePath="Icons/blueberry.png", quantity=1, amount=None),
-        Product(name="Blackberry", weight=0.2, type="fresh", category="fruit", imagePath="Icons/blackberry.png", quantity=1, amount=None),
-        Product(name="Orange", weight=0.3, type="fresh", category="fruit", imagePath="Icons/orange.png", quantity=1, amount=None),
-        Product(name="Cherry", weight=0.2, type="fresh", category="fruit", imagePath="Icons/cherry.png", quantity=1, amount=None)
+        Product(name="Apple", weight=0.2, type="fresh", category="fruit", price=0.30, imagePath="Icons/apple.png", quantity=1, amount=None),
+        Product(name="Apricot", weight=0.1, type="fresh", category="fruit", price=0.40, imagePath="Icons/apricot.png", quantity=1, amount=None),
+        Product(name="Grape", weight=0.5, type="fresh", category="fruit", price=2.50, imagePath="Icons/grape.png", quantity=1, amount=None),
+        Product(name="Banana", weight=0.2, type="fresh", category="fruit", price=0.20, imagePath="Icons/banana.png", quantity=1, amount=None),
+        Product(name="Blueberry", weight=0.2, type="fresh", category="fruit", price=3.00, imagePath="Icons/blueberry.png", quantity=1, amount=None),
+        Product(name="Blackberry", weight=0.2, type="fresh", category="fruit", price=3.00, imagePath="Icons/blackberry.png", quantity=1, amount=None),
+        Product(name="Orange", weight=0.3, type="fresh", category="fruit", price=0.50, imagePath="Icons/orange.png", quantity=1, amount=None),
+        Product(name="Cherry", weight=0.2, type="fresh", category="fruit", price=0.60, imagePath="Icons/cherry.png", quantity=1, amount=None)
     ]
 
     # TODO: Meat should also be in amount since it is a loose product
-    # Meat products
+    # Meat Products with Prices
     meat_products = [
-        Product(name="Ham", weight=1.0, type="packaged", category="meat", imagePath="Icons/ham.png", quantity=1, amount=None),
-        Product(name="Lamb Shank", weight=1.2, type="fresh", category="meat", imagePath="Icons/lambshank.png", quantity=1, amount=None),
-        Product(name="Sausage", weight=0.6, type="packaged", category="meat", imagePath="Icons/sausages.png", quantity=1, amount=None),
-        Product(name="Ground Beef", weight=1.0, type="fresh", category="meat", imagePath="Icons/groundbeef.png", quantity=1, amount=None),
-        Product(name="Chicken", weight=1.5, type="fresh", category="meat", imagePath="Icons/chicken.png", quantity=1, amount=None),
-        Product(name="Beef Steak", weight=1.0, type="fresh", category="meat", imagePath="Icons/beef.png", quantity=1, amount=None),
-        Product(name="Pork Chop", weight=0.8, type="fresh", category="meat", imagePath="Icons/chop.png", quantity=1, amount=None),
-        Product(name="Bacon", weight=0.5, type="packaged", category="meat", imagePath="Icons/bacon.png", quantity=1, amount=None)
+        Product(name="Ham", weight=1.0, type="packaged", category="meat", price=5.99, imagePath="Icons/ham.png", quantity=1, amount=None),
+        Product(name="Lamb Shank", weight=1.2, type="fresh", category="meat", price=14.99, imagePath="Icons/lambshank.png", quantity=1, amount=None),
+        Product(name="Sausage", weight=0.6, type="packaged", category="meat", price=4.50, imagePath="Icons/sausages.png", quantity=1, amount=None),
+        Product(name="Ground Beef", weight=1.0, type="fresh", category="meat", price=7.99, imagePath="Icons/groundbeef.png", quantity=1, amount=None),
+        Product(name="Chicken", weight=1.5, type="fresh", category="meat", price=6.50, imagePath="Icons/chicken.png", quantity=1, amount=None),
+        Product(name="Beef Steak", weight=1.0, type="fresh", category="meat", price=12.99, imagePath="Icons/beef.png", quantity=1, amount=None),
+        Product(name="Pork Chop", weight=0.8, type="fresh", category="meat", price=8.99, imagePath="Icons/chop.png", quantity=1, amount=None),
+        Product(name="Bacon", weight=0.5, type="packaged", category="meat", price=4.99, imagePath="Icons/bacon.png", quantity=1, amount=None)
     ]
 
     # Loop for adding dairy products to the database
