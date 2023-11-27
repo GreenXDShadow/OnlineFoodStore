@@ -100,18 +100,24 @@
   <div class="cartRow">
   <div class="cartBox">
     <h3>Items</h3>
-    <div class="cartinnerBox">
-      {% for item in cart_items %}
-        <div class="itemTitle">
-          {{ item.product.name }} - Quantity: {{ item.quantity }}
-          <!-- Form to remove items from the cart -->
-          <form action="{{ url_for('remove_from_cart', product_id=item.product.id) }}" method="post">
-            <input type="number" name="quantity_to_remove" value="1" min="1" max="{{ item.quantity }}">
-            <button type="submit">Remove</button>
-          </form>
+    {% for item in cart_items %}
+      <div class="itemTitle">
+        {{ item.product.name }} - Quantity: {{ item.quantity }}
+        <div class="itemPrice">
+          {% if item.product.type == 'packaged' %}
+             Price per unit: ${{ '%.2f'|format(item.product.price) }}
+          {% elif item.product.type == 'fresh' %}
+             Price per pound: ${{ '%.2f'|format(item.product.price) }}
+          {% endif %}
         </div>
-      {% endfor %}
-    </div>
+        <!-- Form to remove items from the cart -->
+        <form action="{{ url_for('remove_from_cart', product_id=item.product.id) }}" method="post">
+          <input type="number" name="quantity_to_remove" value="1" min="1" max="{{ item.quantity }}">
+          <button type="submit">Remove</button>
+        </form>
+      </div>
+    {% endfor %}
+
   </div>
   <div class="checkoutBox">
     <div class="checkoutBox-items">

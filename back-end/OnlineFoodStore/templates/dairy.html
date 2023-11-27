@@ -100,33 +100,43 @@
   <h1 style="margin-left:18%;">Dairy Products:</h1>
   <div class="row">
   {% for product in products %} <!-- Start iterating over the products list -->
-      <div class="icon">
-          <!-- Display product image -->
-          <img src="{{ url_for('static', filename=product.imagePath) }}" alt="{{ product.name }}" width="80px" height="80px">
+    <div class="icon">
+      <!-- Display product image -->
+      <img src="{{ url_for('static', filename=product.imagePath) }}" alt="{{ product.name }}" width="80px" height="80px">
 
-          <!-- Display product name -->
-          <h3>{{ product.name }}</h3>
+      <!-- Display product name -->
+      <h3>{{ product.name }}</h3>
 
-          {% if session.logged_in %}
-          <!-- Add to Cart form, visible only when user is logged in -->
-          <form class="add-to" method="POST" action="/api/addToCart" onsubmit="addToCart(event, this)">
-            <input type="number" name="quantity" value="1" min="1" width="80px">
-            <input type="hidden" name="product_id" value="{{ product.id }}">
-            <br>
-            <!-- Button to confirm the quantity change -->
-            <button type="submit" class="confirm">
-              <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
-            </button>
-            <!-- Display success message -->
-            <span class="success-message" style="display: none;"></span> <!-- Success message -->
-          </form>
-          {% endif %}
+      <!-- Display price per unit or per pound based on product type -->
+      <div class="productPrice">
+        {% if product.type == 'packaged' %}
+          Price per unit: ${{ '%.2f'|format(product.price) }}
+        {% elif product.type == 'fresh' %}
+          Price per pound: ${{ '%.2f'|format(product.price) }}
+        {% endif %}
       </div>
 
-      {% if loop.index % 4 == 0 and not loop.last %} <!-- Check if the product is the fourth in a row and not the last product -->
-          </div><div class="row"> <!-- Close the current row and start a new one -->
+      {% if session.logged_in %}
+      <!-- Add to Cart form, visible only when user is logged in -->
+      <form class="add-to" method="POST" action="/api/addToCart" onsubmit="addToCart(event, this)">
+        <input type="number" name="quantity" value="1" min="1" width="80px">
+        <input type="hidden" name="product_id" value="{{ product.id }}">
+        <br>
+        <!-- Button to confirm the quantity change -->
+        <button type="submit" class="confirm">
+          <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
+        </button>
+        <!-- Display success message -->
+        <span class="success-message" style="display: none;"></span> <!-- Success message -->
+      </form>
       {% endif %}
+    </div>
+
+    {% if loop.index % 4 == 0 and not loop.last %} <!-- Check if the product is the fourth in a row and not the last product -->
+      </div><div class="row"> <!-- Close the current row and start a new one -->
+    {% endif %}
   {% endfor %} <!-- End of products iteration -->
+
 </div>
 
 <script src="{{ url_for('static', filename='js/script.js') }}"></script>
