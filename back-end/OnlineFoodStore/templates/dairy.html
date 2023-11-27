@@ -106,26 +106,15 @@
 
             <!-- Display product name -->
             <h3>{{ product.name }}</h3>
-
-            <div class="add-to">
-                <!-- Button to decrement the quantity -->
-                <button class="item-buttons" onclick="changeQuantity(this,'decrement')">
-                    <img class="to-cart-minus arrow-level" src="{{ url_for('static', filename='Icons/minus.png')}}" alt="Cart Icon">
-                </button>
-
-                <!-- Display product quantity -->
-                <span class="quantity">1</span>
-
-                <!-- Button to increment the quantity -->
-                <button class="item-buttons" onclick="changeQuantity(this,'increment')">
-                    <img class="to-cart-plus arrow-level" src="{{ url_for('static', filename='Icons/plus.png')}}" alt="Cart Icon">
-                </button>
-            </div>
-
-            <!-- Button to confirm the quantity change -->
-            <button class="confirm" onclick="resetQuantity(this)">
+            <form class="add-to" method="POST" action="/api/addToCart">
+              <input type="number" name="quantity" value="1" min="1" width="80px">
+              <input type="hidden" name="product_id" value="{{ product.id }}">
+              <br>
+              <!-- Button to confirm the quantity change -->
+            <button type = "submit" class="confirm" >
                 <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
             </button>
+            </form>
         </div>
 
         {% if loop.index % 4 == 0 and not loop.last %} <!-- Check if the product is the fourth in a row and not the last product -->
