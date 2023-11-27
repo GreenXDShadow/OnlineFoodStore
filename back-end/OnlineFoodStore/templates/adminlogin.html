@@ -118,51 +118,54 @@
       </div>
     </div>
     <div class="forms">
-        <div class="form-content">
-          <div class="login-form">
-            <div class="title">Admin Login</div>
-          <form action="#">
+      <div class="form-content">
+        <!-- Admin Login Form -->
+        <div class="login-form">
+          <div class="title">Admin Login</div>
+          <form action="{{ url_for('loginManager') }}" method="post">
             <div class="input-boxes">
               <div class="input-box">
                 <i class="fa fa-fw fa-envelope"></i>
-                <input type="text" placeholder="Enter your email" required>
+                <input type="email" name="email" placeholder="Enter your email" required>
               </div>
               <div class="input-box">
                 <i class="fa fa-fw fa-lock"></i>
-                <input type="password" placeholder="Enter your password" required>
+                <input type="password" name="password" placeholder="Enter your password" required>
               </div>
-              <div class="text"><a href="#" style="color: #C1A7EF;">Forgot password?</a></div>
               <div class="button input-box">
                 <input type="submit" value="Submit">
               </div>
               <div class="text sign-up-text">Don't have an account? <label for="flip">Signup now</label></div>
             </div>
-        </form>
-      </div>
+          </form>
+        </div>
+
+
+       <!-- Admin Signup Form -->
         <div class="signup-form">
           <div class="title">Admin Signup</div>
-        <form action="#">
+          <form action="{{ url_for('addManager') }}" method="post">
             <div class="input-boxes">
               <div class="input-box">
                 <i class="fa fa-fw fa-user"></i>
-                <input type="text" placeholder="Enter your name" required>
+                <input type="text" name="name" placeholder="Enter your name" required>
               </div>
               <div class="input-box">
                 <i class="fa fa-fw fa-envelope"></i>
-                <input type="text" placeholder="Enter your email" required>
+                <input type="email" name="email" placeholder="Enter your email" required>
               </div>
               <div class="input-box">
                 <i class="fa fa-fw fa-lock"></i>
-                <input type="password" placeholder="Enter your password" required>
+                <input type="password" name="password" placeholder="Enter your password" required>
               </div>
               <div class="button input-box">
                 <input type="submit" value="Submit">
               </div>
               <div class="text sign-up-text">Already have an account? <label for="flip">Login now</label></div>
             </div>
-      </form>
-    </div>
-    </div>
+          </form>
+        </div>
+      </div>
     </div>
   </div>
 </div>
