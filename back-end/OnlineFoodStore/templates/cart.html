@@ -97,31 +97,30 @@
     </ul>
   </div>
   <h3 class="cart">Cart</h3>
-  <div class = "cartRow" >
-    <div class = "cartBox">
-      <h3>Items</h3>
-      <div class = "cartinnerBox">
-       <div class = "itemTitle">Apple</div>
-      </div>
-    </div>
-    <div class = "checkoutBox">
-      <div class = "checkoutBox-items">
-        <div class = "checkoutBox-headers">Subtotal</div>
-        <div class = "checkoutinnerBox">
-          Total: XXXXXXXXX
-          <br>
-          Tax: XXXXXXXXX
-        </div>
-        <div class = "checkoutBox-headers">Shipping</div>
-        <div class = "checkoutinnerBox">
-          Shipping Cost: FREE
-        </div>
-        <!-- <input class = "checkoutButton" type="submit" value="Checkout"> -->
-        <li class = "checkoutButton" type="submit"><a href="{{ url_for('checkout') }}">Checkout</a></li>
-
-        
-
-      </div>
+  <div class="cartRow">
+  <div class="cartBox">
+    <h3>Items</h3>
+    <div class="cartinnerBox">
+      {% for item in cart_items %}
+      <div class="itemTitle">{{ item.product.name }} - Quantity: {{ item.quantity }}</div>
+      <!-- Add more details as needed -->
+    {% endfor %}
     </div>
   </div>
+  <div class="checkoutBox">
+    <div class="checkoutBox-items">
+      <div class="checkoutBox-headers">Subtotal</div>
+      <div class="checkoutinnerBox">
+        Total: ${{ subtotal }}
+        <br>
+        Tax: Calculated Tax Here
+      </div>
+      <div class="checkoutBox-headers">Shipping</div>
+      <div class="checkoutinnerBox">
+        Shipping Cost: ${{ shipping_cost }}
+      </div>
+      <li class="checkoutButton" type="submit"><a href="{{ url_for('checkout') }}">Checkout</a></li>
+    </div>
+  </div>
+</div>
 </body>

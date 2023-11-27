@@ -171,10 +171,25 @@ def userlogin():
 def contact():
     return render_template('contact.html')
 
+
 @app.route('/cart')
 def cart():
-    # if user is logged in we will display the items in their current cart here with a total
-    return render_template('cart.html')
+    if 'user_id' not in session:
+        # Redirect to login page or show a message that user is not logged in
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+    cart_items = Cart.query.filter_by(customer_id=user_id).all()
+
+    subtotal = 0
+    for item in cart_items:
+        product = Product.query.get(item.product_id)
+        subtotal += product.price * item.quantity
+
+    shipping_cost = 0.15 * subtotal if subtotal > 20 else 0
+
+    return render_template('cart.html', cart_items=cart_items, subtotal=subtotal, shipping_cost=shipping_cost)
+
 
 @app.route('/checkout')
 def checkout():
