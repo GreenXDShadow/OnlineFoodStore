@@ -88,8 +88,28 @@ def populate_data():
         Product(name="Bacon", weight=0.5, type="packaged", category="meat", imagePath="Icons/bacon.png", quantity=1, amount=None)
     ]
 
+    # Loop for adding dairy products to the database
     for product in dairy_products:
         db.session.add(product)
+
+    # Loop for adding frozen food products to the database
+    for product in frozen_food_products:
+        db.session.add(product)
+
+    # Loop for adding beverage products to the database
+    for product in beverage_products:
+        db.session.add(product)
+
+    # Loop for adding fruit products to the database
+    for product in fruit_products:
+        db.session.add(product)
+
+    # Loop for adding meat products to the database
+    for product in meat_products:
+        db.session.add(product)
+
+    # Commit the changes to the database
+    db.session.commit()
 
     # Commit the changes
     db.session.commit()
@@ -118,7 +138,7 @@ def print_tables():
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
+        # db.create_all()
         # clear_tables()
-        populate_data()
+        # populate_data()
         print_tables()
