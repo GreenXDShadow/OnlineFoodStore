@@ -61,10 +61,10 @@ class ApiCalls:
 
         if not user:
             return jsonify({"status": "error", "message": "Failed to log in"})
-
-        session['logged_in'] = True
-        session['username'] = user.name
-        return render_template('index.html', session = session)
+        else:
+            session['logged_in'] = True
+            session['username'] = user.name
+            return render_template('index.html', session = session)
 
     @staticmethod
     @app.route('/api/logout', methods =['POST'])
@@ -74,6 +74,13 @@ class ApiCalls:
             session.pop('username', None)
             session.pop('cart', None)
         return render_template('index.html', session=session)
+
+    @staticmethod
+    @app.route('/api/addToCart', methods = ['POST'])
+    def addToCart():
+        product_id = request.form.get('product_id')
+        quantity = request.form.get('quantity')
+
 # These app routes are 'URL' requests. A function will be run whenever the web page reaches any of these URLs.
 @app.route('/')
 def index():
