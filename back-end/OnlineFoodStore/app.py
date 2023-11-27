@@ -190,6 +190,26 @@ def cart():
 
     return render_template('cart.html', cart_items=cart_items, subtotal=subtotal, shipping_cost=shipping_cost)
 
+@app.route('/remove_from_cart/<int:product_id>', methods=['POST'])
+def remove_from_cart(product_id):
+    user_id = session.get('user_id')
+    if not user_id:
+        # Handle not logged in case
+        return redirect(url_for('login'))
+
+    quantity_to_remove = int(request.form.get('quantity_to_remove'))
+    cart_item = Cart.query.filter_by(customer_id=user_id, product_id=product_id).first()
+
+    if cart_item:
+        if cart_item.quantity > quantity_to_remove:
+            cart_item.quantity -= quantity_to_remove
+        else:
+            db.session.delete(cart_item)
+        db.session.commit()
+        flash('Item removed successfully')
+
+    return redirect(url_for('cart'))
+
 
 @app.route('/checkout')
 def checkout():
