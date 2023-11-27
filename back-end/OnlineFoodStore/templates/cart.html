@@ -119,7 +119,7 @@
       <div class="checkoutinnerBox">
         Total: ${{ '%.2f'|format(subtotal) }}
         <br>
-        Tax: Calculated Tax Here
+        Tax: ${{ '%.2f'|format(sales_tax) }}
       </div>
       <div class="checkoutBox-headers">Shipping</div>
       <div class="checkoutinnerBox">
