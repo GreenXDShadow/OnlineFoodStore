@@ -13,6 +13,8 @@ app.secret_key = 'your_secret_key_here'
 app.config['SQLALCHEMY_DATABASE_URI'] = \
     'sqlite:///' + os.path.join(basedir, 'database.db')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+app.config['UPLOAD_FOLDER'] = 'static\Icons'  # Add this line
+
 
 db = SQLAlchemy(app)
 
@@ -21,6 +23,13 @@ from Product import Product, BoxedProduct, FreshProduct
 from User import User, Customer, Manager, Cart
 
 from sqlalchemy.exc import IntegrityError
+
+class Upload(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    filename = db.Column(db.String(255), nullable=False)
+
+with app.app_context():
+    db.create_all()
 
 class ApiCalls:
     @staticmethod
@@ -119,5 +128,35 @@ def featured():
 def categories():
     return render_template('categories.html')
 
+@app.route('/upload', methods=['GET', 'POST'])
+def upload():
+    if request.method == 'POST':
+        if 'myFile[]' not in request.files:
+            return 'No file part'
+
+        files = request.files.getlist('myFile[]')
+
+        for file in files:
+            if file.filename == '':
+                return 'No selected file'
+
+            # Save the file to the specified folder
+            filename = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
+            file.save(filename)
+
+            # Insert file info into the database using SQLAlchemy
+            new_upload = Upload(filename=file.filename)
+            db.session.add(new_upload)
+            db.session.commit()
+
+        return 'File(s) uploaded successfully'
+
+    return render_template('upload.html')
+
+
 if __name__ == "__main__":
+    db.create_all()
     app.run(debug=True)
+
+# if __name__ == "__main__":
+#     app.run(debug=True)
