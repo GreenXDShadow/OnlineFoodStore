@@ -19,7 +19,7 @@ app.config['UPLOAD_FOLDER'] = 'static\Icons'  # Add this line
 db = SQLAlchemy(app)
 
 # Importing the models
-from Product import Product, BoxedProduct, FreshProduct
+from Product import Product
 from User import User, Customer, Manager, Cart
 from flask import Flask, render_template, request, redirect, session
 from sqlalchemy.exc import IntegrityError
@@ -109,8 +109,8 @@ def vegetable():
 
 @app.route('/dairy')
 def dairy():
-    return render_template('dairy.html')
-
+    dairy_products = Product.query.filter_by(category='dairy').all()  # Replace with your actual query
+    return render_template('dairy.html', products=dairy_products)
 
 @app.route('/meat')
 def meat():
