@@ -1,6 +1,6 @@
 from app import app, db
 from User import User, Customer, Manager, Cart
-from Product import Product, BoxedProduct, FreshProduct
+from Product import Product
 
 
 def clear_tables():
@@ -8,8 +8,6 @@ def clear_tables():
     Clear all data from the tables.
     """
     Cart.query.delete()
-    BoxedProduct.query.delete()
-    FreshProduct.query.delete()
     Customer.query.delete()
     Manager.query.delete()
     User.query.delete()
@@ -27,24 +25,23 @@ def populate_data():
     db.session.add(customer1)
     db.session.add(manager1)
 
-    # Populate Product, BoxedProduct, and FreshProduct
-    product1 = Product(name="GenericProduct", weight=1.5)
-    boxed_product1 = BoxedProduct(name="BoxedCereal", weight=1.0, cost=5.99)
-    fresh_product1 = FreshProduct(name="FreshApple", costPerPound=1.99)
 
-    db.session.add(product1)
-    db.session.add(boxed_product1)
-    db.session.add(fresh_product1)
+    # Default dairy products
+    dairy_products = [
+        Product(name="Milk", weight=1.0, type="packaged", category="dairy", imagePath="Icons/milk.png", quantity=1, amount=None),
+        Product(name="that Cheese", weight=0.5, type="packaged", category="dairy", imagePath="Icons/cheese.png",quantity=1, amount=None),
+        Product(name="Eggsssss", weight=0.6, type="packaged", category="dairy", imagePath="Icons/eggs.png", quantity=1,amount=None),
+        Product(name="Almond Milk", weight=1.0, type="packaged", category="dairy", imagePath="Icons/almondmilk.png",quantity=1, amount=None),
+        Product(name="Yogurt", weight=0.4, type="packaged", category="dairy", imagePath="Icons/yogurt.png", quantity=1,amount=None),
+        Product(name="Butter", weight=0.25, type="packaged", category="dairy", imagePath="Icons/butter.png", quantity=1,amount=None),
+        Product(name="Whipped Cream", weight=0.2, type="packaged", category="dairy", imagePath="Icons/whippedcream.png",quantity=1, amount=None),
+        Product(name="Soy Milk", weight=1.0, type="packaged", category="dairy", imagePath="Icons/soymilk.png",quantity=1, amount=None)
+    ]
+
+    for product in dairy_products:
+        db.session.add(product)
 
     # Commit the changes
-    db.session.commit()
-
-    # Add some products to the customer's cart
-    cart_item1 = Cart(customer_id=customer1.id, product_id=boxed_product1.id)
-    cart_item2 = Cart(customer_id=customer1.id, product_id=fresh_product1.id)
-
-    db.session.add(cart_item1)
-    db.session.add(cart_item2)
     db.session.commit()
 
 
@@ -64,12 +61,6 @@ def print_tables():
     print("\nProducts:")
     for product in Product.query.all():
         print(product)
-    print("\nBoxedProducts:")
-    for product in BoxedProduct.query.all():
-        print(product)
-    print("\nFreshProducts:")
-    for product in FreshProduct.query.all():
-        print(product)
     print("\nCart Items:")
     for item in Cart.query.all():
         print(item)
@@ -77,7 +68,7 @@ def print_tables():
 
 if __name__ == '__main__':
     with app.app_context():
-        #db.create_all()
+        db.create_all()
         # clear_tables()
-        # populate_data()
+        populate_data()
         print_tables()
