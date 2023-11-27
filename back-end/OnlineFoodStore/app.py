@@ -73,6 +73,7 @@ class ApiCalls:
         else:
             session['logged_in'] = True
             session['username'] = user.name
+            session['user_id'] = user.id
             return render_template('index.html', session = session)
 
     @staticmethod
@@ -81,7 +82,7 @@ class ApiCalls:
         if 'logged_in' in session:
             session.pop('logged_in', None)
             session.pop('username', None)
-            session.pop('cart', None)
+            session.pop('user_id', None)
         return render_template('index.html', session=session)
 
     @staticmethod
@@ -89,6 +90,37 @@ class ApiCalls:
     def addToCart():
         product_id = request.form.get('product_id')
         quantity = request.form.get('quantity')
+        user_id = session.get('user_id')
+        cart_item = Cart.query.filter_by(product_id=product_id, customer_id=user_id).first()
+        if cart_item:
+            # If the product is already in the cart, update the quantity
+            cart_item.quantity += int(quantity)
+        else:
+            # If the product is not in the cart, create a new cart item
+            cart_item = Cart(product_id=product_id, customer_id=user_id, quantity=int(quantity))
+            db.session.add(cart_item)
+
+        db.session.commit()
+        return jsonify({"status": "success", "message": "Item added successfully"})
+
+    @staticmethod
+    @app.route('/api/removeFromCart', methods=['POST'])
+    def removeFromCart():
+        product_id = request.form.get('product_id')
+        user_id = session.get('user_id')
+
+        if not user_id:
+            return jsonify({"status": "error", "message": "User not logged in"})
+
+        cart_item = Cart.query.filter_by(product_id=product_id, user_id=user_id).first()
+
+        if cart_item:
+            # If the product is found in the cart, remove it
+            db.session.delete(cart_item)
+            db.session.commit()
+            #return jsonify({"status": "success", "message": "Product removed from cart successfully"})
+        else:
+            return jsonify({"status": "error", "message": "Product is not in the cart"})
 
 # These app routes are 'URL' requests. A function will be run whenever the web page reaches any of these URLs.
 @app.route('/')
