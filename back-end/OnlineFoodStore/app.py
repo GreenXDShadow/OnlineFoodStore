@@ -251,6 +251,40 @@ def upload():
 
     return render_template('upload.html')
 
+@app.route('/api/addManager', methods=['POST'])
+def addManager():
+    name = request.form.get('name')
+    password = request.form.get('password')
+    email = request.form.get('email')
+
+    if not all([name, password, email]):
+        return jsonify({"status": "error", "message": "All fields must be filled out"})
+
+    try:
+        new_manager = Manager(name=name, password=password, email=email)
+        db.session.add(new_manager)
+        db.session.commit()
+        return jsonify({"status": "success", "message": "Manager added successfully"})
+    except IntegrityError:
+        return jsonify({"status": "error", "message": "Email already exists"})
+
+
+@app.route('/api/loginManager', methods=['POST'])
+def loginManager():
+    email = request.form.get('email')
+    password = request.form.get('password')
+
+    manager = Manager.query.filter_by(email=email, password=password).first()
+
+    if manager:
+        session['logged_in'] = True
+        session['username'] = manager.name
+        session['user_id'] = manager.id
+        session['user_type'] = 'manager'
+        return redirect(url_for('some_admin_dashboard'))
+    else:
+        return jsonify({"status": "error", "message": "Invalid email or password"})
+
 
 if __name__ == "__main__":
     db.create_all()
