@@ -80,6 +80,17 @@ class ApiCalls:
     def addToCart():
         product_id = request.form.get('product_id')
         quantity = request.form.get('quantity')
+        cart_item = Cart.query.filter_by(product_id=product_id, user_id=user_id).first()
+
+        if cart_item:
+            # If the product is already in the cart, update the quantity
+            cart_item.quantity += int(quantity)
+        else:
+            # If the product is not in the cart, create a new cart item
+            cart_item = Cart(product_id=product_id, user_id=user_id, quantity=int(quantity))
+            db.session.add(cart_item)
+
+        db.session.commit()
 
 # These app routes are 'URL' requests. A function will be run whenever the web page reaches any of these URLs.
 @app.route('/')
