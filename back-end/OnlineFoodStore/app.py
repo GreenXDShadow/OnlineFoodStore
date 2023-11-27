@@ -175,7 +175,7 @@ def contact():
 @app.route('/cart')
 def cart():
     if 'user_id' not in session:
-        # Redirect to login page or show a message that user is not logged in
+        # Redirect to login or show a message that user is not logged in
         return redirect(url_for('login'))
 
     user_id = session['user_id']
@@ -186,9 +186,12 @@ def cart():
         product = Product.query.get(item.product_id)
         subtotal += product.price * item.quantity
 
+    sales_tax = 0.03 * subtotal  # 3% sales tax
     shipping_cost = 0.15 * subtotal if subtotal > 20 else 0
+    grand_total = subtotal + sales_tax + shipping_cost
 
-    return render_template('cart.html', cart_items=cart_items, subtotal=subtotal, shipping_cost=shipping_cost)
+    return render_template('cart.html', cart_items=cart_items, subtotal=subtotal, sales_tax=sales_tax, shipping_cost=shipping_cost, grand_total=grand_total)
+
 
 @app.route('/remove_from_cart/<int:product_id>', methods=['POST'])
 def remove_from_cart(product_id):
