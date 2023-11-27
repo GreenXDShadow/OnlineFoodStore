@@ -3,6 +3,7 @@ class Product(db.Model):
     __tablename__ = 'product'
 
     id = db.Column(db.Integer, primary_key=True)
+    price = db.Column(db.Float, nullable=False)
     imagePath = db.Column(db.String)
     name = db.Column(db.String, nullable=False)
     weight = db.Column(db.Float)
