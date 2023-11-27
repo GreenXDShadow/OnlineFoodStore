@@ -2,8 +2,10 @@
 <html>
 
 <head>
+  <!-- Basic page setup with meta tags and title -->
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>Homepage</title>
   <!-- icon library and stylesheet reference -->
   <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
@@ -12,30 +14,50 @@
 </head>
 
 <body>
+  <!-- Overlay for styling purposes -->
   <div class="overlay"></div>
+
+  <!-- Top navigation bar -->
   <div class="topnav">
     <a href="{{ url_for('index') }}"><i class="fa fa-fw fa-home"></i> Home</a>
+
+    <!-- Search bar form -->
     <form>
       <input class="searchbar" type="search" placeholder="search for products <3">
     </form>
+
+    <!-- User icon and dropdown for account management -->
     <div class="imageRight">
       <button class="user-icon-btn" onclick="toggleDropdown()">
         <img src="{{ url_for('static', filename='Icons/user.png')}}" alt="user" class="user-icon" width="27px"
           height="27px">
-    </div></button>
+      </button>
+    </div>
     <div class="dropdown-content hidden" id="myDropdown">
+      <!-- Dropdown content for user account management -->
+
       {% if not session.logged_in %}
+      <!-- Close button for dropdown, visible when user is not logged in -->
         <button class="user-icon-btn" onclick="toggleDropdown()"><i class="fa fa-times fa-xs fa-fw imageRight"
-            style="font-size: 2em;"></i></button>
+            style="font-size: 2em;"></i>
+        </button>
+
+        <!-- Account options header -->
         <h2>ACCOUNT</h2>
+
+        <!-- Registration section -->
         <div id="oneline">
           <h4>Register</h4>
+          <!-- Button to trigger registration popup -->
           <button id="loginButton" class="user-icon-btn" onclick=registrationPopUp()>
             <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
               height="20px">
           </button>
         </div>
+
+        <!-- Registration form popup -->
         <div class="form-popup" id="register">
+          <!-- Flash messages for user feedback -->
           <div id="flash-messages">
           {% with messages = get_flashed_messages(with_categories=true) %}
               {% if messages %}
@@ -47,20 +69,30 @@
               {% endif %}
           {% endwith %}
           </div>
+
+          <!-- Registration form -->
           <form action="/api/addUser" method="post" class="form-container" id="popUpForm">
             <h2>Registration</h2>
+
+            <!--username-->
             <div class="input-container">
             <i class="fa fa-fw fa-user"></i>
             <input type="text" id="userName" name="name" placeholder="Username">
             </div>
+
+            <!--password-->
             <div class="input-container">
             <i class="fa fa-fw fa-lock"></i>
             <input type="password" id="passWord" name="password" placeholder="Password">
             </div>
+
+            <!--confirm password-->
             <div class="input-container">
             <i class="fa fa-fw fa-lock"></i>
             <input type="password" id="confirmPassWord" name="confirm_password" placeholder="Confirm Password">
             </div>
+
+            <!--email-->
             <div class="input-container">
             <i class="fa fa-fw fa-envelope"></i>
             <input type="email" id="email" name="email" placeholder="Email Address">
@@ -69,29 +101,36 @@
             <input type="submit" value="Submit">
           </form>
         </div>
+
+        <!-- Login section -->
         <div id="oneline">
           <h4>Log In</h4>
+          <!-- Button to trigger login popup -->
           <button id="loginButton" class="user-icon-btn" onclick=loginPopUp()>
             <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
               height="20px">
           </button>
         </div>
+
+        <!-- Login form popup -->
         <div class="form-popup" id="login">
+          <!-- Login form -->
           <form action="/api/login" method="post" class="form-container" id="loginForm">
-      <h2>Login</h2>
-      <div class="input-container">
-          <i class="fa fa-fw fa-user"></i>
-          <input type="text" id="userName" name="userName" placeholder="Username">
-      </div>
-      <div class="input-container">
-          <i class="fa fa-fw fa-lock"></i>
-          <input type="password" id="passWord" name="passWord" placeholder="Password">
-      </div>
-      <br>
+            <h2>Login</h2>
+              <div class="input-container">
+              <i class="fa fa-fw fa-user"></i>
+              <input type="text" id="userName" name="userName" placeholder="Username">
+              </div>
+          <div class="input-container">
+              <i class="fa fa-fw fa-lock"></i>
+              <input type="password" id="passWord" name="passWord" placeholder="Password">
+          </div>
+        <br>
       <input type="submit" value="Login">
   </form>
 
-        </div>
+      <!-- Links for specialized login forms like Admin and User Login -->
+      </div>
         <a href="{{ url_for('adminlogin') }}">
           <h4>Admin Login</h4>
         </a>
@@ -100,19 +139,26 @@
         </a>
       </div>
     {% else %}
+      <!-- Welcome message and logout option for logged-in users -->
       <h2> Welcome, {{session.username}}</h2>
       <form action="{{ url_for('logout') }}" method="post">
           <input type="submit" value="Logout">
       </form>
       </div>
     {% endif%}
+
+    <!-- Cart icon button -->
     <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
       <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
         height="27px">
-  </div></button>
+    </button>
   </div>
   </div>
+  </div>
+
+  <!-- Bottom navigation bar -->
   <div class="bottomnav">
+    <!-- Navigation links for different sections of the site -->
     <ul>
       <li><a href="{{ url_for('categories') }}">Select Category</a></li>
       <li><a href="{{ url_for('upload') }}">New Products</a></li>
@@ -120,15 +166,22 @@
       <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
     </ul>
   </div>
+
+  <!-- Main banner image -->
   <div class="bannerposition">
     <img class="banner" src="{{ url_for('static', filename='Images/banner.png')}}">
   </div>
+
+  <!-- Section to shop by categories -->
   <h4 style="margin-bottom:0;">Shop by:</h4>
   <h2>Categories</h2>
+
+  <!-- Carousel for category selection -->
   <div class="row">
     <div class="carousel carousel-1">
       <button class="carousel-btn prev-btn"><i class="fa fa-chevron-left"></i></button>
 
+      <!-- Container holding the carousel items -->
       <div class="carousel-container">
         <div class="carousel-inner">
           <div class="row">
@@ -184,14 +237,10 @@
       <button class="carousel-btn next-btn"><i class="fa fa-chevron-right"></i></button>
     </div>
   </div>
+
+  <!-- Scripts for functionality like jQuery and custom scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
   <script src="{{ url_for('static', filename='js/ajaxScript.js') }}"></script>
-
-
-
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-
 </body>
-
 </html>
