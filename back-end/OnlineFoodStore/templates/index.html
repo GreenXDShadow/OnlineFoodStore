@@ -36,11 +36,13 @@
     <div class="dropdown-content hidden" id="myDropdown">
       <!-- Dropdown content for user account management -->
 
+      <!-- Close button for dropdown-->
+      <button class="user-icon-btn" onclick="toggleDropdown()">
+        <i class="fa fa-times fa-xs fa-fw imageRight"
+           style="font-size: 2em;"></i>
+      </button>
+
       {% if not session.logged_in %}
-      <!-- Close button for dropdown, visible when user is not logged in -->
-        <button class="user-icon-btn" onclick="toggleDropdown()"><i class="fa fa-times fa-xs fa-fw imageRight"
-            style="font-size: 2em;"></i>
-        </button>
 
         <!-- Account options header -->
         <h2>ACCOUNT</h2>
