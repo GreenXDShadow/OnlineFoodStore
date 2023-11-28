@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, flash, redirect, render_template, request, url_for, jsonify
+from flask import Flask, jsonify, flash, redirect, render_template, request, url_for, jsonify, make_response
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
@@ -66,15 +66,15 @@ class ApiCalls:
         name = request.form.get('userName')
         password = request.form.get('passWord')
 
-        user = db.session.query(User).filter(User.name == name, User.password == password, ).first()
+        user = db.session.query(User).filter(User.name == name, User.password == password).first()
 
         if not user:
-            return jsonify({"status": "error", "message": "Failed to log in"})
+            return make_response("Invalid username or password", 401)
         else:
             session['logged_in'] = True
             session['username'] = user.name
             session['user_id'] = user.id
-            return render_template('index.html', session = session)
+            return render_template('index.html', session=session)
 
     @staticmethod
     @app.route('/api/logout', methods =['POST'])
