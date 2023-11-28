@@ -119,7 +119,7 @@
           <!-- Login form -->
           <form action="/api/login" method="post" class="form-container" id="loginForm">
             <h2>Login</h2>
-              <div class="input-container">
+            <div class="input-container">
               <i class="fa fa-fw fa-user"></i>
               <input type="text" id="userName" name="userName" placeholder="Username">
               </div>
@@ -127,8 +127,11 @@
               <i class="fa fa-fw fa-lock"></i>
               <input type="password" id="passWord" name="passWord" placeholder="Password">
           </div>
-        <br>
+            <!-- Placeholder for error message -->
+            <div id="loginErrorMessage" class="error-message"></div>
+          <br>
       <input type="submit" value="Login">
+
   </form>
 
       <!-- Links for specialized login forms like Admin and User Login -->
@@ -244,5 +247,34 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{ url_for('static', filename='js/ajaxScript.js') }}"></script>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script>
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Create a FormData object, passing in the form
+    var formData = new FormData(this);
+
+    fetch('/api/login', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+      return response.text();
+    })
+    .then(html => {
+      document.open();
+      document.write(html);
+      document.close();
+    })
+    .catch(error => {
+      document.getElementById('loginErrorMessage').innerText = "Invalid username or password";
+    });
+  });
+  </script>
+
+
 </body>
 </html>
