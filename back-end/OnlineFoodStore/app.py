@@ -3,6 +3,7 @@ from flask import Flask, jsonify, flash, redirect, render_template, request, url
 
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy.sql import func
+from werkzeug.utils import secure_filename
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -171,6 +172,36 @@ def userlogin():
 def contact():
     return render_template('contact.html')
 
+
+@app.route('/add_product', methods=['POST'])
+def add_product():
+    if request.method == 'POST':
+        name = request.form['name']
+        price = float(request.form['price'])
+        weight = float(request.form.get('weight', 0))
+        type_ = request.form.get('type', '')
+        category = request.form.get('category', '')
+        quantity = int(request.form.get('quantity', 0))
+        amount = float(request.form.get('amount', 0))
+
+        # Handling file upload for image path
+        file = request.files['imagePath']
+        file_path = ''  # Default empty file path
+        if file and file.filename != '':
+            filename = secure_filename(file.filename)
+            file_path = 'Icons/' + filename  # Modified file path
+            full_path = os.path.join(app.root_path, 'static', file_path)  # Full path for saving the file
+            file.save(full_path)  # Saving the file to the filesystem
+
+        new_product = Product(
+            name=name, price=price, weight=weight, type=type_,
+            category=category, quantity=quantity, amount=amount, imagePath=file_path
+        )
+        db.session.add(new_product)
+        db.session.commit()
+        flash('Product added successfully!')
+
+        return redirect(url_for('index'))  # Redirect to some page after adding
 
 @app.route('/cart')
 def cart():
