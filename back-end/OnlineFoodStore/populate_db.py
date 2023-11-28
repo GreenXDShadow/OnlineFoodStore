@@ -16,12 +16,10 @@ def clear_tables():
 
 def populate_data():
     # Populate User, Customer, and Manager
-    user1 = User(name="JohnDoe", password="password123", email="johndoe@example.com")
-    customer1 = Customer(name="JaneDoe", password="password456", email="janedoe@example.com", address="123 Main St",
-                         card_number_last4="1234", expiration_month="12", expiration_year="2025")
+    customer1 = Customer(name="JaneDoe", password="password456", email="janedoe@example.com")
     manager1 = Manager(name="AdminUser", password="adminpass", email="admin@example.com")
+    customer2 = Customer(name="a", password="a",email="a@a.com")
 
-    db.session.add(user1)
     db.session.add(customer1)
     db.session.add(manager1)
 
@@ -136,7 +134,7 @@ def print_tables():
 
 if __name__ == '__main__':
     with app.app_context():
-        # db.create_all()
-        # clear_tables()
-        # populate_data()
+        db.create_all()
+        clear_tables()
+        populate_data()
         print_tables()
