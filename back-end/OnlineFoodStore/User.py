@@ -10,6 +10,21 @@ class User(db.Model):
     email = db.Column(db.String, unique=True, nullable=False)
     type = db.Column(db.String(50))
 
+    # New fields for delivery information
+    delivery_first_name = db.Column(db.String)
+    delivery_last_name = db.Column(db.String)
+    delivery_address1 = db.Column(db.String)
+    delivery_address2 = db.Column(db.String)
+    delivery_city = db.Column(db.String)
+    delivery_state = db.Column(db.String)
+    delivery_zipcode = db.Column(db.Integer)
+
+    # New fields for payment information
+    billing_address = db.Column(db.String)
+    card_number = db.Column(db.String)
+    card_expiration_date = db.Column(db.String)
+    card_cvv = db.Column(db.String)
+
     __mapper_args__ = {
         'polymorphic_identity': 'user',
         'polymorphic_on': type
@@ -23,11 +38,6 @@ class Customer(User):
 
     id = db.Column(db.Integer, db.ForeignKey('user.id'), primary_key=True)
     address = db.Column(db.String)
-
-    # Payment information fields
-    card_number_last4 = db.Column(db.String(4))  # Last 4 digits of the card
-    expiration_month = db.Column(db.String(2))  # MM format
-    expiration_year = db.Column(db.String(4))  # YYYY format
 
     # Relationship to represent the cart
     cart = db.relationship('Cart', backref='customer', lazy=True)

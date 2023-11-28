@@ -216,7 +216,78 @@ def remove_from_cart(product_id):
 
 @app.route('/checkout')
 def checkout():
-    return render_template('checkout.html')
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
+
+    user_id = session['user_id']
+    cart_items = Cart.query.filter_by(customer_id=user_id).all()
+
+    subtotal = sum(item.product.price * item.quantity for item in cart_items)
+    sales_tax = subtotal * 0.03  # Assuming 3% sales tax
+    shipping_cost = 0.15 * subtotal if subtotal > 20 else 0
+    grand_total = subtotal + sales_tax + shipping_cost
+
+    return render_template('checkout.html', cart_items=cart_items, subtotal=subtotal, sales_tax=sales_tax, shipping_cost=shipping_cost, grand_total=grand_total)
+
+@app.route('/api/updateUser', methods=['POST'])
+def updateUser():
+    # Assuming user_id is stored in session when the user logs in
+    user_id = session.get('user_id')
+
+    if not user_id:
+        return jsonify({"status": "error", "message": "User not logged in"})
+
+    # Retrieve user from database
+    user = User.query.get(user_id)
+
+    if not user:
+        return jsonify({"status": "error", "message": "User not found"})
+
+    # Update user fields from form data
+    user.delivery_first_name = request.form.get('firstname')
+    user.delivery_last_name = request.form.get('lastname')
+    user.delivery_address1 = request.form.get('address1')
+    user.delivery_address2 = request.form.get('address2')
+    user.delivery_city = request.form.get('city')
+    user.delivery_state = request.form.get('state')
+    user.delivery_zipcode = request.form.get('zipcode')
+    # Update payment information
+    user.billing_address = request.form.get('billing_address')
+    user.card_number = request.form.get('card_number')
+    user.card_expiration_date = request.form.get('card_expiration_date')
+    user.card_cvv = request.form.get('card_cvv')
+
+    # Save changes
+    try:
+        db.session.commit()
+        return jsonify({"status": "success", "message": "User updated successfully"})
+    except Exception as e:
+        return jsonify({"status": "error", "message": "Error updating user: " + str(e)})
+
+@app.route('/api/submitOrder', methods=['POST'])
+def submitOrder():
+    user_id = session.get('user_id')
+    if not user_id:
+        return jsonify({"status": "error", "message": "User not logged in"})
+
+    user = User.query.get(user_id)
+    if not user:
+        return jsonify({"status": "error", "message": "User not found"})
+
+    # Check if delivery and payment information is complete
+    if not all([user.delivery_first_name, user.delivery_last_name, user.delivery_address1,
+               user.delivery_city, user.delivery_state, user.delivery_zipcode,
+               user.billing_address, user.card_number, user.card_expiration_date, user.card_cvv]):
+        return jsonify({"status": "error", "message": "Please fill out all delivery and payment information"})
+
+    # Here you would normally add logic to process the payment
+    # For simplicity, we'll skip this step
+
+    # Clear the user's cart
+    Cart.query.filter_by(customer_id=user_id).delete()
+    db.session.commit()
+
+    return jsonify({"status": "success", "message": "Thank you for your order"})
 
 @app.route('/featured')
 def featured():
