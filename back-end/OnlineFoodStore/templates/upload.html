@@ -25,72 +25,41 @@
           height="27px">
     </div></button>
     <div class="dropdown-content hidden" id="myDropdown">
-      <button class="user-icon-btn" onclick="toggleDropdown()"><i class="fa fa-times fa-xs fa-fw imageRight"
-          style="font-size: 2em;"></i></button>
-      <h2>ACCOUNT</h2>
-      <div id="oneline">
-        <h4>Register</h4>
-        <button id="loginButton" class="user-icon-btn" onclick=registrationPopUp()>
-          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
-            height="20px">
+       <!-- Dropdown content for user account management -->
+
+      <!-- Close button for dropdown-->
+      <button class="user-icon-btn" onclick="toggleDropdown()">
+        <i class="fa fa-times fa-xs fa-fw imageRight"
+           style="font-size: 2em;"></i>
+      </button>
+
+      {% if not session.logged_in %}
+
+        <!-- Account options header -->
+        <h2>ACCOUNT</h2>
+
+        <a href="{{ url_for('adminlogin') }}">
+          <h4>Admin Login</h4>
+        </a>
+        <a href="{{ url_for('userlogin') }}">
+          <h4>User Login</h4>
+        </a>
+      </div>
+     {% else %}
+      <!-- Welcome message and logout option for logged-in users -->
+      <h2> Welcome, {{session.username}}</h2>
+      <form action="{{ url_for('logout') }}" method="post">
+          <input type="submit" value="Logout">
+      </form>
+      </div>
+       {% endif%}
+
+        <!-- Cart icon button -->
+        <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
+          <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
+            height="27px">
         </button>
       </div>
-      <div class="form-popup" id="register">
-        <form action="/api/addUser" method="post" class="form-container" id="popUpForm">
-          <h2>Registration</h2>
-          <div class="input-container">
-          <i class="fa fa-fw fa-user"></i>
-          <input type="text" id="userName" name="name" placeholder="Username">
-          </div>
-          <div class="input-container">
-          <i class="fa fa-fw fa-lock"></i>
-          <input type="password" id="passWord" name="password" placeholder="Password">
-          </div>
-          <div class="input-container">
-          <i class="fa fa-fw fa-lock"></i>
-          <input type="password" id="confirmPassWord" name="confirm_password" placeholder="Confirm Password">
-          </div>
-          <div class="input-container">
-          <i class="fa fa-fw fa-envelope"></i>
-          <input type="email" id="email" name="email" placeholder="Email Address">
-          </div>
-          <br>
-          <input type="submit" value="Submit">
-        </form>
-      </div>
-      <div id="oneline">
-        <h4>Log In</h4>
-        <button id="loginButton" class="user-icon-btn" onclick=loginPopUp()>
-          <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
-            height="20px">
-        </button>
-      </div>
-      <div class="form-popup" id="login">
-        <form action="example.com/path" class="form-container" id="popUpForm">
-          <h2>Log In</h2>
-          <div class="input-container">
-          <i class="fa fa-fw fa-user"></i>
-          <input type="text" id="userName" placeholder="Username">
-        </div>
-        <div class="input-container">
-          <i class="fa fa-fw fa-lock"></i>
-          <input type="password" id="passWord" placeholder="Password">
-          </div>
-          <br>
-            <input type="submit" value="Submit">
-        </form>
-      </div>
-      <a href="{{ url_for('adminlogin') }}">
-        <h4>Admin Login</h4>
-      </a>
-      <a href="{{ url_for('userlogin') }}">
-        <h4>User Login</h4>
-      </a>
-    </div>
-    <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
-      <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
-        height="27px">
-  </div></button>
   </div>
   </div>
   <div class="bottomnav">
