@@ -103,8 +103,14 @@
                     <i class="fa fa-fw fa-lock"></i>
                     <input type="password" id="passWord" name="passWord" placeholder="Password">
                   </div>
-                  <!-- Placeholder for error message -->
-                  <div id="loginErrorMessage" class="error-message"></div>
+                  <!-- Flash Messages -->
+                  {% with messages = get_flashed_messages(with_categories=true) %}
+                      {% if messages %}
+                          {% for category, message in messages %}
+                              <div class="flash-{{ category }}">{{ message }}</div>
+                          {% endfor %}
+                      {% endif %}
+                  {% endwith %}
                   <div class="button input-box">
                     <input type="submit" value="Submit">
                   </div>
