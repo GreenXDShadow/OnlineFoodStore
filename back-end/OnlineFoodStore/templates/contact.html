@@ -15,9 +15,9 @@
   <div class="overlay"></div>
   <div class="topnav">
     <a href="{{ url_for('index') }}"><i class="fa fa-fw fa-home"></i> Home</a>
-    <form>
-      <input class="searchbar" type="search" placeholder="search for products <3">
-    </form>
+    <form id="searchForm" action="{{ url_for('search') }}" method="GET" onsubmit="return handleSearch()">
+      <input class="searchbar" type="text" id="searchInput" name="query" placeholder="search for products <3">
+    </form>   
     <div class="imageRight">
       <button class="user-icon-btn" onclick="toggleDropdown()">
         <img src="{{ url_for('static', filename='Icons/user.png')}}" alt="user" class="user-icon" width="27px"
