@@ -132,7 +132,8 @@ def index():
 
 @app.route('/fruit')
 def fruit():
-    return render_template('fruit.html')
+    fruit_products = Product.query.filter_by(category='fruit').all()  # Replace with your actual query
+    return render_template('fruit.html', products=fruit_products)
 
 
 @app.route('/vegetable')
@@ -147,17 +148,20 @@ def dairy():
 
 @app.route('/meat')
 def meat():
-    return render_template('meat.html')
+    meat_products = Product.query.filter_by(category='meat').all()  # Replace with your actual query
+    return render_template('meat.html', products=meat_products)
 
 
-@app.route('/frozen')
+@app.route('/frozen') #frozen_food_products
 def frozen():
-    return render_template('frozen.html')
+    frozen_food_products = Product.query.filter_by(category='frozen').all()  # Replace with your actual query
+    return render_template('frozen.html', products=frozen_food_products)
 
 
 @app.route('/beverages')
 def beverages():
-    return render_template('beverages.html')
+    beverage_products = Product.query.filter_by(category='beverages').all()  # Replace with your actual query
+    return render_template('beverages.html', products=beverage_products)
 
 
 @app.route('/adminlogin')
@@ -172,15 +176,21 @@ def userlogin():
 def contact():
     return render_template('contact.html')
 
-
 @app.route('/add_product', methods=['POST'])
 def add_product():
     if request.method == 'POST':
         name = request.form['name']
         price = float(request.form['price'])
         weight = float(request.form.get('weight', 0))
-        type_ = request.form.get('type', '')
-        category = request.form.get('category', '')
+
+        # Collecting values from checkboxes for type and category
+        type_list = request.form.getlist('type')
+        category_list = request.form.getlist('category')
+
+        # Convert list to comma-separated string
+        type_ = ', '.join(type_list)
+        category = ', '.join(category_list)
+
         quantity = int(request.form.get('quantity', 0))
         amount = float(request.form.get('amount', 0))
 
@@ -193,21 +203,27 @@ def add_product():
             full_path = os.path.join(app.root_path, 'static', file_path)  # Full path for saving the file
             file.save(full_path)  # Saving the file to the filesystem
 
+        # Create a new Product instance
         new_product = Product(
             name=name, price=price, weight=weight, type=type_,
             category=category, quantity=quantity, amount=amount, imagePath=file_path
         )
+
+        # Adding the new product to the database
         db.session.add(new_product)
         db.session.commit()
+
+        # Show a confirmation message
         flash('Product added successfully!')
 
-        return redirect(url_for('index'))  # Redirect to some page after adding
+        # Redirect to some page after adding
+        return redirect(url_for('index'))
 
 @app.route('/cart')
 def cart():
     if 'user_id' not in session:
-        # Redirect to login or show a message that user is not logged in
-        return redirect(url_for('login'))
+        flash('You need to log in first', 'info')  # 'info' is the category of the message
+        return redirect(url_for('index'))  # Redirect to homepage or login page
 
     user_id = session['user_id']
     cart_items = Cart.query.filter_by(customer_id=user_id).all()
@@ -386,6 +402,18 @@ def loginManager():
         return redirect(url_for('some_admin_dashboard'))
     else:
         return jsonify({"status": "error", "message": "Invalid email or password"})
+    
+@app.route('/search', methods=['GET'])
+def search():
+    query = request.args.get('query')
+
+    results = Product.query.filter(
+        (Product.name.ilike(f"%{query}%")) |
+        (Product.category.ilike(f"{query}"))
+    ).all()
+
+    return render_template('search_results.html', search_results=results, query=query)
+
 
 
 if __name__ == "__main__":

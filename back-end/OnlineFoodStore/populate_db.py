@@ -48,14 +48,14 @@ def populate_data():
 
     # Beverage products
     beverage_products = [
-        Product(name="Orange Juice", weight=1.0, type="liquid", category="beverages", price=3.99, imagePath="Icons/orangejuice.png", quantity=1, amount=None),
-        Product(name="Water", weight=1.0, type="liquid", category="beverages", price=1.00, imagePath="Icons/water.png", quantity=1, amount=None),
-        Product(name="Grape Juice", weight=1.0, type="liquid", category="beverages", price=4.20, imagePath="Icons/grapejuice.png", quantity=1, amount=None),
-        Product(name="Apple Cider", weight=1.0, type="liquid", category="beverages", price=5.00, imagePath="Icons/applecider.png", quantity=1, amount=None),
-        Product(name="Berry Smoothie", weight=0.5, type="liquid", category="beverages", price=3.50, imagePath="Icons/berrysmoothie.png", quantity=1, amount=None),
-        Product(name="Lemonade", weight=1.0, type="liquid", category="beverages", price=2.75, imagePath="Icons/lemonade.png", quantity=1, amount=None),
-        Product(name="Green Tea", weight=0.5, type="liquid", category="beverages", price=2.50, imagePath="Icons/greentea.png", quantity=1, amount=None),
-        Product(name="Watermelon Juice", weight=1.0, type="liquid", category="beverages", price=4.00, imagePath="Icons/watermelonjuice.png", quantity=1, amount=None)
+        Product(name="Orange Juice", weight=1.0, type="packaged", category="beverages", price=3.99, imagePath="Icons/orangejuice.png", quantity=1, amount=None),
+        Product(name="Water", weight=1.0, type="packaged", category="beverages", price=1.00, imagePath="Icons/water.png", quantity=1, amount=None),
+        Product(name="Grape Juice", weight=1.0, type="packaged", category="beverages", price=4.20, imagePath="Icons/grapejuice.png", quantity=1, amount=None),
+        Product(name="Apple Cider", weight=1.0, type="packaged", category="beverages", price=5.00, imagePath="Icons/applecider.png", quantity=1, amount=None),
+        Product(name="Berry Smoothie", weight=0.5, type="packaged", category="beverages", price=3.50, imagePath="Icons/berrysmoothie.png", quantity=1, amount=None),
+        Product(name="Lemonade", weight=1.0, type="packaged", category="beverages", price=2.75, imagePath="Icons/lemonade.png", quantity=1, amount=None),
+        Product(name="Green Tea", weight=0.5, type="packaged", category="beverages", price=2.50, imagePath="Icons/greentea.png", quantity=1, amount=None),
+        Product(name="Watermelon Juice", weight=1.0, type="packaged", category="beverages", price=4.00, imagePath="Icons/watermelonjuice.png", quantity=1, amount=None)
     ]
 
     # Fruit products
@@ -69,6 +69,17 @@ def populate_data():
         Product(name="Blackberry", weight=0.2, type="fresh", category="fruit", price=3.00, imagePath="Icons/blackberry.png", quantity=1, amount=None),
         Product(name="Orange", weight=0.3, type="fresh", category="fruit", price=0.50, imagePath="Icons/orange.png", quantity=1, amount=None),
         Product(name="Cherry", weight=0.2, type="fresh", category="fruit", price=0.60, imagePath="Icons/cherry.png", quantity=1, amount=None)
+    ]
+
+    vegetable_products = [
+        Product(name="Tomato", weight=0.3, type="fresh", category="vegetable", price=1.00, imagePath="Icons/tomato.png", quantity=1, amount=None),
+        Product(name="Green Onion", weight=0.05, type="fresh", category="vegetable", price=0.20, imagePath="Icons/greenonion.png", quantity=1, amount=None),
+        Product(name="Cucumber", weight=0.4, type="fresh", category="vegetable", price=0.75, imagePath="Icons/cucumber.png", quantity=1, amount=None),
+        Product(name="Carrot", weight=0.1, type="fresh", category="vegetable", price=0.30, imagePath="Icons/carrots.png", quantity=1, amount=None),
+        Product(name="Broccoli", weight=0.5, type="fresh", category="vegetable", price=1.50, imagePath="Icons/broccoli.png", quantity=1, amount=None),
+        Product(name="Cauliflower", weight=0.6, type="fresh", category="vegetable", price=1.80, imagePath="Icons/cauliflower.png", quantity=1, amount=None),
+        Product(name="Cabbage", weight=0.7, type="fresh", category="vegetable", price=1.20, imagePath="Icons/cabbage.png", quantity=1, amount=None),
+        Product(name="Potato", weight=0.4, type="fresh", category="vegetable", price=0.50, imagePath="Icons/potato.png", quantity=1, amount=None)
     ]
 
     # TODO: Meat should also be in amount since it is a loose product
@@ -87,6 +98,10 @@ def populate_data():
     # Loop for adding dairy products to the database
     for product in dairy_products:
         db.session.add(product)
+
+    for product in vegetable_products:
+        db.session.add(product)
+
 
     # Loop for adding frozen food products to the database
     for product in frozen_food_products:
@@ -109,6 +124,15 @@ def populate_data():
 
     # Commit the changes
     db.session.commit()
+
+def search_products(query):
+    # Perform a database query to find products that match the search query
+    results = Product.query.filter(
+        (Product.name.ilike(f"%{query}%")) |
+        (Product.category.ilike(f"%{query}%"))
+    ).all()
+
+    return results
 
 
 def print_tables():
