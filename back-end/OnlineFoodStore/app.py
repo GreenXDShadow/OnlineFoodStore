@@ -202,9 +202,6 @@ def contact():
 
 @app.route('/add_product', methods=['GET', 'POST'])
 def add_product():
-    if not ('user_type' in session and session['user_type'] == 'admin'):
-        flash('Only admins can access this page', 'error')
-        return redirect(url_for('index'))
     if request.method == 'POST':
         name = request.form['name']
         price = float(request.form['price'])
