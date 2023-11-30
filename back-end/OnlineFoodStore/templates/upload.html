@@ -205,16 +205,25 @@
             const amountInput = document.getElementById('amount');
 
             function updateFields() {
-                if (packagedRadio.checked) {
-                    quantityDiv.style.display = '';
-                    amountDiv.style.display = 'none';
-                    amountInput.value = 0;
-                } else if (freshRadio.checked) {
-                    amountDiv.style.display = '';
-                    quantityDiv.style.display = 'none';
-                    quantityInput.value = 0;
+                    const packagedRadio = document.getElementById('packaged');
+                    const freshRadio = document.getElementById('fresh');
+                    const quantityDiv = document.getElementById('quantityDiv');
+                    const amountDiv = document.getElementById('amountDiv');
+                    const quantityInput = document.getElementById('quantity');
+                    const amountInput = document.getElementById('amount');
+
+                    if (packagedRadio.checked) {
+                        quantityDiv.style.display = '';
+                        amountDiv.style.display = 'none';
+                        amountInput.value = 0;
+                    } else if (freshRadio.checked) {
+                        quantityDiv.style.display = '';
+                        amountDiv.style.display = 'none'; // Hide both divs if 'Fresh' is selected
+                        quantityInput.value = 0;
+                        amountInput.value = 0;
+                    }
                 }
-            }
+
 
             packagedRadio.addEventListener('change', updateFields);
             freshRadio.addEventListener('change', updateFields);
