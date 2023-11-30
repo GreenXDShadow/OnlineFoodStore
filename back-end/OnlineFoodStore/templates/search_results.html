@@ -183,26 +183,35 @@
 
                 <!-- Display result price per unit or per pound based on product type -->
                 <div class="productPrice">
-                    {% if result.type == 'packaged' %}
-                        Price per unit: ${{ '%.2f'|format(result.price) }}
-                    {% elif result.type == 'fresh' %}
+                    {% if result.type == 'fresh' %}
                         Price per pound: ${{ '%.2f'|format(result.price) }}
+                        <!-- Input for weight -->
+                    {% else %}
+                        Price per unit: ${{ '%.2f'|format(result.price) }}
                     {% endif %}
                 </div>
 
-                {% if session.logged_in %}
-                    <!-- Add to Cart form, visible only when user is logged in -->
-                    <form class="add-to" method="POST" action="/api/addToCart" onsubmit="addToCart(event, this)">
-                        <input type="number" name="quantity" value="1" min="1" width="80px">
-                        <input type="hidden" name="product_id" value="{{ result.id }}">
-                        <br>
-                        <!-- Button to confirm the quantity change -->
-                        <button type="submit" class="confirm">
-                            <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
-                        </button>
-                        <!-- Display success message -->
-                        <span class="success-message" style="display: none;"></span> <!-- Success message -->
-                    </form>
+                    {% if session.logged_in %}
+                        <!-- Add to Cart form, visible only when user is logged in -->
+                        <form class="add-to" method="POST" action="/api/addToCart" onsubmit="addToCart(event, this)">
+                            <!-- Conditionally render the input field based on the product type -->
+                            {% if result.type == 'fresh' %}
+                                <!-- Input for weight for fresh products -->
+                                <input type="number" name="weight" placeholder="Pounds" step="0.01" min="0.01" style="width: 80px;">
+                            {% else %}
+                                <!-- Input for quantity for packaged products -->
+                                <input type="number" name="quantity" placeholder="amount" min="1" style="width: 80px;">
+                            {% endif %}
+
+                            <input type="hidden" name="product_id" value="{{ result.id }}">
+                            <br>
+                            <!-- Button to confirm the quantity/weight change -->
+                            <button type="submit" class="confirm">
+                                <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
+                            </button>
+                            <!-- Display success message -->
+                            <span class="success-message" style="display: none;"></span> <!-- Success message -->
+                        </form>
                     {% endif %}
                   </div>
               
@@ -240,7 +249,7 @@
       })
       .catch(error => console.error('Error:', error));
     }
-    </script>
+</script>
     
 
 

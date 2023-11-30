@@ -86,20 +86,41 @@ class ApiCalls:
             session.pop('user_id', None)
         return render_template('index.html', session=session)
 
-    @staticmethod
-    @app.route('/api/addToCart', methods = ['POST'])
+    @app.route('/api/addToCart', methods=['POST'])
     def addToCart():
         product_id = request.form.get('product_id')
-        quantity = request.form.get('quantity')
         user_id = session.get('user_id')
+
+        if not user_id:
+            return jsonify({"status": "error", "message": "User not logged in"})
+
+        product = Product.query.get(product_id)
+        if not product:
+            return jsonify({"status": "error", "message": "Product not found"})
+
         cart_item = Cart.query.filter_by(product_id=product_id, customer_id=user_id).first()
-        if cart_item:
-            # If the product is already in the cart, update the quantity
-            cart_item.quantity += int(quantity)
+
+        if product.type == 'fresh':
+            weight = float(request.form.get('weight', 0))
+            total_price = product.price * weight
+
+            if cart_item:
+                # Update weight and price for existing cart item
+                cart_item.quantity += weight
+                cart_item.total_price += total_price
+            else:
+                # Create a new cart item for fresh product
+                cart_item = Cart(product_id=product_id, customer_id=user_id, quantity=weight, total_price=total_price)
+                db.session.add(cart_item)
         else:
-            # If the product is not in the cart, create a new cart item
-            cart_item = Cart(product_id=product_id, customer_id=user_id, quantity=int(quantity))
-            db.session.add(cart_item)
+            # Logic for packaged products remains the same
+            quantity = int(request.form.get('quantity', 1))
+
+            if cart_item:
+                cart_item.quantity += quantity
+            else:
+                cart_item = Cart(product_id=product_id, customer_id=user_id, quantity=quantity)
+                db.session.add(cart_item)
 
         db.session.commit()
         return jsonify({"status": "success", "message": "Item added successfully"})
