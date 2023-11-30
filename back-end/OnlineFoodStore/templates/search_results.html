@@ -50,6 +50,92 @@
         <!-- Account options header -->
         <h2>ACCOUNT</h2>
 
+        <!-- Registration section -->
+        <div id="oneline">
+          <h4>Register</h4>
+          <!-- Button to trigger registration popup -->
+          <button id="loginButton" class="user-icon-btn" onclick=registrationPopUp()>
+            <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+              height="20px">
+          </button>
+        </div>
+
+        <!-- Registration form popup -->
+        <div class="form-popup" id="register">
+          <!-- Flash messages for user feedback -->
+          <div id="flash-messages">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                  <ul class="flash-messages">
+                      {% for category, message in messages %}
+                          <li class="{{ category }}">{{ message }}</li>
+                      {% endfor %}
+                  </ul>
+              {% endif %}
+          {% endwith %}
+          </div>
+
+          <!-- Registration form -->
+          <form action="/api/addUser" method="post" class="form-container" id="popUpForm">
+            <h2>Registration</h2>
+
+            <!--username-->
+            <div class="input-container">
+            <i class="fa fa-fw fa-user"></i>
+            <input type="text" id="userName" name="name" placeholder="Username">
+            </div>
+
+            <!--password-->
+            <div class="input-container">
+            <i class="fa fa-fw fa-lock"></i>
+            <input type="password" id="passWord" name="password" placeholder="Password">
+            </div>
+
+            <!--confirm password-->
+            <div class="input-container">
+            <i class="fa fa-fw fa-lock"></i>
+            <input type="password" id="confirmPassWord" name="confirm_password" placeholder="Confirm Password">
+            </div>
+
+            <!--email-->
+            <div class="input-container">
+            <i class="fa fa-fw fa-envelope"></i>
+            <input type="email" id="email" name="email" placeholder="Email Address">
+            </div>
+            <br>
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+
+        <!-- Login section -->
+        <div id="oneline">
+          <h4>Log In</h4>
+          <!-- Button to trigger login popup -->
+          <button id="loginButton" class="user-icon-btn" onclick=loginPopUp()>
+            <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+              height="20px">
+          </button>
+        </div>
+
+        <!-- Login form popup -->
+        <div class="form-popup" id="login">
+          <!-- Login form -->
+          <form action="/api/login" method="post" class="form-container" id="loginForm">
+            <h2>Login</h2>
+              <div class="input-container">
+              <i class="fa fa-fw fa-user"></i>
+              <input type="text" id="userName" name="userName" placeholder="Username">
+              </div>
+          <div class="input-container">
+              <i class="fa fa-fw fa-lock"></i>
+              <input type="password" id="passWord" name="passWord" placeholder="Password">
+          </div>
+        <br>
+      <input type="submit" value="Login">
+  </form>
+
+      <!-- Links for specialized login forms like Admin and User Login -->
+      </div>
         <a href="{{ url_for('adminlogin') }}">
           <h4>Admin Login</h4>
         </a>

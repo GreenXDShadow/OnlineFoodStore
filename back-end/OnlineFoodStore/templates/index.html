@@ -47,6 +47,95 @@
         <!-- Account options header -->
         <h2>ACCOUNT</h2>
 
+        <!-- Registration section -->
+        <div id="oneline">
+          <h4>Register</h4>
+          <!-- Button to trigger registration popup -->
+          <button id="loginButton" class="user-icon-btn" onclick=registrationPopUp()>
+            <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+              height="20px">
+          </button>
+        </div>
+
+        <!-- Registration form popup -->
+        <div class="form-popup" id="register">
+          <!-- Flash messages for user feedback -->
+          <div id="flash-messages">
+          {% with messages = get_flashed_messages(with_categories=true) %}
+              {% if messages %}
+                  <ul class="flash-messages">
+                      {% for category, message in messages %}
+                          <li class="{{ category }}">{{ message }}</li>
+                      {% endfor %}
+                  </ul>
+              {% endif %}
+          {% endwith %}
+          </div>
+
+          <!-- Registration form -->
+          <form action="/api/addUser" method="post" class="form-container" id="popUpForm">
+            <h2>Registration</h2>
+
+            <!--username-->
+            <div class="input-container">
+            <i class="fa fa-fw fa-user"></i>
+            <input type="text" id="userName" name="name" placeholder="Username">
+            </div>
+
+            <!--password-->
+            <div class="input-container">
+            <i class="fa fa-fw fa-lock"></i>
+            <input type="password" id="passWord" name="password" placeholder="Password">
+            </div>
+
+            <!--confirm password-->
+            <div class="input-container">
+            <i class="fa fa-fw fa-lock"></i>
+            <input type="password" id="confirmPassWord" name="confirm_password" placeholder="Confirm Password">
+            </div>
+
+            <!--email-->
+            <div class="input-container">
+            <i class="fa fa-fw fa-envelope"></i>
+            <input type="email" id="email" name="email" placeholder="Email Address">
+            </div>
+            <br>
+            <input type="submit" value="Submit">
+          </form>
+        </div>
+
+        <!-- Login section -->
+        <div id="oneline">
+          <h4>Log In</h4>
+          <!-- Button to trigger login popup -->
+          <button id="loginButton" class="user-icon-btn" onclick=loginPopUp()>
+            <img class="arrow-level" src="{{ url_for('static', filename='Icons/down.png')}}" alt="downarrow" width="20px"
+              height="20px">
+          </button>
+        </div>
+
+        <!-- Login form popup -->
+        <div class="form-popup" id="login">
+          <!-- Login form -->
+          <form action="/api/login" method="post" class="form-container" id="loginForm">
+            <h2>Login</h2>
+            <div class="input-container">
+              <i class="fa fa-fw fa-user"></i>
+              <input type="text" id="userName" name="userName" placeholder="Username">
+              </div>
+          <div class="input-container">
+              <i class="fa fa-fw fa-lock"></i>
+              <input type="password" id="passWord" name="passWord" placeholder="Password">
+          </div>
+            <!-- Placeholder for error message -->
+            <div id="loginErrorMessage" class="error-message"></div>
+          <br>
+      <input type="submit" value="Login">
+
+  </form>
+
+      <!-- Links for specialized login forms like Admin and User Login -->
+      </div>
         <a href="{{ url_for('adminlogin') }}">
           <h4>Admin Login</h4>
         </a>
@@ -64,9 +153,8 @@
     {% endif%}
 
     <!-- Cart icon button -->
-    <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
-      <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
-        height="27px">
+    <button class="cart-icon-btn">
+        <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="cart" class="user-icon" width="27px" height="27px">
     </button>
   </div>
   </div>
@@ -135,7 +223,7 @@
                 <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
               </div>
             </a>
-            <a href="{{ url_for('search', query='Frozen Food') }}" class="category-button">
+            <a href="{{ url_for('search', query='Frozen') }}" class="category-button">
               <div class="icon-category">
                 <img src="{{ url_for('static', filename='Icons/frozenfood.png')}}" alt="frozen food" width="80px"
                   height="80px">
@@ -161,5 +249,53 @@
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="{{ url_for('static', filename='js/ajaxScript.js') }}"></script>
   <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+  <script>
+  document.getElementById('loginForm').addEventListener('submit', function(event) {
+    event.preventDefault();
+
+    // Create a FormData object, passing in the form
+    var formData = new FormData(this);
+
+    fetch('/api/login', {
+      method: 'POST',
+      body: formData
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Login failed');
+      }
+      return response.text();
+    })
+    .then(html => {
+      document.open();
+      document.write(html);
+      document.close();
+    })
+    .catch(error => {
+      document.getElementById('loginErrorMessage').innerText = "Invalid username or password";
+    });
+  });
+  </script>
+
+  <script>
+  document.querySelector('.cart-icon-btn').addEventListener('click', function() {
+      var isLoggedIn = {{ 'true' if session.logged_in else 'false' }};
+      if (!isLoggedIn) {
+          var flashMessage = document.createElement('div');
+          flashMessage.innerText = 'You need to log in first';
+          flashMessage.classList.add('flash-message');
+          this.appendChild(flashMessage);
+
+          // Remove the flash message after a few seconds
+          setTimeout(function() {
+              flashMessage.remove();
+          }, 3000);
+      } else {
+          window.location.href = '{{ url_for('cart') }}'; // Go to cart
+      }
+  });
+  </script>
+
+
 </body>
 </html>
