@@ -397,11 +397,16 @@ def upload():
 
 @app.route('/api/addManager', methods=['POST'])
 def addManager():
+    master_key = request.form.get('masterKey')
+
+    if master_key != '54321':
+        return jsonify({"status": "error", "message": "Invalid Masterkey"})
+    
     name = request.form.get('name')
     password = request.form.get('password')
     email = request.form.get('email')
 
-    if not all([name, password, email]):
+    if not all([name, password, email, master_key]):
         return jsonify({"status": "error", "message": "All fields must be filled out"})
 
     try:
