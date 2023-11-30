@@ -69,12 +69,13 @@ class ApiCalls:
         user = db.session.query(User).filter(User.name == name, User.password == password).first()
 
         if not user:
-            return make_response("Invalid username or password", 401)
+            flash("Invalid username or password", "error")  # 'error' is a category you can define
+            return redirect(url_for('userlogin'))  # Redirect to the login page
         else:
             session['logged_in'] = True
             session['username'] = user.name
             session['user_id'] = user.id
-            session['user_type'] = user.type  # Assuming 'user.type' will be 'customer' for regular users
+            session['user_type'] = user.type
             return render_template('index.html', session=session)
 
     @staticmethod
@@ -426,7 +427,8 @@ def loginManager():
         session['user_type'] = 'admin'  # Set user type as admin
         return redirect(url_for('index'))
     else:
-        return jsonify({"status": "error", "message": "Invalid email or password"})
+        flash("Invalid email or password", "error")  # Use the flash function here
+        return redirect(url_for('adminlogin'))  # Redirect to the admin login page
     
 @app.route('/search', methods=['GET'])
 def search():
