@@ -108,133 +108,163 @@
       <button class="file-upload__button" type="submit">Choose File(s)</button>
       <span class="file-upload__label"></span>
     </div>
-</form>
+  </form>
 
   <div>
-        <h2>Add New Product</h2>
-        <form method="POST" action="{{ url_for('add_product') }}" enctype="multipart/form-data">
-            <div>
-                <label for="name">Product Name:</label>
-                <input type="text" id="name" name="name" placeholder="Product Name" required>
-            </div>
-            <div>
-                <label for="price">Price:</label>
-                <input type="number" id="price" step="any" name="price" placeholder="Price" required>
-            </div>
-            <div>
-                <label for="weight">Weight:</label>
-                <input type="number" id="weight" step="any" name="weight" placeholder="Weight">
-            </div>
-            <div>
-                <label for="type">Type:</label>
-                <input type="text" id="type" name="type" placeholder="Type">
-            </div>
-            <div>
-                <label for="category">Category:</label>
-                <input type="text" id="category" name="category" placeholder="Category">
-            </div>
-            <div>
-                <label for="quantity">Quantity:</label>
-                <input type="number" id="quantity" name="quantity" placeholder="Quantity">
-            </div>
-            <div>
-                <label for="amount">Amount:</label>
-                <input type="number" id="amount" step="any" name="amount" placeholder="Amount">
-            </div>
-            <div>
-                <label for="imagePath">Product Image:</label>
-                <input type="file" id="imagePath" name="imagePath">
-            </div>
-            <div>
-                <input type="submit" value="Add Product">
-            </div>
-        </form>
-    </div>
+    <h2>Add New Product</h2>
+    <form method="POST" action="{{ url_for('add_product') }}" enctype="multipart/form-data">
+        <div>
+            <label for="name">Product Name:</label>
+            <input type="text" id="name" name="name" placeholder="Product Name" required>
+        </div>
+        <div>
+            <label for="price">Price:</label>
+            <input type="number" id="price" name="price" placeholder="Price" step="0.01" required>
+        </div>
+        <div>
+            <label for="weight">Weight:</label>
+            <input type="number" id="weight" name="weight" placeholder="Weight" step="0.01">
+        </div>
+        <div>
+            <label>Type:</label>
+            <input type="radio" id="packaged" name="type" value="packaged">
+            <label for="packaged">Packaged</label>
+            <input type="radio" id="fresh" name="type" value="fresh">
+            <label for="fresh">Fresh</label>
+        </div>
+        <div>
+            <label>Category:</label>
+            <input type="radio" id="dairy" name="category" value="dairy">
+            <label for="dairy">Dairy</label>
+            <input type="radio" id="frozen" name="category" value="frozen">
+            <label for="frozen">Frozen</label>
+            <input type="radio" id="beverages" name="category" value="beverages">
+            <label for="beverages">Beverages</label>
+            <input type="radio" id="fruit" name="category" value="fruit">
+            <label for="fruit">Fruit</label>
+            <input type="radio" id="vegetable" name="category" value="vegetable">
+            <label for="vegetable">Vegetable</label>
+            <input type="radio" id="meat" name="category" value="meat">
+            <label for="meat">Meat</label>
+        </div>
+        <div id="quantityDiv" style="display: none;">
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity" placeholder="Quantity" min="1" step="1">
+        </div>
+        <div id="amountDiv" style="display: none;">
+            <label for="amount">Amount:</label>
+            <input type="number" id="amount" name="amount" placeholder="Amount" step="0.01">
+        </div>
+        <div>
+            <label for="imagePath">Product Image:</label>
+            <input type="file" id="imagePath" name="imagePath">
+        </div>
+        <div>
+            <input type="submit" value="Add Product">
+        </div>
+    </form>
+</div>
 
-<script>
-    document.addEventListener("DOMContentLoaded", function() {
-    Array.prototype.forEach.call(
-        document.querySelectorAll(".file-upload__button"),
-        function(button) {
-        const hiddenInput = button.parentElement.querySelector(
-            ".file-upload__input"
-        );
-        const label = button.parentElement.querySelector(".file-upload__label");
-        const defaultLabelText = "No file(s) selected";
 
-        // Set default text for label
-        label.textContent = defaultLabelText;
-        label.title = defaultLabelText;
 
-        button.addEventListener("click", function() {
-            hiddenInput.click();
-        });
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // File upload button functionality
+            Array.prototype.forEach.call(
+                document.querySelectorAll(".file-upload__button"),
+                function(button) {
+                    const hiddenInput = button.parentElement.querySelector(".file-upload__input");
+                    const label = button.parentElement.querySelector(".file-upload__label");
+                    const defaultLabelText = "No file(s) selected";
 
-        hiddenInput.addEventListener("change", function() {
-            const filenameList = Array.prototype.map.call(hiddenInput.files, function(
-            file
-            ) {
-            return file.name;
+                    // Set default text for label
+                    label.textContent = defaultLabelText;
+                    label.title = defaultLabelText;
+
+                    button.addEventListener("click", function() {
+                        hiddenInput.click();
+                    });
+
+                    hiddenInput.addEventListener("change", function() {
+                        const filenameList = Array.prototype.map.call(hiddenInput.files, function(file) {
+                            return file.name;
+                        });
+
+                        label.textContent = filenameList.join(", ") || defaultLabelText;
+                        label.title = label.textContent;
+                    });
+                }
+            );
+
+            // Code for handling Type selection and display of Quantity/Amount
+            const packagedRadio = document.getElementById('packaged');
+            const freshRadio = document.getElementById('fresh');
+            const quantityDiv = document.getElementById('quantityDiv');
+            const amountDiv = document.getElementById('amountDiv');
+            const quantityInput = document.getElementById('quantity');
+            const amountInput = document.getElementById('amount');
+
+            function updateFields() {
+                if (packagedRadio.checked) {
+                    quantityDiv.style.display = '';
+                    amountDiv.style.display = 'none';
+                    amountInput.value = 0;
+                } else if (freshRadio.checked) {
+                    amountDiv.style.display = '';
+                    quantityDiv.style.display = 'none';
+                    quantityInput.value = 0;
+                }
+            }
+
+            packagedRadio.addEventListener('change', updateFields);
+            freshRadio.addEventListener('change', updateFields);
+
+            // Initialize fields on page load
+            updateFields();
+
+            // File upload submit logic
+            const uploadForm = document.getElementById("uploadForm");
+            const fileInput = document.getElementById("myFile");
+            const label = document.querySelector(".file-upload__label");
+            const defaultLabelText = "No file(s) selected";
+
+            // Set default text for label
+            label.textContent = defaultLabelText;
+            label.title = defaultLabelText;
+
+            fileInput.addEventListener("change", function () {
+                const filenameList = Array.from(fileInput.files).map(function (file) {
+                    return file.name;
+                });
+
+                label.textContent = filenameList.join(", ") || defaultLabelText;
+                label.title = label.textContent;
             });
 
-            label.textContent = filenameList.join(", ") || defaultLabelText;
-            label.title = label.textContent;
+            uploadForm.addEventListener("submit", function (event) {
+                event.preventDefault(); // Prevent the form from submitting normally
 
-            // Submit the form when a file is selected
-            document.getElementById("uploadForm").submit();
+                fetch('/upload', {
+                    method: 'POST',
+                    body: new FormData(uploadForm),
+                })
+                .then(response => response.text())
+                .then(message => {
+                    alert(message); // Display an alert with the server's response
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    alert('File upload failed. Please try again.'); // Display an error message
+                });
+            });
         });
-        }
-    );
-    });
-    document.addEventListener("DOMContentLoaded", function () {
-    const uploadForm = document.getElementById("uploadForm");
-    const fileInput = document.getElementById("myFile");
-    const label = document.querySelector(".file-upload__label");
-    const defaultLabelText = "No file(s) selected";
+    </script>
 
-    // Set default text for label
-    label.textContent = defaultLabelText;
-    label.title = defaultLabelText;
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-    fileInput.addEventListener("change", function () {
-    const filenameList = Array.from(fileInput.files).map(function (file) {
-        return file.name;
-    });
+    <script src="{{ url_for('static', filename='js/ajaxScript.js') }}"></script>
 
-    label.textContent = filenameList.join(", ") || defaultLabelText;
-    label.title = label.textContent;
-    });
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
-    uploadForm.addEventListener("submit", function (event) {
-    event.preventDefault(); // Prevent the form from submitting normally
-
-    // You can add additional logic here to handle the file upload
-    fetch('/upload', {
-        method: 'POST',
-        body: new FormData(uploadForm),
-    })
-    .then(response => response.text())
-    .then(message => {
-        alert(message); // Display an alert with the server's response
-        // Optionally, you can redirect the user to another page
-        // window.location.href = '/success'; // Change '/success' to the desired success page
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('File upload failed. Please try again.'); // Display an error message
-    });
-    });
-});
-</script>
-
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <script src="{{ url_for('static', filename='js/ajaxScript.js') }}"></script>
-
-
-
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    
 </body>
-
 </html>
