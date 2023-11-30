@@ -54,12 +54,14 @@ class ApiCalls:
             new_user = Customer(name=name, password=password, email=email)
             db.session.add(new_user)
             db.session.commit()
-            return jsonify({"status": "success", "message": "User added successfully"})
-        except IntegrityError:  # This is for the unique constraint error
-            return jsonify({"status": "error", "message": "Email already exists"})
+            flash("User added successfully", "success")  # 'success' is a category
+            return redirect(url_for('userlogin'))  # Redirect to the form page
+        except IntegrityError:
+            flash("Email already exists", "error")  # Using flash for error message
+            return redirect(url_for('userlogin'))  # Redirect back to the form
         except Exception as e:
-            # Handle other database exceptions here
-            return jsonify({"status": "error", "message": "An error occurred while registering. Please try again."})
+            flash("An error occurred. Please try again.", "error")
+            return redirect(url_for('userlogin'))
 
     @app.route('/api/login', methods=['POST'])
     def login():
@@ -402,15 +404,18 @@ def addManager():
     email = request.form.get('email')
 
     if not all([name, password, email]):
-        return jsonify({"status": "error", "message": "All fields must be filled out"})
+        flash("All fields must be filled out", "error")
+        return redirect(url_for('adminlogin'))
 
     try:
         new_manager = Manager(name=name, password=password, email=email)
         db.session.add(new_manager)
         db.session.commit()
-        return jsonify({"status": "success", "message": "Admin added successfully"})
+        flash("Admin added successfully", "success")
+        return redirect(url_for('adminlogin'))
     except IntegrityError:
-        return jsonify({"status": "error", "message": "Email already exists"})
+        flash("Email already exists", "error")
+        return redirect(url_for('adminlogin'))
 
 
 @app.route('/api/loginManager', methods=['POST'])
