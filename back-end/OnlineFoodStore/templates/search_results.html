@@ -1,3 +1,4 @@
+<!-- search_results.html -->
 <!DOCTYPE html>
 <html>
 
@@ -24,7 +25,9 @@
     <!-- Search bar form -->
       <form id="searchForm" action="{{ url_for('search') }}" method="GET" onsubmit="return handleSearch()">
         <input class="searchbar" type="text" id="searchInput" name="query" placeholder="search for products <3">
-      </form>      
+      </form>
+      <div id="searchResults"></div>
+      
 
     <!-- User icon and dropdown for account management -->
     <div class="imageRight">
@@ -168,81 +171,77 @@
       <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
     </ul>
   </div>
+    <h1 style="margin-left: 18%;">Search Results: {{ query }}</h1>
+    <div class="row">
+        {% for result in search_results %}
+            <div class="icon">
+                <!-- Display result image if available -->
+                <img src="{{ url_for('static', filename=result.imagePath) }}" alt="{{ result.name }}" width="80px" height="80px">
 
-  <!-- Main banner image -->
-  <div class="bannerposition">
-    <img class="banner" src="{{ url_for('static', filename='Images/banner.png')}}">
-  </div>
+                <!-- Display result name -->
+                <h3>{{ result.name }}</h3>
 
-  <!-- Section to shop by categories -->
-  <h4 style="margin-bottom:0;">Shop by:</h4>
-  <h2>Categories</h2>
+                <!-- Display result price per unit or per pound based on product type -->
+                <div class="productPrice">
+                    {% if result.type == 'packaged' %}
+                        Price per unit: ${{ '%.2f'|format(result.price) }}
+                    {% elif result.type == 'fresh' %}
+                        Price per pound: ${{ '%.2f'|format(result.price) }}
+                    {% endif %}
+                </div>
 
-  <!-- Carousel for category selection -->
-  <div class="row">
-    <div class="carousel carousel-1">
-      <button class="carousel-btn prev-btn"><i class="fa fa-chevron-left"></i></button>
-
-      <!-- Container holding the carousel items -->
-      <div class="carousel-container">
-        <div class="carousel-inner">
-          <div class="row">
-            <a href="{{ url_for('search', query='Fruit') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/fruits.png')}}" alt="fruits" width="80px"
-                  height="80px">
-                <h3>Fruit</h3>
+                {% if session.logged_in %}
+                    <!-- Add to Cart form, visible only when user is logged in -->
+                    <form class="add-to" method="POST" action="/api/addToCart" onsubmit="addToCart(event, this)">
+                        <input type="number" name="quantity" value="1" min="1" width="80px">
+                        <input type="hidden" name="product_id" value="{{ result.id }}">
+                        <br>
+                        <!-- Button to confirm the quantity change -->
+                        <button type="submit" class="confirm">
+                            <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
+                        </button>
+                        <!-- Display success message -->
+                        <span class="success-message" style="display: none;"></span> <!-- Success message -->
+                    </form>
+                    {% endif %}
+                  </div>
+              
+                  {% if loop.index % 4 == 0 and not loop.last %} <!-- Check if the product is the fourth in a row and not the last product -->
+                    </div><div class="row"> <!-- Close the current row and start a new one -->
+                  {% endif %}
+                {% endfor %} <!-- End of products iteration -->
+              
               </div>
-            </a>
-            <a href="{{ url_for('search', query='Vegetable') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/vegetables.png')}}" alt="vegetables" width="80px"
-                  height="80px">
-                <h3>Vegetables</h3>
-              </div>
-            </a>
-            <a href="{{ url_for('search', query='Dairy') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/dairyproducts.png')}}" alt="dairy" width="80px"
-                  height="80px">
-                <h3>Dairy and Eggs</h3>
-              </div>
-            </a>
-          </div>
-
-          <div class="row">
-            <a href="{{ url_for('search', query='Meat') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/meat.png')}}" alt="meat" width="80px" height="80px">
-                <h3>Meats</h3>
-                <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
-              </div>
-            </a>
-            <a href="{{ url_for('search', query='Frozen') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/frozenfood.png')}}" alt="frozen food" width="80px"
-                  height="80px">
-                <h3>Frozen Food</h3>
-              </div>
-            </a>
-            <a href="{{ url_for('search', query='Beverages') }}" class="category-button">
-              <div class="icon-category">
-                <img src="{{ url_for('static', filename='Icons/beverages.png')}}" alt="beverages" width="80px"
-                  height="80px">
-                <h3>Beverages</h3>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-      <button class="carousel-btn next-btn"><i class="fa fa-chevron-right"></i></button>
-    </div>
-  </div>
-
-  <!-- Scripts for functionality like jQuery and custom scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="{{ url_for('static', filename='js/ajaxScript.js') }}"></script>
-  <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
 </body>
 </html>
+
+<script>
+    function addToCart(event, form) {
+      event.preventDefault();
+    
+      var formData = new FormData(form);
+    
+      fetch('/api/addToCart', {
+        method: 'POST',
+        body: formData
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          var successMessage = form.querySelector('.success-message');
+          successMessage.innerText = 'Item added successfully';
+          successMessage.style.display = 'block';
+    
+          setTimeout(() => {
+            successMessage.style.display = 'none';
+          }, 3000);
+        }
+      })
+      .catch(error => console.error('Error:', error));
+    }
+    </script>
+    
+
+
+

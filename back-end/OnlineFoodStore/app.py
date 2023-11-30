@@ -131,7 +131,8 @@ def index():
 
 @app.route('/fruit')
 def fruit():
-    return render_template('fruit.html')
+    fruit_products = Product.query.filter_by(category='fruit').all()  # Replace with your actual query
+    return render_template('fruit.html', products=fruit_products)
 
 
 @app.route('/vegetable')
@@ -146,17 +147,20 @@ def dairy():
 
 @app.route('/meat')
 def meat():
-    return render_template('meat.html')
+    meat_products = Product.query.filter_by(category='meat').all()  # Replace with your actual query
+    return render_template('meat.html', products=meat_products)
 
 
-@app.route('/frozen')
+@app.route('/frozen') #frozen_food_products
 def frozen():
-    return render_template('frozen.html')
+    frozen_food_products = Product.query.filter_by(category='frozen').all()  # Replace with your actual query
+    return render_template('frozen.html', products=frozen_food_products)
 
 
 @app.route('/beverages')
 def beverages():
-    return render_template('beverages.html')
+    beverage_products = Product.query.filter_by(category='beverages').all()  # Replace with your actual query
+    return render_template('beverages.html', products=beverage_products)
 
 
 @app.route('/adminlogin')
@@ -284,6 +288,18 @@ def loginManager():
         return redirect(url_for('some_admin_dashboard'))
     else:
         return jsonify({"status": "error", "message": "Invalid email or password"})
+    
+@app.route('/search', methods=['GET'])
+def search():
+    query = request.args.get('query')
+
+    results = Product.query.filter(
+        (Product.name.ilike(f"%{query}%")) |
+        (Product.category.ilike(f"{query}"))
+    ).all()
+
+    return render_template('search_results.html', search_results=results, query=query)
+
 
 
 if __name__ == "__main__":
