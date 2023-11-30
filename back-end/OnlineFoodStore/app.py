@@ -61,7 +61,6 @@ class ApiCalls:
             # Handle other database exceptions here
             return jsonify({"status": "error", "message": "An error occurred while registering. Please try again."})
 
-    @staticmethod
     @app.route('/api/login', methods=['POST'])
     def login():
         name = request.form.get('userName')
@@ -75,6 +74,7 @@ class ApiCalls:
             session['logged_in'] = True
             session['username'] = user.name
             session['user_id'] = user.id
+            session['user_type'] = user.type  # Assuming 'user.type' will be 'customer' for regular users
             return render_template('index.html', session=session)
 
     @staticmethod
@@ -197,8 +197,11 @@ def userlogin():
 def contact():
     return render_template('contact.html')
 
-@app.route('/add_product', methods=['POST'])
+@app.route('/add_product', methods=['GET', 'POST'])
 def add_product():
+    if not ('user_type' in session and session['user_type'] == 'admin'):
+        flash('Only admins can access this page', 'error')
+        return redirect(url_for('index'))
     if request.method == 'POST':
         name = request.form['name']
         price = float(request.form['price'])
@@ -404,7 +407,7 @@ def addManager():
         new_manager = Manager(name=name, password=password, email=email)
         db.session.add(new_manager)
         db.session.commit()
-        return jsonify({"status": "success", "message": "Manager added successfully"})
+        return jsonify({"status": "success", "message": "Admin added successfully"})
     except IntegrityError:
         return jsonify({"status": "error", "message": "Email already exists"})
 
@@ -420,8 +423,8 @@ def loginManager():
         session['logged_in'] = True
         session['username'] = manager.name
         session['user_id'] = manager.id
-        session['user_type'] = 'manager'
-        return redirect(url_for('some_admin_dashboard'))
+        session['user_type'] = 'admin'  # Set user type as admin
+        return redirect(url_for('index'))
     else:
         return jsonify({"status": "error", "message": "Invalid email or password"})
     

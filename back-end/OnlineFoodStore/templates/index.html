@@ -24,7 +24,7 @@
     <!-- Search bar form -->
       <form id="searchForm" action="{{ url_for('search') }}" method="GET" onsubmit="return handleSearch()">
         <input class="searchbar" type="text" id="searchInput" name="query" placeholder="search for products <3">
-      </form>      
+      </form>
 
     <!-- User icon and dropdown for account management -->
     <div class="imageRight">
@@ -165,7 +165,10 @@
     <!-- Navigation links for different sections of the site -->
     <ul>
       <li><a href="{{ url_for('categories') }}">Select Category</a></li>
-      <li><a href="{{ url_for('upload') }}">New Products</a></li>
+      {% if session.logged_in and session.user_type == 'manager' %}
+          <!-- Display New Products Link -->
+          <li><a href="{{ url_for('upload') }}">New Products</a><li>
+      {% endif %}
       <li><a href="{{ url_for('featured') }}">Featured Products</a></li>
       <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
     </ul>
