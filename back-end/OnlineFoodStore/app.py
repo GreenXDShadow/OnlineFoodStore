@@ -176,15 +176,21 @@ def userlogin():
 def contact():
     return render_template('contact.html')
 
-
 @app.route('/add_product', methods=['POST'])
 def add_product():
     if request.method == 'POST':
         name = request.form['name']
         price = float(request.form['price'])
         weight = float(request.form.get('weight', 0))
-        type_ = request.form.get('type', '')
-        category = request.form.get('category', '')
+
+        # Collecting values from checkboxes for type and category
+        type_list = request.form.getlist('type')
+        category_list = request.form.getlist('category')
+
+        # Convert list to comma-separated string
+        type_ = ', '.join(type_list)
+        category = ', '.join(category_list)
+
         quantity = int(request.form.get('quantity', 0))
         amount = float(request.form.get('amount', 0))
 
@@ -197,15 +203,21 @@ def add_product():
             full_path = os.path.join(app.root_path, 'static', file_path)  # Full path for saving the file
             file.save(full_path)  # Saving the file to the filesystem
 
+        # Create a new Product instance
         new_product = Product(
             name=name, price=price, weight=weight, type=type_,
             category=category, quantity=quantity, amount=amount, imagePath=file_path
         )
+
+        # Adding the new product to the database
         db.session.add(new_product)
         db.session.commit()
+
+        # Show a confirmation message
         flash('Product added successfully!')
 
-        return redirect(url_for('index'))  # Redirect to some page after adding
+        # Redirect to some page after adding
+        return redirect(url_for('index'))
 
 @app.route('/cart')
 def cart():

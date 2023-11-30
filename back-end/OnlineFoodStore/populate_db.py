@@ -71,6 +71,17 @@ def populate_data():
         Product(name="Cherry", weight=0.2, type="fresh", category="fruit", price=0.60, imagePath="Icons/cherry.png", quantity=1, amount=None)
     ]
 
+    vegetable_products = [
+        Product(name="Tomato", weight=0.3, type="fresh", category="vegetable", price=1.00, imagePath="Icons/tomato.png", quantity=1, amount=None),
+        Product(name="Green Onion", weight=0.05, type="fresh", category="vegetable", price=0.20, imagePath="Icons/greenonion.png", quantity=1, amount=None),
+        Product(name="Cucumber", weight=0.4, type="fresh", category="vegetable", price=0.75, imagePath="Icons/cucumber.png", quantity=1, amount=None),
+        Product(name="Carrot", weight=0.1, type="fresh", category="vegetable", price=0.30, imagePath="Icons/carrots.png", quantity=1, amount=None),
+        Product(name="Broccoli", weight=0.5, type="fresh", category="vegetable", price=1.50, imagePath="Icons/broccoli.png", quantity=1, amount=None),
+        Product(name="Cauliflower", weight=0.6, type="fresh", category="vegetable", price=1.80, imagePath="Icons/cauliflower.png", quantity=1, amount=None),
+        Product(name="Cabbage", weight=0.7, type="fresh", category="vegetable", price=1.20, imagePath="Icons/cabbage.png", quantity=1, amount=None),
+        Product(name="Potato", weight=0.4, type="fresh", category="vegetable", price=0.50, imagePath="Icons/potato.png", quantity=1, amount=None)
+    ]
+
     # TODO: Meat should also be in amount since it is a loose product
     # Meat Products with Prices
     meat_products = [
@@ -87,6 +98,10 @@ def populate_data():
     # Loop for adding dairy products to the database
     for product in dairy_products:
         db.session.add(product)
+
+    for product in vegetable_products:
+        db.session.add(product)
+
 
     # Loop for adding frozen food products to the database
     for product in frozen_food_products:
