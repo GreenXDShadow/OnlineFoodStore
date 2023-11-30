@@ -399,6 +399,13 @@ def upload():
 
 @app.route('/api/addManager', methods=['POST'])
 def addManager():
+    master_key = request.form.get('masterKey')
+
+    if master_key != '54321':
+        flash("Invalid Masterkey", "error")
+        return redirect(url_for('adminlogin'))
+    
+
     name = request.form.get('name')
     password = request.form.get('password')
     email = request.form.get('email')
