@@ -125,3 +125,11 @@ window.onclick = function(event) {
 }
 
 
+function handleSearch() {
+  var query = document.getElementById('searchInput').value;
+
+  window.location.href = "/search?query=" + encodeURIComponent(query);
+
+  return false;
+}
+
