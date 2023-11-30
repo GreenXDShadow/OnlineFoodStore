@@ -25,7 +25,7 @@
           height="27px">
     </div></button>
     <div class="dropdown-content hidden" id="myDropdown">
-       <!-- Dropdown content for user account management -->
+      <!-- Dropdown content for user account management -->
 
       <!-- Close button for dropdown-->
       <button class="user-icon-btn" onclick="toggleDropdown()">
@@ -37,7 +37,6 @@
 
         <!-- Account options header -->
         <h2>ACCOUNT</h2>
-
         <a href="{{ url_for('adminlogin') }}">
           <h4>Admin Login</h4>
         </a>
@@ -45,21 +44,20 @@
           <h4>User Login</h4>
         </a>
       </div>
-        {% else %}
+    {% else %}
       <!-- Welcome message and logout option for logged-in users -->
       <h2> Welcome, {{session.username}}</h2>
       <form action="{{ url_for('logout') }}" method="post">
           <input type="submit" value="Logout">
       </form>
       </div>
-      {% endif%}
-    </div>
-      <!-- Cart icon button -->
-      <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
-        <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
-          height="27px">
-     </button>
-    </div>
+    {% endif%}
+
+    <!-- Cart icon button -->
+    <button class="cart-icon-btn">
+        <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="cart" class="user-icon" width="27px" height="27px">
+    </button>
+  </div>
   </div>
   </div>
   <div class="bottomnav">
