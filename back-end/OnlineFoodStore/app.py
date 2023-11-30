@@ -268,7 +268,8 @@ def remove_from_cart(product_id):
         # Handle not logged in case
         return redirect(url_for('login'))
 
-    quantity_to_remove = int(request.form.get('quantity_to_remove'))
+    quantity_to_remove = float(request.form.get('quantity_to_remove'))
+    quantity_to_remove = round(quantity_to_remove, 2)
     cart_item = Cart.query.filter_by(customer_id=user_id, product_id=product_id).first()
 
     if cart_item:

@@ -100,23 +100,36 @@
   <div class="cartRow">
   <div class="cartBox">
     <h3>Items</h3>
-    {% for item in cart_items %}
-      <div class="itemTitle">
-        {{ item.product.name }} - Quantity: {{ item.quantity }}
-        <div class="itemPrice">
+      {% for item in cart_items %}
+        <div class="itemTitle">
+          {{ item.product.name }} -
           {% if item.product.type == 'packaged' %}
-             Price per unit: ${{ '%.2f'|format(item.product.price) }}
+            Quantity: {{ item.quantity }}
           {% elif item.product.type == 'fresh' %}
-             Price per pound: ${{ '%.2f'|format(item.product.price) }}
+            Weight: {{ '%.2f'|format(item.quantity) }} pounds
           {% endif %}
+          <div class="itemPrice">
+            {% if item.product.type == 'packaged' %}
+               Price per unit: ${{ '%.2f'|format(item.product.price) }}
+            {% elif item.product.type == 'fresh' %}
+               Price per pound: ${{ '%.2f'|format(item.product.price) }}
+            {% endif %}
+          </div>
+          <!-- Form to remove items from the cart -->
+          <form action="{{ url_for('remove_from_cart', product_id=item.product.id) }}" method="post">
+            {% if item.product.type == 'fresh' %}
+              <!-- Allow decimal values for fresh products -->
+              <input type="number" name="quantity_to_remove" value="1" min="0.01" step="0.01" max="{{ item.quantity }}">
+            {% else %}
+              <!-- Integer values for packaged products -->
+              <input type="number" name="quantity_to_remove" value="1" min="1" max="{{ item.quantity }}">
+            {% endif %}
+            <button type="submit">Remove</button>
+          </form>
         </div>
-        <!-- Form to remove items from the cart -->
-        <form action="{{ url_for('remove_from_cart', product_id=item.product.id) }}" method="post">
-          <input type="number" name="quantity_to_remove" value="1" min="1" max="{{ item.quantity }}">
-          <button type="submit">Remove</button>
-        </form>
-      </div>
-    {% endfor %}
+      {% endfor %}
+
+
 
   </div>
   <div class="checkoutBox">
