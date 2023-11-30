@@ -68,10 +68,10 @@ class Cart(db.Model):
     customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
     product_id = db.Column(db.Integer, db.ForeignKey('product.id'), nullable=False)
     quantity = db.Column(db.Integer, nullable=False, default=0)
+    total_price = db.Column(db.Float, nullable=False, default=0.0)  # New field for total price
 
     # Relationship to access product details
     product = db.relationship('Product')
 
     def __repr__(self):
-        return f"<Cart(id={self.id}, customer_id={self.customer_id}, product_id={self.product_id}, quantity={self.quantity})>"
-
+        return f"<Cart(id={self.id}, customer_id={self.customer_id}, product_id={self.product_id}, quantity={self.quantity}, total_price={self.total_price})>"
