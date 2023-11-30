@@ -1,80 +1,79 @@
-# OnlineFoodStore
+### OnlineFoodStore
 CMPE-131 Group Project
 
 ## User Guide: Contributing to the OnlineFoodStore Repository
 
-### Prerequisites:
-Ensure you have `git` installed on your machine. If not, [download and install it](https://git-scm.com/downloads).
-Ensure you have 'Github Desktop' Installed. (https://desktop.github.com/)
+## Prerequisites
 
-### 1. **Clone the Repository**:
-Now, clone the repository to your local machine:
+- Git installed on your system.
+- Python installed on your system.
+
+## 1. Cloning the Repository
+
+First, you need to clone the repository to your local machine. Open your terminal and run the following command:
 
 ```bash
 git clone https://github.com/GreenXDShadow/OnlineFoodStore.git
 ```
-if this does not work use
+
+This will create a directory named `OnlineFoodStore` in your current directory.
+
+## 2. Navigating to the Project Directory
+
+Change to the project directory:
 
 ```bash
-git clone git@github.com:GreenXDShadow/OnlineFoodStore.git
+cd OnlineFoodStore/back-end/OnlineFoodStore
 ```
 
-### 2. **Set up the remote repository**:
-Navigate to the cloned directory:
+## 3. Creating a Virtual Environment
+Create a virtual environment in the project directory:
 
 ```bash
-cd OnlineFoodStore
+python -m venv venv
 ```
 
-Then, set up the original repository as the `origin`:
+This command creates a new directory named `venv` where the virtual environment files are stored.
+
+## 4. Activating the Virtual Environment
+
+Activate the virtual environment. The command varies depending on your operating system:
+# On Windows:
 
 ```bash
-git remote add origin https://github.com/GreenXDShadow/OnlineFoodStore.git
+.\venv\Scripts\activate
 ```
 
-### 3. **Pull the Latest Changes**:
-Before making any changes, ensure you have the latest version from the original repository:
+# On Mac:
 
 ```bash
-git pull origin main
+source venv/bin/activate
 ```
 
-### 4. **Create a New Branch**:
-Always create a new branch for your changes. This keeps the workflow clean:
+You should now see `(venv)` in your terminal prompt, indicating that the virtual environment is active.
+
+## 5. Installing Dependencies
+
+Install the required dependencies using the `requirements.txt` file:
 
 ```bash
-git checkout -b feature/NAME_OF_YOUR_FEATURE
+pip install -r requirements.txt
 ```
-Replace `NAME_OF_YOUR_FEATURE` with a brief name that describes your changes.
 
-### 5. **Make Your Changes**:
-Modify, add, or delete files as necessary for your feature or fix.
+This command will install all the packages listed in `requirements.txt` with their specified versions.
 
-### 6. **Commit Your Changes**:
-Once you've made your changes, commit them:
+## 6. Running the application
+
+To run the website. make sure you are still in the project directory
 
 ```bash
-git add .
-git commit -m "Brief description of your changes"
+cd OnlineFoodStore/back-end/OnlineFoodStore
 ```
 
-### 7. **Push to Github**:
-Push your changes to Github:
+once you are in here you can type 
 
 ```bash
-git push -u origin feature/NAME_OF_YOUR_FEATURE
+flask run
 ```
 
-### 8. **Create a Pull Request (PR)**:
-Finally, create a pull request to the `main` branch of the original `OnlineFoodStore` repository:
-
-- Go to the repository on GitHub.
-- Click on the **New pull request** button.
-- Ensure the base repository is `GreenXDShadow/OnlineFoodStore` and the base branch is `main`.
-- For the head repository, choose the branch you just pushed.
-- Click **Create pull request**.
-- Fill in a title and description for your PR, then submit.
-
----
-
-Once you've submitted your PR, your changes will be reviewed. If everything looks good, they will merge your changes into the `main` branch.
+and you will be prompted with a link to the website hosted locally
