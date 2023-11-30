@@ -206,8 +206,8 @@ def add_product():
 @app.route('/cart')
 def cart():
     if 'user_id' not in session:
-        # Redirect to login or show a message that user is not logged in
-        return redirect(url_for('login'))
+        flash('You need to log in first', 'info')  # 'info' is the category of the message
+        return redirect(url_for('index'))  # Redirect to homepage or login page
 
     user_id = session['user_id']
     cart_items = Cart.query.filter_by(customer_id=user_id).all()

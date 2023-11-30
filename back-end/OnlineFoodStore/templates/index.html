@@ -153,9 +153,8 @@
     {% endif%}
 
     <!-- Cart icon button -->
-    <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
-      <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
-        height="27px">
+    <button class="cart-icon-btn">
+        <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="cart" class="user-icon" width="27px" height="27px">
     </button>
   </div>
   </div>
@@ -272,6 +271,25 @@
     .catch(error => {
       document.getElementById('loginErrorMessage').innerText = "Invalid username or password";
     });
+  });
+  </script>
+
+  <script>
+  document.querySelector('.cart-icon-btn').addEventListener('click', function() {
+      var isLoggedIn = {{ 'true' if session.logged_in else 'false' }};
+      if (!isLoggedIn) {
+          var flashMessage = document.createElement('div');
+          flashMessage.innerText = 'You need to log in first';
+          flashMessage.classList.add('flash-message');
+          this.appendChild(flashMessage);
+
+          // Remove the flash message after a few seconds
+          setTimeout(function() {
+              flashMessage.remove();
+          }, 3000);
+      } else {
+          window.location.href = '{{ url_for('cart') }}'; // Go to cart
+      }
   });
   </script>
 
