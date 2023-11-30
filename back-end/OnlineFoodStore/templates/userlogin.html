@@ -125,17 +125,18 @@
         <div class="form-content">
           <div class="login-form">
             <div class="title">User Login</div>
-          <form action="#">
+          <form action="/api/login" method="post" class="form-box" id="loginForm">
             <div class="input-boxes">
               <div class="input-box">
-                <i class="fa fa-fw fa-envelope"></i>
-                <input type="text" placeholder="Enter your email" required>
+                <i class="fa fa-fw fa-user"></i>
+                <input type="text" id="userName" name="userName" placeholder="Username">
               </div>
               <div class="input-box">
                 <i class="fa fa-fw fa-lock"></i>
-                <input type="password" placeholder="Enter your password" required>
+                <input type="password" id="passWord" name="passWord" placeholder="Password">
               </div>
-              <div class="text"><a href="#" style="color: #C1A7EF;">Forgot password?</a></div>
+              <!-- Placeholder for error message -->
+              <div id="loginErrorMessage" class="error-message"></div>
               <div class="button input-box">
                 <input type="submit" value="Submit">
               </div>
@@ -145,20 +146,30 @@
       </div>
         <div class="signup-form">
           <div class="title">User Signup</div>
-        <form action="#">
+        <form action="/api/addUser" method="post" class="form-box" id="popUpForm">
             <div class="input-boxes">
               <div class="input-box">
-                <i class="fa fa-fw fa-user"></i>
-                <input type="text" placeholder="Enter your name" required>
-              </div>
-              <div class="input-box">
-                <i class="fa fa-fw fa-envelope"></i>
-                <input type="text" placeholder="Enter your email" required>
-              </div>
-              <div class="input-box">
-                <i class="fa fa-fw fa-lock"></i>
-                <input type="password" placeholder="Enter your password" required>
-              </div>
+            <i class="fa fa-fw fa-user"></i>
+            <input type="text" id="userName" name="name" placeholder="Username">
+            </div>
+
+            <!--password-->
+            <div class="input-box">
+            <i class="fa fa-fw fa-lock"></i>
+            <input type="password" id="passWord" name="password" placeholder="Password">
+            </div>
+
+            <!--confirm password-->
+            <div class="input-box">
+            <i class="fa fa-fw fa-lock"></i>
+            <input type="password" id="confirmPassWord" name="confirm_password" placeholder="Confirm Password">
+            </div>
+
+            <!--email-->
+            <div class="input-box">
+            <i class="fa fa-fw fa-envelope"></i>
+            <input type="email" id="email" name="email" placeholder="Email Address">
+            </div>
               <div class="button input-box">
                 <input type="submit" value="Submit">
               </div>
