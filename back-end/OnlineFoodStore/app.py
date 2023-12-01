@@ -171,7 +171,8 @@ def fruit():
 
 @app.route('/vegetable')
 def vegetable():
-    return render_template('vegetable.html')
+    vegetable_products = Product.query.filter_by(category='vegetable').all()
+    return render_template('vegetable.html', products = vegetable_products)
 
 
 @app.route('/dairy')
