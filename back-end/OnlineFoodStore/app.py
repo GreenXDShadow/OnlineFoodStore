@@ -102,27 +102,29 @@ class ApiCalls:
             return jsonify({"status": "error", "message": "Product not found"})
 
         cart_item = Cart.query.filter_by(product_id=product_id, customer_id=user_id).first()
-        quantity = int(request.form.get('quantity', 1))
-        if product.quantity < quantity:
-            return jsonify({"status": "failed", "message": "Not enough stock"})
+
 
         if product.type == 'fresh':
             weight = float(request.form.get('weight', 0))
             total_price = product.price * weight
+            if product.amount < weight:
+                return jsonify({"status": "failed", "message": "Not enough stock"})
 
             if cart_item:
                 # Update weight and price for existing cart item
                 cart_item.quantity += weight
-                product.quantity -= weight
+                product.amount -= weight
                 cart_item.total_price += total_price
             else:
                 # Create a new cart item for fresh product
                 cart_item = Cart(product_id=product_id, customer_id=user_id, quantity=weight, total_price=total_price)
-                product.quantity -= weight
+                product.amount -= weight
                 db.session.add(cart_item)
         else:
             # Logic for packaged products remains the same
             quantity = int(request.form.get('quantity', 1))
+            if product.quantity < quantity:
+                return jsonify({"status": "failed", "message": "Not enough stock"})
             if cart_item:
                 cart_item.quantity += quantity
                 product.quantity -= quantity
