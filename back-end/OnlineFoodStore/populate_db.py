@@ -15,7 +15,7 @@ def clear_tables():
 
 
 def populate_data():
-    # Populate User, Customer, and Manager
+    #  Populate User, Customer, and Manager
     customer1 = Customer(name="JaneDoe", password="password456", email="janedoe@example.com")
     manager1 = Manager(name="AdminUser", password="adminpass", email="admin@example.com")
     customer2 = Customer(name="a", password="a",email="a@a.com")
