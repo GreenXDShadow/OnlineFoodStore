@@ -319,13 +319,15 @@ def updateUser():
     user_id = session.get('user_id')
 
     if not user_id:
-        return jsonify({"status": "error", "message": "User not logged in"})
+        flash("User not logged in", "error")
+        return redirect(url_for('checkout'))  # Redirect back to the checkout page
 
     # Retrieve user from database
     user = User.query.get(user_id)
 
     if not user:
-        return jsonify({"status": "error", "message": "User not found"})
+        flash("User not found", "error")
+        return redirect(url_for('checkout'))  # Redirect back to the checkout page
 
     # Update user fields from form data
     user.delivery_first_name = request.form.get('firstname')
@@ -344,9 +346,11 @@ def updateUser():
     # Save changes
     try:
         db.session.commit()
-        return jsonify({"status": "success", "message": "User updated successfully"})
+        flash("User information updated successfully", "success")  # Flash success message
+        return redirect(url_for('checkout'))  # Redirect back to the checkout page
     except Exception as e:
-        return jsonify({"status": "error", "message": "Error updating user: " + str(e)})
+        flash("Error updating user: " + str(e), "error")
+        return redirect(url_for('checkout'))  # Redirect back to the checkout page
 
 @app.route('/api/submitOrder', methods=['POST'])
 def submitOrder():

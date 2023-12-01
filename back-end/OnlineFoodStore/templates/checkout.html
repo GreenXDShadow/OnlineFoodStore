@@ -110,6 +110,16 @@
             </label>
             <input class="form-btn" type="submit" value="Update Information">
           </form>
+          <!-- Flash Messages Display Area -->
+          {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+              <div id="flash-messages">
+                {% for category, message in messages %}
+                  <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          {% endwith %}
         </div>
       </div>
       <div class="box">
