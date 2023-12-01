@@ -389,7 +389,15 @@ def submitOrder():
 @app.route('/featured')
 def featured():
     return render_template('featured.html')
+@app.route('/orders')
+def orders():
+    if 'user_id' not in session:
+        return redirect(url_for('login'))
 
+    user_id = session['user_id']
+    all_items = Cart.query.all()
+
+    return render_template('orders.html', all_items=all_items)
 @app.route('/categories')
 def categories():
     return render_template('categories.html')
