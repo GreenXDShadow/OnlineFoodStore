@@ -452,6 +452,42 @@ padding: 10px 0px; /* Adjust padding as needed */
   padding-bottom: 0px;
   margin: 1% 5%;
 }
+/* CSS class for the table */
+.orders {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+/* Table header styles */
+.orders th {
+  background-color: #f2f2f2;
+  color: #333;
+  font-weight: bold;
+  text-align: left;
+  padding: 12px;
+}
+
+/* Table row styles */
+.orders tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.orders tr:nth-child(odd) {
+  background-color: #ffffff;
+}
+
+/* Table cell styles */
+.orders td {
+  border-bottom: 1px solid #dddddd;
+  padding: 8px;
+}
+
+/* Hover effect on rows */
+.orders tr:hover {
+  background-color: #e2e2e2;
+}
+
 
 /* @media screen and (max-width: 500px) {
 .topnav a, .bottomnav a{
