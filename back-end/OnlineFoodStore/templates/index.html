@@ -77,7 +77,7 @@
       <li><a href="{{ url_for('categories') }}">Select Category</a></li>
       {% if session.logged_in and session.user_type == 'manager' %}
           <!-- Display New Products Link -->
-          <li><a href="{{ url_for('upload') }}">New Products</a><li>
+          <li><a href="{{ url_for('change_stock_form') }}">New Products</a><li>
       {% endif %}
       <li><a href="{{ url_for('featured') }}">Featured Products</a></li>
       <li><a href="{{ url_for('contact') }}">Contact Us</a></li>

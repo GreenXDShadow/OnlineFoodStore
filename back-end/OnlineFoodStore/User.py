@@ -75,3 +75,13 @@ class Cart(db.Model):
 
     def __repr__(self):
         return f"<Cart(id={self.id}, customer_id={self.customer_id}, product_id={self.product_id}, quantity={self.quantity}, total_price={self.total_price})>"
+
+class Order(db.Model):
+    __tablename__ = "orders"
+
+    id = db.Column(db.Integer, primary_key=True)
+    customer_id = db.Column(db.Integer, db.ForeignKey('customer.id'), nullable=False)
+    total_price = db.Column(db.Float, nullable=False, default=0.0)
+
+    def __repr__(self):
+        return f"<Order(id={self.id}, customer_id={self.customer_id}, total_price={self.total_price})>"
