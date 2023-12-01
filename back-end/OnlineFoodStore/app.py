@@ -43,11 +43,13 @@ class ApiCalls:
 
         # Check if any field is empty
         if not all([name, password, email, confirm_password]):
-            return jsonify({"status": "error", "message": "All fields must be filled out"})
+            flash("All fields must be filled out", "error")  # Using flash for error message
+            return redirect(url_for('userlogin'))  # Redirect back to the form
 
         # Check password confirmation
         if password != confirm_password:
-            return jsonify({"status": "error", "message": "Passwords do not match"})
+            flash("Passwords do not match", "error")  # 'error' is the category
+            return redirect(url_for('userlogin'))  # Redirect to the user login page
 
         # Attempt to add user to database
         try:
@@ -155,7 +157,6 @@ class ApiCalls:
             # If the product is found in the cart, remove it
             db.session.delete(cart_item)
             db.session.commit()
-            #return jsonify({"status": "success", "message": "Product removed from cart successfully"})
         else:
             return jsonify({"status": "error", "message": "Product is not in the cart"})
 
