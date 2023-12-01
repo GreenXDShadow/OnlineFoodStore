@@ -77,15 +77,17 @@
   </div>
 
   <!-- Bottom navigation bar -->
-  <div class="bottomnav">
+  {% if session.logged_in and session.user_type == 'manager' %}
+    <div class="bottomnav">
     <!-- Navigation links for different sections of the site -->
-    <ul>
-      <li><a href="{{ url_for('categories') }}">Select Category</a></li>
-      <li><a href="{{ url_for('upload') }}">New Products</a></li>
-      <li><a href="{{ url_for('featured') }}">Featured Products</a></li>
-      <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
+      <ul>
+          <!-- Display New Products Link -->
+          <li><a href="{{ url_for('change_stock_form') }}">New Products</a><li>
+          <li><a href="{{ url_for('orders') }}">Orders</a><li>
+      
     </ul>
   </div>
+  {% endif %}
     <h1 style="margin-left: 18%;">Search Results: {{ query }}</h1>
     <div class="row">
         {% for result in search_results %}
