@@ -71,15 +71,15 @@
         <div class="input-form">
           <form action="/api/updateUser" method="post">
               <label for="fname">First Name
-              <input type="text" id="fname" name="firstname" placeholder="First Name">
+              <input type="text" id="fname" name="firstname" placeholder="First Name" required>
               </label>
               <label for="lname">Last Name
-              <input type="text" id="lname" name="lastname" placeholder="Last Name">
+              <input type="text" id="lname" name="lastname" placeholder="Last Name" required>
             </label>
               <br>
               <br>
               <label for="address1">Address 1
-              <input type="text" id="address1" name="address1" placeholder="Address 1">
+              <input type="text" id="address1" name="address1" placeholder="Address 1" required>
               </label>
               <label for="address2">Address 2
               <input type="text" id="address2" name="address2" placeholder="Address 2">
@@ -87,26 +87,26 @@
               <br>
               <br>
               <label for="city">City
-              <input type="text" id="city" name="city" placeholder="City">
+              <input type="text" id="city" name="city" placeholder="City" required>
             </label>
               <label for="state">State
-              <input type="text" id="state" name="state" placeholder="CA">
+              <input type="text" id="state" name="state" placeholder="CA" required>
             </label>
               <label for="zipcode">ZIP code
-              <input type="text" id="zipcode" name="zipcode" maxlength="5" placeholder="00000">
+              <input type="text" id="zipcode" name="zipcode" maxlength="5" placeholder="00000" required>
             </label>
         <h2>Payment Information</h2>
             <label for="billingaddress">Billing Address
-              <input type="text" id="billingaddress" name="billing_address" placeholder="Billing Address">
+              <input type="text" id="billingaddress" name="billing_address" placeholder="Billing Address" required>
             </label>
             <label for="cardnumber">Card Number
-              <input type="text" id="cardnumber" name="card_number" maxlength="19" placeholder="Card Number">
+              <input type="text" id="cardnumber" name="card_number" maxlength="19" placeholder="Card Number" required>
             </label>
             <label for="cardexpiration">Card Expiration Date (MM/YYYY)
-              <input type="text" id="cardexpiration" name="card_expiration_date" placeholder="MM/YYYY">
+              <input type="text" id="cardexpiration" name="card_expiration_date" placeholder="MM/YYYY" required>
             </label>
             <label for="cardcvv">CVV
-              <input type="text" id="cardcvv" name="card_cvv" maxlength="4" placeholder="CVV">
+              <input type="text" id="cardcvv" name="card_cvv" maxlength="4" placeholder="CVV" required>
             </label>
             <input class="form-btn" type="submit" value="Update Information">
           </form>
