@@ -76,11 +76,16 @@
     <h3>Items</h3>
       {% for item in cart_items %}
         <div class="itemTitle">
-          {{ item.product.name }} -
+           {{ item.product.name }} -
           {% if item.product.type == 'packaged' %}
-            Quantity: {{ item.quantity }}
+           Quantity: {{ item.quantity }}
+            {% if item.product.weight %}
+              Weight: {{ '%.2f'|format(item.product.weight * item.quantity) }} pounds&nbsp;
+            {% else %}
+              Quantity: {{ item.quantity }}
+            {% endif %}
           {% elif item.product.type == 'fresh' %}
-            Weight: {{ '%.2f'|format(item.quantity) }} pounds
+            Weight: {{ '%.2f'|format(item.quantity) }} pounds&nbsp;
           {% endif %}
           <div class="itemPrice">
             {% if item.product.type == 'packaged' %}
