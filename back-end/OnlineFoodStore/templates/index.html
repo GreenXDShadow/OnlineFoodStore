@@ -71,17 +71,19 @@
   </div>
 
   <!-- Bottom navigation bar -->
-  {% if session.logged_in and session.user_type == 'manager' %}
-    <div class="bottomnav">
+  <div class="bottomnav">
     <!-- Navigation links for different sections of the site -->
-      <ul>
+    <ul>
+      <li><a href="{{ url_for('categories') }}">Select Category</a></li>
+      {% if session.logged_in and session.user_type == 'manager' %}
           <!-- Display New Products Link -->
           <li><a href="{{ url_for('change_stock_form') }}">New Products</a><li>
           <li><a href="{{ url_for('orders') }}">Orders</a><li>
-      
+      {% endif %}
+      <li><a href="{{ url_for('featured') }}">Featured Products</a></li>
+      <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
     </ul>
   </div>
-  {% endif %}
 
   <!-- Main banner image -->
   <div class="bannerposition">

@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 <html>
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Add Product</title>
+  <title>Contact</title>
   <!-- icon library and stylesheet reference -->
-  <link href="{{ url_for('static', filename='css/upload.css') }}" rel="stylesheet" type="text/css" />
   <link href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="{{ url_for('static', filename='css/contactstyle.css') }}" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 </head>
 
@@ -18,14 +17,14 @@
     <a href="{{ url_for('index') }}"><i class="fa fa-fw fa-home"></i> Home</a>
     <form id="searchForm" action="{{ url_for('search') }}" method="GET" onsubmit="return handleSearch()">
       <input class="searchbar" type="text" id="searchInput" name="query" placeholder="search for products <3">
-    </form>
+    </form>   
     <div class="imageRight">
       <button class="user-icon-btn" onclick="toggleDropdown()">
         <img src="{{ url_for('static', filename='Icons/user.png')}}" alt="user" class="user-icon" width="27px"
           height="27px">
     </div></button>
     <div class="dropdown-content hidden" id="myDropdown">
-       <!-- Dropdown content for user account management -->
+        <!-- Dropdown content for user account management -->
 
       <!-- Close button for dropdown-->
       <button class="user-icon-btn" onclick="toggleDropdown()">
@@ -45,21 +44,21 @@
           <h4>User Login</h4>
         </a>
       </div>
-     {% else %}
+        {% else %}
       <!-- Welcome message and logout option for logged-in users -->
       <h2> Welcome, {{session.username}}</h2>
       <form action="{{ url_for('logout') }}" method="post">
           <input type="submit" value="Logout">
       </form>
       </div>
-       {% endif%}
+      {% endif%}
 
-        <!-- Cart icon button -->
-        <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
-          <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
-            height="27px">
-        </button>
-      </div>
+      <!-- Cart icon button -->
+      <button class="cart-icon-btn" onclick="window.location.href = '{{ url_for('cart') }}';">
+        <img src="{{ url_for('static', filename='Icons/cart.png')}}" alt="user" class="user-icon" width="27px"
+          height="27px">
+      </button>
+    </div>
   </div>
   </div>
   <div class="bottomnav">
@@ -70,32 +69,30 @@
       <li><a href="{{ url_for('contact') }}">Contact Us</a></li>
     </ul>
   </div>
+<div class="container">
+    <div style="text-align:center">
+      <h2>Contact Us</h2>
+      <p>Shop for some fresh produce, or leave us a message: </br> Email Us: Team2OFS@gmail.com </p>
+    </div>
+    <div class="row">
+      <div class="column">
+        <img class="banner" src="{{ url_for('static', filename='Images/banner.png')}}" style= "width:100%"";">
+      </div>
+      <div class="column">
+        <form action="#">
+          <label for="fname">First Name</label>
+          <input type="text" id="fname" name="firstname" placeholder="Your name..">
+          <label for="lname">Last Name</label>
+          <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+          <label for="subject">Subject</label>
+          <textarea id="subject" name="subject" placeholder="Write something.." style="height:170px"></textarea>
+          <input type="submit" value="Submit">
+        </form>
+      </div>
+    </div>
+  </div>
 
-
-  <div class = "orders">
-    <h2>Past Orders</h2>
-          <div class="inside">
-          <table class="orders">
-            <colgroup>
-              <col style="width: 15%"/>
-              <col style="width: 5%"/>
-              <col style="width: 10%"/>
-            </colgroup>
-            <tr>
-            <th>order number</th>
-            <th>customer id</th>
-            <th>Order total</th>
-            </tr>
-            <!-- Loop through cart items -->
-            {% for order in all_items %}
-            <tr>
-              <td>{{ order.id }}</td>
-              <td>{{ order.customer_id }}</td>
-              <td>${{ '%.2f' |  format(order.total_price) }}</td>
-            </tr>
-            {% endfor %}
-          </table>
-</div>
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
 
 </body>
 </html>
