@@ -92,6 +92,7 @@
     <div class="row">
         {% for result in search_results %}
             <div class="icon">
+
                 <!-- Display result image if available -->
                 <img src="{{ url_for('static', filename=result.imagePath) }}" alt="{{ result.name }}" width="80px" height="80px">
 
@@ -126,6 +127,15 @@
                             <button type="submit" class="confirm">
                                 <img src="{{ url_for('static', filename='Icons/check.png')}}" alt="check Icon" style="width: 16px; height: 16px;">
                             </button>
+
+                            <!-- Display stock amount or quantity -->
+                            <div class="stock-info">
+                                {% if result.type == 'fresh' %}
+                                    <p style="font-size: 12px; margin-top: 0; padding-top: 0;">Amount: {{ result.amount }} lbs</p>
+                                {% else %}
+                                    <p style="font-size: 12px; margin-top: 0; padding-top: 0;">Quantity: {{ result.quantity }} units</p>
+                                {% endif %}
+                            </div>
                             <!-- Display success message -->
                             <span class="success-message" style="display: none;"></span> <!-- Success message -->
                             <span class="failure-message" style="display: none;"></span> <!--Failure Message-->
@@ -133,8 +143,8 @@
                     {% endif %}
                     {% if session.logged_in and session.user_type == 'manager' %}
                       <form method="POST" action="{{ url_for('delete_product', product_id=result.id) }}">
-                          <button type="submit" class="delete-btn">Delete</button>
-                      </form>
+                        <button type="submit" class="delete-btn" style="font-size: 10px; margin-top: 0; padding-top: 0; padding: 1px 5px;">Delete</button>
+                    </form>
                     {% endif %}
                     
                   </div>
