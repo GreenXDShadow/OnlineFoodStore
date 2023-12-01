@@ -71,8 +71,11 @@ class ApiCalls:
         user = db.session.query(User).filter(User.name == name, User.password == password).first()
 
         if not user:
-            flash("Invalid username or password", "error")  # 'error' is a category you can define
-            return redirect(url_for('userlogin'))  # Redirect to the login page
+            flash("Signup unsuccessful. Please try again.", "error")
+            if session['user_type'] == 'customer':
+                return redirect(url_for('userlogin'))
+            else:
+                return redirect(url_for('adminlogin'))
         else:
             session['logged_in'] = True
             session['username'] = user.name
@@ -411,6 +414,12 @@ def upload():
 
 @app.route('/api/addManager', methods=['POST'])
 def addManager():
+    master_key = request.form.get('masterKey')
+
+    if master_key != '54321':
+        flash("Invalid Masterkey", "error")
+        return redirect(url_for('adminlogin'))    
+    
     name = request.form.get('name')
     password = request.form.get('password')
     email = request.form.get('email')
@@ -438,7 +447,6 @@ def loginManager():
     manager = Manager.query.filter_by(email=email, password=password).first()
 
     if manager:
-        session['logged_in'] = True
         session['username'] = manager.name
         session['user_id'] = manager.id
         session['user_type'] = 'admin'  # Set user type as admin
