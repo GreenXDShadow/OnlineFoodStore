@@ -270,7 +270,7 @@ def cart():
         subtotal += product.price * item.quantity
 
     sales_tax = 0.03 * subtotal  # 3% sales tax
-    shipping_cost = 0.15 * subtotal if subtotal > 20 else 0
+    shipping_cost = 5.00 if subtotal > 20 else 0
     grand_total = subtotal + sales_tax + shipping_cost
 
     return render_template('cart.html', cart_items=cart_items, subtotal=subtotal, sales_tax=sales_tax, shipping_cost=shipping_cost, grand_total=grand_total)
