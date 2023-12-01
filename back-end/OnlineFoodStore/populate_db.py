@@ -42,7 +42,7 @@ def populate_data():
         Product(name="Fish Sticks", weight=0.7, type="packaged", category="frozen", price=5.50, imagePath="Icons/fishsticks.png", quantity=10, amount=None),
         Product(name="Spinach", weight=0.4, type="packaged", category="frozen", price=3.25, imagePath="Icons/spinach.png", quantity=10, amount=None),
         Product(name="Mushrooms", weight=0.3, type="packaged", category="frozen", price=3.75, imagePath="Icons/mushrooms.png", quantity=10, amount=None),
-        Product(name="Chicken Nuggets", weight=0.6, type="packaged", category="frozen", price=4.99, imagePath="Icons/nuggets.png", quantity=1, amount=None),
+        Product(name="Chicken Nuggets", weight=0.6, type="packaged", category="frozen", price=4.99, imagePath="Icons/nuggets.png", quantity=10, amount=None),
         Product(name="Shrimp", weight=0.5, type="packaged", category="frozen", price=7.99, imagePath="Icons/shrimp.png", quantity=10, amount=None)
     ]
 
@@ -85,9 +85,9 @@ def populate_data():
     # TODO: Meat should also be in amount since it is a loose product
     # Meat Products with Prices
     meat_products = [
-        Product(name="Ham", weight=1.0, type="packaged", category="meat", price=5.99, imagePath="Icons/ham.png", quantity=1, amount=None),
+        Product(name="Ham", weight=1.0, type="packaged", category="meat", price=5.99, imagePath="Icons/ham.png", quantity=10, amount=None),
         Product(name="Lamb Shank", weight=1.2, type="fresh", category="meat", price=14.99, imagePath="Icons/lambshank.png", quantity=0, amount=10),
-        Product(name="Sausage", weight=0.6, type="packaged", category="meat", price=4.50, imagePath="Icons/sausages.png", quantity=1, amount=None),
+        Product(name="Sausage", weight=0.6, type="packaged", category="meat", price=4.50, imagePath="Icons/sausages.png", quantity=10, amount=None),
         Product(name="Ground Beef", weight=1.0, type="fresh", category="meat", price=7.99, imagePath="Icons/groundbeef.png", quantity=0, amount=10),
         Product(name="Chicken", weight=1.5, type="fresh", category="meat", price=6.50, imagePath="Icons/chicken.png", quantity=0, amount=10),
         Product(name="Beef Steak", weight=1.0, type="fresh", category="meat", price=12.99, imagePath="Icons/beef.png", quantity=0, amount=10),
