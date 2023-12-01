@@ -496,7 +496,22 @@ def change_stock():
 
     return redirect(url_for('change_stock_form'))
 
+@app.route('/api/delete_product/<int:product_id>', methods=['POST'])
+def delete_product(product_id):
+    # Retrieve the product from the database
+    product = Product.query.get(product_id)
 
+    # Check if the product exists
+    if product:
+        # Delete the product
+        db.session.delete(product)
+        db.session.commit()
+        flash('Product deleted successfully!')
+    else:
+        flash('Product not found.')
+
+    # Redirect to the index page
+    return redirect(url_for('index'))
 
 
 if __name__ == "__main__":
