@@ -71,7 +71,7 @@ class ApiCalls:
         user = db.session.query(User).filter(User.name == name, User.password == password).first()
 
         if not user:
-            flash("Signup unsuccessful. Please try again.", "error")
+            flash("Sign in unsuccessful. Please try again.", "error")
             if session['user_type'] == 'customer':
                 return redirect(url_for('userlogin'))
             else:
@@ -111,6 +111,7 @@ class ApiCalls:
             weight = float(request.form.get('weight', 0))
             total_price = product.price * weight
             if product.amount < weight:
+                flash('Product added successfully!')
                 return jsonify({"status": "failed", "message": "Not enough stock"})
 
             if cart_item:
