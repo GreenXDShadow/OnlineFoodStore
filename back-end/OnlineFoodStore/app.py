@@ -286,14 +286,28 @@ def remove_from_cart(product_id):
     quantity_to_remove = float(request.form.get('quantity_to_remove'))
     quantity_to_remove = round(quantity_to_remove, 2)
     cart_item = Cart.query.filter_by(customer_id=user_id, product_id=product_id).first()
-
-    if cart_item:
+    product = Product.query.filter_by(id=cart_item.product_id).first()
+    print(product.type)
+    print(cart_item)
+    if product.type == 'fresh':
+        print(product)
+        if cart_item.quantity > quantity_to_remove:
+            print(product)
+            cart_item.quantity -= quantity_to_remove
+            product.amount += quantity_to_remove
+        else:
+            product.amount += cart_item.quantity
+            db.session.delete(cart_item)
+    else:
         if cart_item.quantity > quantity_to_remove:
             cart_item.quantity -= quantity_to_remove
+            product.quantity += quantity_to_remove
         else:
+            product.quantity += cart_item.quantity
             db.session.delete(cart_item)
-        db.session.commit()
-        flash('Item removed successfully')
+
+    db.session.commit()
+    flash('Item removed successfully')
 
     return redirect(url_for('cart'))
 
@@ -395,7 +409,7 @@ def orders():
         return redirect(url_for('login'))
 
     user_id = session['user_id']
-    all_items = Cart.query.all()
+    all_items = Order.query.all()
 
     return render_template('orders.html', all_items=all_items)
 @app.route('/categories')
