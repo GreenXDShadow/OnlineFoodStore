@@ -21,7 +21,7 @@ db = SQLAlchemy(app)
 
 # Importing the models
 from Product import Product
-from User import User, Customer, Manager, Cart
+from User import User, Customer, Manager, Cart, Order
 from flask import Flask, render_template, request, redirect, session
 from sqlalchemy.exc import IntegrityError
 
@@ -102,6 +102,9 @@ class ApiCalls:
             return jsonify({"status": "error", "message": "Product not found"})
 
         cart_item = Cart.query.filter_by(product_id=product_id, customer_id=user_id).first()
+        quantity = int(request.form.get('quantity', 1))
+        if product.quantity < quantity:
+            return jsonify({"status": "failed", "message": "Not enough stock"})
 
         if product.type == 'fresh':
             weight = float(request.form.get('weight', 0))
@@ -110,19 +113,22 @@ class ApiCalls:
             if cart_item:
                 # Update weight and price for existing cart item
                 cart_item.quantity += weight
+                product.quantity -= weight
                 cart_item.total_price += total_price
             else:
                 # Create a new cart item for fresh product
                 cart_item = Cart(product_id=product_id, customer_id=user_id, quantity=weight, total_price=total_price)
+                product.quantity -= weight
                 db.session.add(cart_item)
         else:
             # Logic for packaged products remains the same
             quantity = int(request.form.get('quantity', 1))
-
             if cart_item:
                 cart_item.quantity += quantity
+                product.quantity -= quantity
             else:
                 cart_item = Cart(product_id=product_id, customer_id=user_id, quantity=quantity)
+                product.quantity -= quantity
                 db.session.add(cart_item)
 
         db.session.commit()
@@ -296,7 +302,7 @@ def checkout():
 
     subtotal = sum(item.product.price * item.quantity for item in cart_items)
     sales_tax = subtotal * 0.03  # Assuming 3% sales tax
-    shipping_cost = 0.15 * subtotal if subtotal > 20 else 0
+    shipping_cost = 5.00 if subtotal > 20 else 0
     grand_total = subtotal + sales_tax + shipping_cost
 
     return render_template('checkout.html', cart_items=cart_items, subtotal=subtotal, sales_tax=sales_tax, shipping_cost=shipping_cost, grand_total=grand_total)
@@ -354,6 +360,15 @@ def submitOrder():
 
     # Here you would normally add logic to process the payment
     # For simplicity, we'll skip this step
+    cart_items = Cart.query.filter_by(customer_id=user_id).all()
+
+    subtotal = sum(item.product.price * item.quantity for item in cart_items)
+    sales_tax = subtotal * 0.03  # Assuming 3% sales tax
+    shipping_cost = 5.00 if subtotal > 20 else 0
+    grand_total = subtotal + sales_tax + shipping_cost
+
+    new_order = Order(customer_id=user_id, total_price=grand_total)
+    db.session.add(new_order)
 
     # Clear the user's cart
     Cart.query.filter_by(customer_id=user_id).delete()
@@ -442,6 +457,30 @@ def search():
     ).all()
 
     return render_template('search_results.html', search_results=results, query=query)
+@app.route('/change_stock', methods=['GET'])
+def change_stock_form():
+    # Fetch all products to populate the dropdown
+    products = Product.query.all()
+    return render_template('upload.html', products=products)
+
+@app.route('/change_stock', methods=['POST'])
+def change_stock():
+    product_id = request.form.get('product_id')
+    new_quantity = request.form.get('quantity')
+    print(new_quantity)
+
+    # Logic to update the stock quantity for the selected product
+    product = Product.query.get(product_id)
+    print(product)
+    if product:
+        product.quantity = new_quantity
+        db.session.commit()
+        flash('Stock quantity updated successfully', 'success')
+    else:
+        flash('Product not found', 'error')
+
+    return redirect(url_for('change_stock_form'))
+
 
 
 
